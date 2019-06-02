@@ -1,0 +1,6 @@
+@import "~element-ui/lib/theme-chalk/reset.css";
+@import url("https://fonts.cat.net/css?family=Source+Code+Pro&display=swap");
+
+code {
+  font-family: "Source Code Pro", monospace;
+}

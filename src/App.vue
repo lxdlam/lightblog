@@ -11,16 +11,11 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.cat.net/css?family=Noto+Sans+SC|Nunito&display=swap&subset=chinese-simplified");
-
-* {
-  font-family: "Nunito", "Noto Sans SC", sans-serif;
-}
-
 #app {
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   margin-top: 60px;
 }
