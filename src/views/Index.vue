@@ -1,8 +1,8 @@
 <template>
   <div id="index">
     <p><el-button>A random button :)</el-button></p>
-  </div></template
->
+  </div>
+</template>
 
 <script>
 export default {

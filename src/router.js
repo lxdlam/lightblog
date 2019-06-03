@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import IndexView from "./views/Index.vue";
+// import IndexView from "./views/Index.vue";
 
 Vue.use(Router);
 
@@ -9,7 +9,8 @@ export default new Router({
     {
       path: "/",
       name: "index",
-      component: IndexView
+      component: () =>
+        import(/* webpackChunkName: "index" */ "./views/Index.vue")
     },
     {
       path: "/test",
