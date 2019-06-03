@@ -2374,6 +2374,11 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
+cropperjs@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.npm.taobao.org/cropperjs/download/cropperjs-1.5.1.tgz#3bf93c6e89bf46d18cccc27160cd7d9b936cac7a"
+  integrity sha1-O/k8bom/RtGMzMJxYM19m5NsrHo=
+
 cross-spawn@^5.0.1, cross-spawn@^5.1.0:
   version "5.1.0"
   resolved "https://registry.npm.taobao.org/cross-spawn/download/cross-spawn-5.1.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcross-spawn%2Fdownload%2Fcross-spawn-5.1.0.tgz#e8bd0efee58fcff6f8f94510a0a554bbfa235449"

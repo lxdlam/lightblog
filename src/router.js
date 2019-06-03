@@ -10,12 +10,18 @@ export default new Router({
       path: "/",
       name: "index",
       component: () =>
-        import(/* webpackChunkName: "index" */ "./views/Index.vue")
+        import(/* webpackChunkName: "indexView" */ "./views/Index.vue")
     },
     {
       path: "/test",
       name: "test",
       component: () => import(/* webpackChunkName: "test" */ "./views/Test.vue")
+    },
+    {
+      path: "/register",
+      name: "register",
+      component: () =>
+        import(/* webpackChunkName: "registerView" */ "./views/Register.vue")
     }
   ]
 });

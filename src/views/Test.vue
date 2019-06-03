@@ -6,6 +6,9 @@
         <template v-if="step === 1">
           <RegisterUserInfo :user="user" />
         </template>
+        <template v-else-if="step === 2">
+          <RegisterAvatar />
+        </template>
         <template v-else-if="step === 4">
           <RegisterFinish username="Ramen" account="lxdlam" />
         </template>
@@ -29,18 +32,24 @@
       </div>
     </div>
     <p>{{ user.account }}</p>
+    <p>{{ user.username }}</p>
+    <p>{{ user.password }}</p>
+    <p>{{ user.phone }}</p>
+    <p>{{ user.email }}</p>
   </div>
 </template>
 
 <script>
 import RegisterStepsBar from "../components/Register/StepsBar";
 import RegisterUserInfo from "../components/Register/UserInfo";
+import RegisterAvatar from "../components/Register/Avatar";
 import RegisterFinish from "../components/Register/Finish";
 
 export default {
   name: "TestView",
   components: {
     RegisterStepsBar,
+    RegisterAvatar,
     RegisterUserInfo,
     RegisterFinish
   },
@@ -74,7 +83,7 @@ export default {
 
 <style scoped>
 #inner-container {
-  padding-top: 80px;
+  padding-top: 40px;
   text-align: center;
 }
 
