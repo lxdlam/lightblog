@@ -1,94 +1,27 @@
 <template>
   <div id="test-view">
-    <RegisterStepsBar :step="step" />
-    <div id="inner-container">
-      <keep-alive exclude="RegisterFinish">
-        <template v-if="step === 1">
-          <RegisterUserInfo :user="user" />
-        </template>
-        <template v-else-if="step === 2">
-          <RegisterAvatar />
-        </template>
-        <template v-else-if="step === 4">
-          <RegisterFinish username="Ramen" account="lxdlam" />
-        </template>
-      </keep-alive>
-      <div id="button-container">
-        <template v-if="step < 4" :style="{ 'padding-top': '40px' }">
-          <template v-if="step > 1">
-            <el-button @click="backward">上一步</el-button>
-          </template>
-          <template v-if="step < 3">
-            <el-button @click="forward" :disabled="!user.available"
-              >下一步</el-button
-            >
-          </template>
-          <template v-else>
-            <el-button type="primary" @click="do_register" :loading="loading"
-              >注册！</el-button
-            >
-          </template>
-        </template>
-      </div>
-    </div>
-    <p>{{ user.account }}</p>
-    <p>{{ user.username }}</p>
-    <p>{{ user.password }}</p>
-    <p>{{ user.phone }}</p>
-    <p>{{ user.email }}</p>
+    <ReadArticle
+      article_hash="ac59f05f2d111eca6fc6685333b43998"
+      avatar_sm="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
+      user_nickname="z臧博浩"
+      :release_time="1559627549000"
+      :reading="0"
+      title="今天，昨天，前天"
+    ></ReadArticle>
   </div>
 </template>
 
 <script>
-import RegisterStepsBar from "../components/Register/StepsBar";
-import RegisterUserInfo from "../components/Register/UserInfo";
-import RegisterAvatar from "../components/Register/Avatar";
-import RegisterFinish from "../components/Register/Finish";
+import ReadArticle from "./ReadArticle";
 
 export default {
   name: "TestView",
-  components: {
-    RegisterStepsBar,
-    RegisterAvatar,
-    RegisterUserInfo,
-    RegisterFinish
-  },
+  components: { ReadArticle },
   data: function() {
-    return {
-      step: 1,
-      user: {
-        account: "",
-        username: "",
-        password: "",
-        email: "",
-        phone: "",
-        interest: [],
-        img_url: "",
-        available: false
-      },
-      loading: false
-    };
+    return {};
   },
-  methods: {
-    forward() {
-      this.step++;
-    },
-    backward() {
-      this.step--;
-    },
-    do_register() {}
-  }
+  methods: {}
 };
 </script>
 
-<style scoped>
-#inner-container {
-  padding-top: 40px;
-  text-align: center;
-}
-
-#button-container {
-  padding-top: 20px;
-  text-align: center;
-}
-</style>
+<style scoped></style>

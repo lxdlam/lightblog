@@ -22,6 +22,11 @@ export default new Router({
       name: "register",
       component: () =>
         import(/* webpackChunkName: "registerView" */ "./views/Register.vue")
+    },
+    {
+      path: "/article/:id/view",
+      name: "view-article",
+      component: () => import("./views/ReadArticle.vue")
     }
   ]
 });

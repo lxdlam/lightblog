@@ -1,12 +1,12 @@
 <template>
   <div class="comment-item">
     <el-row>
-      <el-col :span="1">
+      <el-col :span="1.5">
         <div class="block">
           <el-image class="com-head" :src="avatar_sm"></el-image>
         </div>
       </el-col>
-      <el-col :span="23">
+      <el-col :span="20">
         <div class="username">
           <strong>{{ user_nickname }}</strong>
         </div>
@@ -115,6 +115,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.comment-item {
+  width: 1000px;
+}
 .el-row {
   margin-bottom: 5px;
 }
@@ -122,8 +125,11 @@ export default {
   border-radius: 4px;
 }
 .com-head {
-  width: 80%;
-  height: 80%;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 12px;
 }
 .gray_line {
   background: #e5e5e5;
@@ -151,6 +157,6 @@ export default {
 }
 .com-reply {
   margin: 10px 10px;
-  width: 90%;
+  width: 100%;
 }
 </style>
