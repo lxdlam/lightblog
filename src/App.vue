@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <router-view />
+    <el-container>
+      <el-header></el-header>
+      <el-main>
+        <router-view />
+      </el-main>
+    </el-container>
   </div>
 </template>
 
 <script>
 export default {
-  name: "app"
+  name: "App"
 };
 </script>
 
@@ -18,5 +23,10 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.el-main {
+  padding-top: 20px;
+  text-align: center;
 }
 </style>

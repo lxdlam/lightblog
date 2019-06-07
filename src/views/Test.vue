@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import ReadArticle from "./ReadArticle";
+import ReadArticle from "@/views/Article/ReadArticle";
 
 export default {
   name: "TestView",

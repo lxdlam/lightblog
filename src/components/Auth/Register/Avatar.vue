@@ -5,7 +5,7 @@
         <td rowspan="3">
           <h3>双击来从移动模式和裁剪模式切换</h3>
           <div class="cropper-container">
-            <img id="image" src="../../assets/default_avatar.jpeg" />
+            <img id="image" src="@/assets/default_avatar.jpeg" />
           </div>
         </td>
         <td>
@@ -130,7 +130,6 @@ export default {
 
       // Here is logically success, but we need to cancel the upload process
       // So we return false
-
       readBase64(file, e => {
         this.cropper.replace(e.target.result);
         this.cropper.reset();

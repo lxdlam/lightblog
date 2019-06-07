@@ -55,8 +55,8 @@
 </template>
 
 <script>
-import Renderer from "../components/Markdown/Renderer";
-import CommentItem from "../components/Comment/CommentItem";
+import Renderer from "@/components/Markdown/Renderer";
+import CommentItem from "@/components/Comment/CommentItem";
 
 export default {
   name: "ReadArticle",

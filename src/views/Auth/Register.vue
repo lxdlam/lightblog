@@ -35,10 +35,10 @@
 </template>
 
 <script>
-import RegisterStepsBar from "../components/Register/StepsBar";
-import RegisterUserInfo from "../components/Register/UserInfo";
-import RegisterAvatar from "../components/Register/Avatar";
-import RegisterFinish from "../components/Register/Finish";
+import RegisterStepsBar from "@/components/Auth/Register/StepsBar";
+import RegisterUserInfo from "@/components/Auth/Register/UserInfo";
+import RegisterAvatar from "@/components/Auth/Register/Avatar";
+import RegisterFinish from "@/components/Auth/Register/Finish";
 
 export default {
   name: "RegisterView",
@@ -50,7 +50,7 @@ export default {
   },
   data: function() {
     return {
-      step: 2,
+      step: 1,
       user: {
         account: "",
         username: "",

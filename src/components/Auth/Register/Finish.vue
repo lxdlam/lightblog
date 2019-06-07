@@ -1,6 +1,6 @@
 <template>
   <div id="register-finish">
-    <img src="../../assets/success.svg" />
+    <img src="@/assets/success.svg" />
     <h1>注册成功！</h1>
     <h3>欢迎你，{{ username }}！</h3>
     <h3>
