@@ -46,6 +46,12 @@ export default new Router({
       name: "login",
       component: () =>
         import(/* webpackChunkName: "loginView" */ "./views/Auth/Login.vue")
+    },
+    {
+      path: "/search/:keyword",
+      name: "search",
+      component: () =>
+        import(/* webpackChunkName: "searchView" */ "./views/Meta/Search.vue")
     }
   ]
 });

@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header></el-header>
+      <el-header height="80px">
+        <Heading />
+      </el-header>
       <el-main>
         <router-view />
       </el-main>
@@ -10,8 +12,13 @@
 </template>
 
 <script>
+import Heading from "@/components/Meta/Heading";
+
 export default {
-  name: "App"
+  name: "App",
+  components: {
+    Heading
+  }
 };
 </script>
 
@@ -22,7 +29,11 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+.el-header {
+  /* position: fixed; */
+  z-index: 200; /* ensure always at the top of the page */
 }
 
 .el-main {

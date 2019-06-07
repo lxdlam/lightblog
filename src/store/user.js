@@ -14,7 +14,7 @@ export default {
         state.logged = true;
         state.uid = payload.uid;
         state.token = payload.token;
-        state.avatar = payload.avatar;
+        state.avatar = require("@/assets/default_avatar.jpeg");
         state.nickname = payload.nickname;
         state.updateTime = new Date().getTime();
       }

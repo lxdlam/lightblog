@@ -1,6 +1,8 @@
 <template>
   <div id="index">
-    <p><el-button>A random button :)</el-button></p>
+    <p>
+      <el-button @click="$router.push('/login')">A random button :)</el-button>
+    </p>
   </div>
 </template>
 
