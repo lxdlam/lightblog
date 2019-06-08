@@ -12,27 +12,30 @@
 </template>
 
 <script>
-import { setInterval } from "timers";
+import { setInterval, clearInterval } from "timers";
 export default {
   name: "NotAuthorizedView",
   data: function() {
     return {
-      count: 5
+      count: 5,
+      interval: null
     };
   },
   mounted() {
     if (this.$store.state.user.logged) {
       this.$router.replace("/");
     } else {
-      const vm = this;
-      const interval = setInterval(() => {
-        if (vm.count > 0) {
-          vm.count--;
-        } else {
-          clearInterval(interval);
-          vm.$router.replace("/login");
-        }
-      }, 1000);
+      this.interval = setInterval(this.callback, 1000);
+    }
+  },
+  methods: {
+    callback: function() {
+      if (this.count > 0) {
+        this.count--;
+      } else {
+        clearInterval(this.interval);
+        this.$router.replace("/login");
+      }
     }
   }
 };

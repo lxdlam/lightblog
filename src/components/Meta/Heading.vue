@@ -14,7 +14,9 @@
             </el-link>
           </li>
           <li class="nav-item"><el-link :underline="false">探索</el-link></li>
-          <li class="nav-item"><el-link :underline="false">随机</el-link></li>
+          <li class="nav-item">
+            <el-link :underline="false">I'm feeling lucky</el-link>
+          </li>
           <li class="nav-item nav-search">
             <el-input
               v-model="keyword"
@@ -180,8 +182,8 @@ export default {
 }
 
 #logo {
-  height: 80px;
-  width: 185px;
+  height: 60px;
+  width: 137px;
 }
 
 ul {
