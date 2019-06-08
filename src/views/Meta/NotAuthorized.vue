@@ -25,10 +25,11 @@ export default {
       this.$router.replace("/");
     } else {
       const vm = this;
-      setInterval(() => {
+      const interval = setInterval(() => {
         if (vm.count > 0) {
           vm.count--;
         } else {
+          clearInterval(interval);
           vm.$router.replace("/login");
         }
       }, 1000);

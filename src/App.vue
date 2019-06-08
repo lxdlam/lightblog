@@ -32,12 +32,17 @@ export default {
 }
 
 .el-header {
-  /* position: fixed; */
-  z-index: 200; /* ensure always at the top of the page */
+  position: relative;
+  height: 80px;
+  padding-top: 10px;
+  max-width: 1280px;
 }
 
 .el-main {
-  padding-top: 20px;
-  text-align: center;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1280px;
+  padding-top: 100px;
 }
 </style>

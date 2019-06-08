@@ -1,57 +1,94 @@
 <template>
   <div id="heading">
-    <div class="left-container">
+    <div class="nav-container">
       <el-image
         id="logo"
         fit="contain"
         :src="require('../../assets/dummy_logo.png')"
       />
-      <el-link @click="$router.push('/')">首页</el-link>
-      <el-link>探索</el-link>
-      <el-link>I'm feeling lucky</el-link>
-    </div>
-    <div class="right-container">
-      <el-input
-        v-model="keyword"
-        placeholder="搜点什么"
-        prefix-icon="el-icon-search"
-        @change="do_search"
-      />
-      <el-link>写文章</el-link>
-      <el-divider direction="vertical" />
-      <template v-if="$store.state.user.logged">
-        <img
-          id="avatar"
-          v-if="$store.state.user.avatar"
-          :src="$store.state.user.avatar"
-        />
-        <img id="avatar" v-else src="../../assets/default_avatar.jpeg" />
-        <el-dropdown trigger="click" @command="dispatch">
-          <span class="el-dropdown-link">
-            Ramen<i class="el-icon-arrow-down el-icon--right" />
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-user-solid" command="profile">
-              个人中心
-            </el-dropdown-item>
-            <el-dropdown-item icon="el-icon-document" command="articles">
-              我的文章
-            </el-dropdown-item>
-            <el-dropdown-item icon="el-icon-star-on" command="favorites">
-              收藏中心
-            </el-dropdown-item>
-            <el-dropdown-item divided icon="el-icon-error" command="logout">
-              退出登录
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </template>
-      <template v-else>
-        <el-link type="primary" @click="login_visiable = true">登录</el-link>
-        <el-link type="primary" @click="$router.push('/register')"
-          >注册</el-link
-        >
-      </template>
+      <div class="nav-bar">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <el-link :underline="false" @click="$router.push('/')">
+              首页
+            </el-link>
+          </li>
+          <li class="nav-item"><el-link :underline="false">探索</el-link></li>
+          <li class="nav-item"><el-link :underline="false">随机</el-link></li>
+          <li class="nav-item nav-search">
+            <el-input
+              v-model="keyword"
+              placeholder="搜点什么"
+              prefix-icon="el-icon-search"
+              @keyup.enter.native="do_search"
+              :style="{ width: width + 'px' }"
+              @focus="width = 200"
+              @blur="width = 130"
+              clearable
+            />
+          </li>
+          <li class="nav-item">
+            <el-link :underline="false" @click="$router.push('/article/new')"
+              >写文章</el-link
+            >
+          </li>
+          <li class="nav-item nav-divide">
+            <el-divider direction="vertical" />
+          </li>
+          <template v-if="$store.state.user.logged">
+            <li class="nav-item">
+              <img
+                id="avatar"
+                v-if="$store.state.user.avatar"
+                :src="$store.state.user.avatar"
+              />
+              <img id="avatar" v-else src="../../assets/default_avatar.jpeg" />
+            </li>
+            <li class="nav-item">
+              <el-dropdown
+                trigger="click"
+                size="medium"
+                @command="dispatch"
+                placement="top"
+              >
+                <span class="el-dropdown-link">
+                  Ramen<i class="el-icon-arrow-down el-icon--right" />
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item icon="el-icon-user-solid" command="profile">
+                    个人中心
+                  </el-dropdown-item>
+                  <el-dropdown-item icon="el-icon-document" command="articles">
+                    我的文章
+                  </el-dropdown-item>
+                  <el-dropdown-item icon="el-icon-star-on" command="favorites">
+                    收藏中心
+                  </el-dropdown-item>
+                  <el-dropdown-item
+                    divided
+                    icon="el-icon-error"
+                    command="logout"
+                  >
+                    退出登录
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </li>
+          </template>
+          <template v-else>
+            <li class="nav-item">
+              <el-link type="primary" @click="login_visiable = true"
+                >登录</el-link
+              >
+            </li>
+            <li class="nav-item">
+              <el-link type="primary" @click="$router.push('/register')"
+                >注册</el-link
+              >
+            </li>
+          </template>
+        </ul>
+      </div>
     </div>
     <el-dialog
       title="登录"
@@ -76,7 +113,8 @@ export default {
   data: function() {
     return {
       keyword: null,
-      login_visiable: false
+      login_visiable: false,
+      width: 130
     };
   },
   methods: {
@@ -112,34 +150,88 @@ export default {
 
 <style scoped>
 .el-link {
-  font-size: 1.33rem;
+  font-size: 18px;
+  height: 40px;
+  text-align: center;
+  color: #909399;
+}
+
+#heading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  transition: all 0.2s;
+}
+
+.nav-container {
+  max-width: 1280px;
+  margin: auto;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  height: 100%;
 }
 
 #avatar {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
 }
 
 #logo {
-  height: 139px;
-  width: 60px;
+  height: 80px;
+  width: 185px;
 }
 
-#heading > .left-container {
-  float: left;
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-bar {
+  display: block;
+  height: 100%;
+  flex: 1 0 auto;
+}
+
+.nav-list {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  text-align: justify;
+  justify-content: flex-end;
   position: relative;
+  height: 100%;
+  margin: 0;
+}
+
+.nav-item {
+  padding: 0 8px;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
   top: 50%;
 }
 
-#heading > .right-container {
-  float: right;
-  position: relative;
-  top: 50%;
+.nav-search {
+  flex: 1 1 auto;
+  justify-content: flex-end;
+  min-width: 220px;
+  padding-top: 4px;
 }
 
-#logo {
-  width: 139px;
-  height: 60px;
+.nav-divide {
+  padding: 0;
+}
+
+.el-input {
+  transition: width 400ms;
+  -moz-transition: width 400ms;
+  -webkit-transition: width 400ms;
+  -o-transition: width 400ms;
 }
 </style>
