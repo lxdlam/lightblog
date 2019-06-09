@@ -1,11 +1,7 @@
 <template>
   <div id="heading">
     <div class="nav-container">
-      <el-image
-        id="logo"
-        fit="contain"
-        :src="require('../../assets/dummy_logo.png')"
-      />
+      <img id="logo" src="../../assets/dummy_logo.png" />
       <div class="nav-bar">
         <ul class="nav-list">
           <li class="nav-item">
@@ -13,7 +9,13 @@
               首页
             </el-link>
           </li>
-          <li class="nav-item"><el-link :underline="false">探索</el-link></li>
+          <li class="nav-item">
+            <el-link
+              :underline="false"
+              @click="$router.push('/article/edit/qewqe')"
+              >探索</el-link
+            >
+          </li>
           <li class="nav-item">
             <el-link :underline="false">I'm feeling lucky</el-link>
           </li>
@@ -30,7 +32,9 @@
             />
           </li>
           <li class="nav-item">
-            <el-link :underline="false" @click="$router.push('/article/new')"
+            <el-link
+              :underline="false"
+              @click="$router.push('/article/edit/new')"
               >写文章</el-link
             >
           </li>
@@ -153,7 +157,6 @@ export default {
 <style scoped>
 .el-link {
   font-size: 18px;
-  height: 40px;
   text-align: center;
   color: #909399;
 }
@@ -164,6 +167,7 @@ export default {
   left: 0;
   right: 0;
   transition: all 0.2s;
+  background-color: white;
 }
 
 .nav-container {

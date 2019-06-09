@@ -84,10 +84,6 @@ export default {
       required: true
     }
   },
-  model: {
-    props: "user",
-    event: "croppered"
-  },
   methods: {
     create() {
       const img = document.getElementById("image");

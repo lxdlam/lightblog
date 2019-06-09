@@ -9,8 +9,11 @@
         <template v-else-if="step === 2">
           <RegisterAvatar :user="user" />
         </template>
+        <template v-else-if="step === 3">
+          <RegisterInterest :user="user" />
+        </template>
         <template v-else-if="step === 4">
-          <RegisterFinish username="Ramen" account="lxdlam" />
+          <RegisterFinish :username="user.username" :account="user.account" />
         </template>
       </keep-alive>
       <div id="button-container">
@@ -38,6 +41,7 @@
 import RegisterStepsBar from "@/components/Auth/Register/StepsBar";
 import RegisterUserInfo from "@/components/Auth/Register/UserInfo";
 import RegisterAvatar from "@/components/Auth/Register/Avatar";
+import RegisterInterest from "@/components/Auth/Register/Interest";
 import RegisterFinish from "@/components/Auth/Register/Finish";
 
 export default {
@@ -46,6 +50,7 @@ export default {
     RegisterStepsBar,
     RegisterAvatar,
     RegisterUserInfo,
+    RegisterInterest,
     RegisterFinish
   },
   data: function() {
@@ -71,7 +76,9 @@ export default {
     backward() {
       this.step--;
     },
-    do_register() {}
+    do_register() {
+      this.step++;
+    }
   }
 };
 </script>

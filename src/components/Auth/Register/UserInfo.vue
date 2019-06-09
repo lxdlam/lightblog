@@ -16,8 +16,8 @@
           content="仅支持大小写字母（a-z, A-Z），数字（0-9）及下划线（_）。第一位只能为字母。"
           placement="top"
         >
-          <el-input v-model="form_data.account"
-        /></el-tooltip>
+          <el-input v-model="form_data.account" />
+        </el-tooltip>
       </el-form-item>
       <el-form-item label="昵称" prop="username">
         <el-input v-model="form_data.username" />
@@ -44,7 +44,10 @@
 export default {
   name: "RegisterUserInfo",
   props: {
-    user: Object
+    user: {
+      type: Object,
+      required: true
+    }
   },
   data: function() {
     return {
@@ -121,10 +124,6 @@ export default {
         ]
       }
     };
-  },
-  model: {
-    props: "user",
-    event: "validated"
   },
   methods: {
     validate() {

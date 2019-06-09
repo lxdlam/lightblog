@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header height="80px">
+      <el-header>
         <Heading />
       </el-header>
       <el-main>
@@ -36,6 +36,7 @@ export default {
   height: 80px;
   padding-top: 10px;
   max-width: 1280px;
+  z-index: 2000;
 }
 
 .el-main {

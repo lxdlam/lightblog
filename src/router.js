@@ -48,6 +48,14 @@ export default new Router({
         import(/* webpackChunkName: "loginView" */ "./views/Auth/Login.vue")
     },
     {
+      path: "/article/edit/:id",
+      name: "edit_article",
+      component: () =>
+        import(
+          /* webpackChunkName: "editArticleView" */ "./views/Article/EditArticle.vue"
+        )
+    },
+    {
       path: "/search/:keyword",
       name: "search",
       component: () =>
