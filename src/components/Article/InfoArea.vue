@@ -78,7 +78,8 @@ export default {
   width: 1200px;
   height: 140px;
   margin: 0 auto;
+  margin-bottom: 20px;
   /* border-radius: 50%; */
-  background-color: #f2f6fc;
+  /* background-color: #f2f6fc; */
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="test1-view">
-    <InfoArea :author="1" />
+    <InfoArea :random="1" />
     <ArticleList :authorid="1" :start="0" :end="2"></ArticleList>
   </div>
 </template>

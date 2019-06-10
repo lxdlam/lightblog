@@ -18,7 +18,7 @@
           <el-button class="attention" type="primary" plain>关注</el-button>
         </el-col>
       </el-row>
-      <Renderer class="article" content="文章内容"></Renderer>
+      <Renderer class="article" content="# Hello, World!"></Renderer>
       <h1 id="comment-h1">评论</h1>
       <div class="submit-comment">
         <el-row>

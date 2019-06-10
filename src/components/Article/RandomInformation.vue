@@ -37,7 +37,7 @@ export default {
 }
 #random-information h1 {
   font-size: 30px;
-  color: #e4e7ed;
+  color: #e9edf5;
   text-shadow: 5px 5px 8px #303133;
 }
 #title {

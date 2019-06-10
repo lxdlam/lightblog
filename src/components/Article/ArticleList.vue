@@ -11,7 +11,7 @@
         :praiseNum="item.thumb"
         :commentNum="item.reading"
         :imgName="item.cover"
-      />
+      ></ArticleListItem>
     </ul>
     <!-- <el-row id="container">
       <el-col :xs="40" :sm="25" :md="25" :lg="25" :xl="50">
@@ -48,7 +48,7 @@ export default {
   },
   data() {
     return {
-      date: 121212412,
+      // date: 0,
       arr: [
         {
           // title: "文章",
@@ -90,12 +90,13 @@ export default {
           {
             article_id: 1,
             virtual_id: "ac59f05f2d111eca6fc6685333b43998",
-            title: "今天，昨天，前天",
+            title: "Vue Router详解",
             author_id: 1,
-            author_nickname: "z臧博浩",
-            cover: "http://img3m6.ddimg.cn/46/1/24144166-1_u_30016.jpg",
+            author_nickname: "臧博浩",
+            cover:
+              "https://cdn.scotch.io/3660/h49pHk3ORDWKylIlU7bE_maxresdefault.jpg",
             content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗",
-            articleAbstract: "123123",
+            articleAbstract: "在这里你可以学到Vue Router的相关内容",
             release_time: 1559627633000,
             thumb: 1,
             reading: 0,
@@ -113,12 +114,33 @@ export default {
           {
             article_id: 2,
             virtual_id: "3674c9cd371671960510cda0370fe5c2",
-            title: "今天，昨天，前天2",
+            title: "React框架基础入门",
             author_id: 1,
-            author_nickname: "z臧博浩",
-            cover: "http://img3m6.ddimg.cn/46/1/24144166-1_u_30016.jpg",
+            author_nickname: "姚越",
+            cover:
+              "https://cn.bing.com/th?id=OIP.EntHChgUyirgbZ9A3zTxkAHaFj&pid=Api&rs=1&p=0",
             content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗2",
-            articleAbstract: "111111111",
+            articleAbstract: "在这里你可以学到React框架开发的相关内容",
+            release_time: 1559627633000,
+            thumb: 2,
+            reading: 0,
+            labels: [
+              {
+                label_id: 1,
+                label_name: "123"
+              }
+            ]
+          },
+          {
+            article_id: 2,
+            virtual_id: "3674c9cd371671960510cda0370fe5c2",
+            title: "AngularJS框架基础入门",
+            author_id: 1,
+            author_nickname: "李洋",
+            cover:
+              "http://theblogreaders.com/wp-content/uploads/2015/12/angular-js.png",
+            content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗2",
+            articleAbstract: "在这里你可以学到AngularJS框架开发的相关内容",
             release_time: 1559627633000,
             thumb: 2,
             reading: 0,
@@ -159,6 +181,7 @@ export default {
 }
 #article-list {
   max-width: 1280px;
-  width: 1200px;
+  width: 1100px;
+  /* box-shadow: 3px 3px 4px #909399; */
 }
 </style>
