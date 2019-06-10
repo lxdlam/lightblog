@@ -1,7 +1,7 @@
 <template>
   <div id="heading">
     <div class="nav-container">
-      <img id="logo" src="../../assets/dummy_logo.png" />
+      <img id="logo" src="../../assets/logo.png" />
       <div class="nav-bar">
         <ul class="nav-list">
           <li class="nav-item">
@@ -10,9 +10,7 @@
             </el-link>
           </li>
           <li class="nav-item">
-            <el-link
-              :underline="false"
-              @click="$router.push('/article/edit/qewqe')"
+            <el-link :underline="false" @click="$router.push('/explore')"
               >探索</el-link
             >
           </li>
@@ -186,8 +184,8 @@ export default {
 }
 
 #logo {
-  height: 60px;
-  width: 137px;
+  height: 70px;
+  width: 160px;
 }
 
 ul {
