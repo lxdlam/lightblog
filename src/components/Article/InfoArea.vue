@@ -77,6 +77,7 @@ export default {
 #infoArea {
   width: 1200px;
   height: 140px;
+  margin: 0 auto;
   /* border-radius: 50%; */
   background-color: #f2f6fc;
 }

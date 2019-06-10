@@ -32,7 +32,9 @@
               justify="start"
               word-wrap="break-word"
             >
-              <h3>{{ title }}</h3>
+              <strong>
+                <h3>{{ title }}</h3></strong
+              >
             </el-col>
           </el-col>
           <el-col :xs="12" :sm="12" :md="11" :lg="8" :xl="8">
@@ -129,13 +131,13 @@ export default {
   margin-top: 5px;
   margin-bottom: 5px;
   height: 40px;
-  /* background-color: #e5e9f2; */
+  background-color: #e5e9f2;
 }
 #container {
   margin-top: 5px;
   /* margin-bottom: 1px; */
   height: 100px;
-  /* width: 1400px; */
+  /* width: 1200px; */
   /* background-color: #e5e9f2; */
   display: flex;
   justify-content: space-between;
@@ -161,6 +163,9 @@ export default {
   padding-left: 20px;
   color: #303133;
 }
+#title-bar h3 {
+  font-size: 20px;
+}
 #digestbar {
   font-size: 15px;
   /* width: 800px; */
@@ -182,13 +187,11 @@ export default {
   display: flex;
   justify-content: space-around;
 }
-#container {
-  display: flex;
-  justify-content: space-between;
-}
+
 #img-bar {
   width: 200px;
   height: 100px;
   margin: 5px, 5px;
+  border-radius: 15px;
 }
 </style>
