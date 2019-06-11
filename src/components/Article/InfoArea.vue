@@ -9,6 +9,9 @@
     <template v-else-if="labelLoad">
       <LabelInformation :label="label.id" />
     </template>
+    <template v-else-if="searchLoad">
+      <SearchInformation />
+    </template>
   </div>
 </template>
 
@@ -16,6 +19,7 @@
 import RandomInformation from "@/components/Article/RandomInformation";
 import AuthorInformation from "@/components/Article/AuthorInformation";
 import LabelInformation from "@/components/Article/LabelInformation";
+import SearchInformation from "@/components/Article/SearchInfomation";
 
 export default {
   name: "InfoArea",
@@ -28,6 +32,9 @@ export default {
     },
     label: {
       type: String
+    },
+    search: {
+      type: String
     }
   },
   data() {
@@ -35,6 +42,7 @@ export default {
       randomLoad: false,
       authorLoad: false,
       labelLoad: false,
+      searchLoad: false,
       account: "123"
       // random: this.$router.params['random'] !== undefined && this.$router.params['random'] !== null;
     };
@@ -43,7 +51,8 @@ export default {
     // 在这里加载你的组件
     RandomInformation,
     AuthorInformation,
-    LabelInformation
+    LabelInformation,
+    SearchInformation
   },
   methods: {
     fetchInfo() {
@@ -68,6 +77,11 @@ export default {
       this.labelLoad = true;
     } else {
       this.labelLoad = false;
+    }
+    if (this.search != undefined) {
+      this.searchLoad = true;
+    } else {
+      this.searchLoad = false;
     }
     // this.fetchInfo();
   }

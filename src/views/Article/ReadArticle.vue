@@ -27,7 +27,6 @@
             <el-button plain>取消关注</el-button>
           </div>
         </template>
-        <!-- <el-button plain>+ 关注</el-button> -->
       </div>
     </div>
     <el-divider></el-divider>
@@ -59,6 +58,10 @@ console.log(ob2.friends);//小明，小白，小黑
 
 "
     ></Renderer>
+    <div id="thumb-bar">
+      <el-button type="primary" plain @click="thumb">喜 欢</el-button>
+    </div>
+
     <el-divider></el-divider>
     <div id="comment-bar">
       <h1>评论</h1>
@@ -84,7 +87,7 @@ console.log(ob2.friends);//小明，小白，小黑
           </el-button>
         </el-row>
       </div>
-
+      <CommentList></CommentList>
       <CommentItem
         avatar_sm="http://pic.baike.soso.com/p/20130110/20130110235135-1881501597.jpg"
         user_nickname="李泽林"
@@ -110,7 +113,7 @@ console.log(ob2.friends);//小明，小白，小黑
 <script>
 import Renderer from "@/components/Markdown/Renderer";
 import CommentItem from "@/components/Comment/CommentItem";
-
+import CommentList from "@/components/Comment/CommentList";
 export default {
   name: "ReadArticle",
   props: {
@@ -121,7 +124,8 @@ export default {
   },
   components: {
     Renderer,
-    CommentItem
+    CommentItem,
+    CommentList
   },
   data() {
     return {
@@ -196,7 +200,8 @@ export default {
     decreseRows() {
       this.Rows = 1;
       this.isOnFocus = false;
-    }
+    },
+    thumb() {}
   }
 };
 </script>
@@ -258,7 +263,14 @@ export default {
   justify-content: center;
   /* padding-left: 20px; */
 }
-
+#thumb-bar {
+  /* width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-items: end;
+  background-color: #606266; */
+}
 .circle-md {
   width: 128px;
   height: 128px;
@@ -297,7 +309,7 @@ export default {
   /* margin-top: 50px; */
 }
 .submit-comment {
-  width: 90%;
+  width: 95%;
   background: #eaf0f8;
   margin-bottom: 20px;
   padding: 10px 0 12px 20px;
@@ -313,7 +325,7 @@ export default {
   margin-left: 12px;
 }
 #submit-button {
-  width: 100%;
+  width: 100px;
   float: right;
   margin: 10px 30px auto auto;
 }
