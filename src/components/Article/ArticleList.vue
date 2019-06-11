@@ -1,6 +1,12 @@
 <template>
   <div id="article-list">
-    <ul class="article-line">
+    <ul
+      class="article-line"
+      v-infinite-scroll="load"
+      infinite-scroll-disabled="disabled"
+      infinite-scroll-distance="30px"
+    >
+      <!-- <li v-for="i in count" class="list-item">{{ i }}</li> -->
       <ArticleListItem
         v-for="(item, index) in this.arr"
         :key="index"
@@ -13,21 +19,8 @@
         :imgName="item.cover"
       ></ArticleListItem>
     </ul>
-    <!-- <el-row id="container">
-      <el-col :xs="40" :sm="25" :md="25" :lg="25" :xl="50">
-        <div id="item-bar">
-          <ArticleListItem
-            :title="this.arr.title"
-            :author="this.arr.author_nickname"
-            :date="this.arr.date"
-            :digest="this.arr.digest"
-            :praiseNum="this.arr.thumb"
-            :commentNum="this.arr.reading"
-            :imgName="this.arr.imgName"
-          ></ArticleListItem>
-        </div>
-      </el-col>
-    </el-row> -->
+    <p v-if="loading">加载中...</p>
+    <p v-if="noMore">没有更多了</p>
   </div>
 </template>
 
@@ -49,8 +42,11 @@ export default {
   data() {
     return {
       // date: 0,
+      count: 10,
+      loading: false,
       arr: [
         {
+          // loading: false
           // title: "文章",
           // author_nickname: "琴乡梦",
           // date: 1231234,
@@ -74,6 +70,21 @@ export default {
       // for (let item in retArray) {
       //   this.arti_object.push(item);
       // }
+    },
+    load() {
+      this.loading = true;
+      setTimeout(() => {
+        this.count += 2;
+        this.loading = false;
+      }, 1000);
+    }
+  },
+  computed: {
+    noMore() {
+      return this.count >= 15;
+    },
+    disabled() {
+      return this.loading || this.noMore;
     }
   },
   mounted: function() {
@@ -121,6 +132,246 @@ export default {
               "https://cn.bing.com/th?id=OIP.EntHChgUyirgbZ9A3zTxkAHaFj&pid=Api&rs=1&p=0",
             content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗2",
             articleAbstract: "在这里你可以学到React框架开发的相关内容",
+            release_time: 1559627633000,
+            thumb: 2,
+            reading: 0,
+            labels: [
+              {
+                label_id: 1,
+                label_name: "123"
+              }
+            ]
+          },
+          {
+            article_id: 2,
+            virtual_id: "3674c9cd371671960510cda0370fe5c2",
+            title: "AngularJS框架基础入门",
+            author_id: 1,
+            author_nickname: "李洋",
+            cover:
+              "http://theblogreaders.com/wp-content/uploads/2015/12/angular-js.png",
+            content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗2",
+            articleAbstract: "在这里你可以学到AngularJS框架开发的相关内容",
+            release_time: 1559627633000,
+            thumb: 2,
+            reading: 0,
+            labels: [
+              {
+                label_id: 1,
+                label_name: "123"
+              }
+            ]
+          },
+          {
+            article_id: 2,
+            virtual_id: "3674c9cd371671960510cda0370fe5c2",
+            title: "AngularJS框架基础入门",
+            author_id: 1,
+            author_nickname: "李洋",
+            cover:
+              "http://theblogreaders.com/wp-content/uploads/2015/12/angular-js.png",
+            content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗2",
+            articleAbstract: "在这里你可以学到AngularJS框架开发的相关内容",
+            release_time: 1559627633000,
+            thumb: 2,
+            reading: 0,
+            labels: [
+              {
+                label_id: 1,
+                label_name: "123"
+              }
+            ]
+          },
+          {
+            article_id: 2,
+            virtual_id: "3674c9cd371671960510cda0370fe5c2",
+            title: "AngularJS框架基础入门",
+            author_id: 1,
+            author_nickname: "李洋",
+            cover:
+              "http://theblogreaders.com/wp-content/uploads/2015/12/angular-js.png",
+            content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗2",
+            articleAbstract: "在这里你可以学到AngularJS框架开发的相关内容",
+            release_time: 1559627633000,
+            thumb: 2,
+            reading: 0,
+            labels: [
+              {
+                label_id: 1,
+                label_name: "123"
+              }
+            ]
+          },
+          {
+            article_id: 2,
+            virtual_id: "3674c9cd371671960510cda0370fe5c2",
+            title: "AngularJS框架基础入门",
+            author_id: 1,
+            author_nickname: "李洋",
+            cover:
+              "http://theblogreaders.com/wp-content/uploads/2015/12/angular-js.png",
+            content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗2",
+            articleAbstract: "在这里你可以学到AngularJS框架开发的相关内容",
+            release_time: 1559627633000,
+            thumb: 2,
+            reading: 0,
+            labels: [
+              {
+                label_id: 1,
+                label_name: "123"
+              }
+            ]
+          },
+          {
+            article_id: 2,
+            virtual_id: "3674c9cd371671960510cda0370fe5c2",
+            title: "AngularJS框架基础入门",
+            author_id: 1,
+            author_nickname: "李洋",
+            cover:
+              "http://theblogreaders.com/wp-content/uploads/2015/12/angular-js.png",
+            content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗2",
+            articleAbstract: "在这里你可以学到AngularJS框架开发的相关内容",
+            release_time: 1559627633000,
+            thumb: 2,
+            reading: 0,
+            labels: [
+              {
+                label_id: 1,
+                label_name: "123"
+              }
+            ]
+          },
+          {
+            article_id: 2,
+            virtual_id: "3674c9cd371671960510cda0370fe5c2",
+            title: "AngularJS框架基础入门",
+            author_id: 1,
+            author_nickname: "李洋",
+            cover:
+              "http://theblogreaders.com/wp-content/uploads/2015/12/angular-js.png",
+            content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗2",
+            articleAbstract: "在这里你可以学到AngularJS框架开发的相关内容",
+            release_time: 1559627633000,
+            thumb: 2,
+            reading: 0,
+            labels: [
+              {
+                label_id: 1,
+                label_name: "123"
+              }
+            ]
+          },
+          {
+            article_id: 2,
+            virtual_id: "3674c9cd371671960510cda0370fe5c2",
+            title: "AngularJS框架基础入门",
+            author_id: 1,
+            author_nickname: "李洋",
+            cover:
+              "http://theblogreaders.com/wp-content/uploads/2015/12/angular-js.png",
+            content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗2",
+            articleAbstract: "在这里你可以学到AngularJS框架开发的相关内容",
+            release_time: 1559627633000,
+            thumb: 2,
+            reading: 0,
+            labels: [
+              {
+                label_id: 1,
+                label_name: "123"
+              }
+            ]
+          },
+          {
+            article_id: 2,
+            virtual_id: "3674c9cd371671960510cda0370fe5c2",
+            title: "AngularJS框架基础入门",
+            author_id: 1,
+            author_nickname: "李洋",
+            cover:
+              "http://theblogreaders.com/wp-content/uploads/2015/12/angular-js.png",
+            content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗2",
+            articleAbstract: "在这里你可以学到AngularJS框架开发的相关内容",
+            release_time: 1559627633000,
+            thumb: 2,
+            reading: 0,
+            labels: [
+              {
+                label_id: 1,
+                label_name: "123"
+              }
+            ]
+          },
+          {
+            article_id: 2,
+            virtual_id: "3674c9cd371671960510cda0370fe5c2",
+            title: "AngularJS框架基础入门",
+            author_id: 1,
+            author_nickname: "李洋",
+            cover:
+              "http://theblogreaders.com/wp-content/uploads/2015/12/angular-js.png",
+            content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗2",
+            articleAbstract: "在这里你可以学到AngularJS框架开发的相关内容",
+            release_time: 1559627633000,
+            thumb: 2,
+            reading: 0,
+            labels: [
+              {
+                label_id: 1,
+                label_name: "123"
+              }
+            ]
+          },
+          {
+            article_id: 2,
+            virtual_id: "3674c9cd371671960510cda0370fe5c2",
+            title: "AngularJS框架基础入门",
+            author_id: 1,
+            author_nickname: "李洋",
+            cover:
+              "http://theblogreaders.com/wp-content/uploads/2015/12/angular-js.png",
+            content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗2",
+            articleAbstract: "在这里你可以学到AngularJS框架开发的相关内容",
+            release_time: 1559627633000,
+            thumb: 2,
+            reading: 0,
+            labels: [
+              {
+                label_id: 1,
+                label_name: "123"
+              }
+            ]
+          },
+          {
+            article_id: 2,
+            virtual_id: "3674c9cd371671960510cda0370fe5c2",
+            title: "AngularJS框架基础入门",
+            author_id: 1,
+            author_nickname: "李洋",
+            cover:
+              "http://theblogreaders.com/wp-content/uploads/2015/12/angular-js.png",
+            content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗2",
+            articleAbstract: "在这里你可以学到AngularJS框架开发的相关内容",
+            release_time: 1559627633000,
+            thumb: 2,
+            reading: 0,
+            labels: [
+              {
+                label_id: 1,
+                label_name: "123"
+              }
+            ]
+          },
+          {
+            article_id: 2,
+            virtual_id: "3674c9cd371671960510cda0370fe5c2",
+            title: "AngularJS框架基础入门",
+            author_id: 1,
+            author_nickname: "李洋",
+            cover:
+              "http://theblogreaders.com/wp-content/uploads/2015/12/angular-js.png",
+            content: "今天我很开心，昨天我也很开心，前天我依然很开心，沙雕吗2",
+            articleAbstract: "在这里你可以学到AngularJS框架开发的相关内容",
             release_time: 1559627633000,
             thumb: 2,
             reading: 0,

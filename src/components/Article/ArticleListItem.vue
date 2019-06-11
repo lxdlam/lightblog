@@ -204,6 +204,7 @@ export default {
   margin: 5px, 5px;
   border-radius: 15px;
 }
+
 #card-bar:hover {
   background-color: #ebeef5;
 }
