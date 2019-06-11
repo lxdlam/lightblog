@@ -1,18 +1,24 @@
 <template>
   <div id="test1-view">
-    <InfoArea :author="1" />
-    <ArticleList :authorid="1" :start="0" :end="2"></ArticleList>
+    <!-- <InfoArea :author="1" /> -->
+    <!-- <ArticleList :authorid="1" :start="0" :end="2"></ArticleList> -->
+    <ReadArticle :article_id="1"></ReadArticle>
+    <CommentList></CommentList>
   </div>
 </template>
 
 <script>
-import InfoArea from "@/components/Article/InfoArea";
-import ArticleList from "@/components/Article/ArticleList";
+// import InfoArea from "@/components/Article/InfoArea";
+// import ArticleList from "@/components/Article/ArticleList";
+import CommentList from "@/components/Comment/CommentList";
+import ReadArticle from "@/views/Article/ReadArticle";
 export default {
   name: "Test1View",
   components: {
-    InfoArea,
-    ArticleList
+    // InfoArea,
+    // ArticleList
+    ReadArticle,
+    CommentList
   },
   data: function() {
     return {
