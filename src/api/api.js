@@ -1,20 +1,28 @@
 import QueryProxy from "./query";
+import Img from "./modules/img";
+import User from "./modules/user";
+import Article from "./modules/article";
 
 export default class {
   constructor(options) {
     this.baseURL = options.baseURL;
     this.modules = new Map();
     this.proxy = new QueryProxy(this.baseURL);
+
+    this._img = new Img(this.proxy);
+    this._user = new User(this.proxy);
+    this._article = new Article(this.proxy);
   }
 
-  registerModule(name, instance) {
-    this.modules.set(name, instance);
+  get img() {
+    return this._img;
+  }
 
-    const map = this.modules;
-    Object.defineProperty(this.prototype, name, {
-      get() {
-        return map.get(name);
-      }
-    });
+  get user() {
+    return this._user;
+  }
+
+  get article() {
+    return this._article;
   }
 }

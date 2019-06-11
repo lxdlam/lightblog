@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ERROR_CODE } from "./error_code";
 import { isUndefined } from "util";
+import { genKey } from "./util";
 
 export class QueryError extends Error {
   constructor(code, message) {
@@ -14,8 +15,11 @@ const config = {
   method: "post", // due to the implementation of backend
   transformResponse: [
     function(data) {
+      // console.log(data);
       if (Object.keys(data).length === 0) return data;
       // check response format
+      if (!isUndefined(data.status) && data.status >= 300)
+        throw new QueryError(data.status, data.message);
       if (
         isUndefined(data.code) ||
         isUndefined(data.msg) ||
@@ -48,18 +52,31 @@ export default class {
 
   // returns an promise
   query(url, data) {
-    return this.instance(
-      Object.assign(
-        {},
-        { url: url, data: { request_time: getTime(), data: data } }
-      )
-    ).then(resp => resp.data);
+    const query = Object.assign(
+      {},
+      { url: url, data: { request_time: getTime(), ...data } }
+    );
+    // console.log(query);
+    return this.instance(query).then(resp => resp.data);
+  }
+
+  loggedQuery(url, token, uid, data) {
+    const time = getTime();
+    const query = Object.assign(
+      {},
+      {
+        url: url,
+        data: { request_time: time, key: genKey(token, uid, time), ...data }
+      }
+    );
+    console.log(query);
+    return this.instance(query).then(resp => resp.data);
   }
 
   // also returns an promise
   upload(url, blob, fileName) {
     let form = new FormData();
-    form.append("img", blob, fileName);
+    form.append("image", blob, fileName);
     form.append("time", getTime());
     return this.instance(
       Object.assign(
@@ -69,7 +86,8 @@ export default class {
           data: form,
           headers: {
             "Content-Type": "multipart/form-data"
-          }
+          },
+          timeout: 0
         }
       )
     ).then(resp => resp.data);

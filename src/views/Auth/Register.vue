@@ -55,7 +55,7 @@ export default {
   },
   data: function() {
     return {
-      step: 2,
+      step: 1,
       user: {
         account: "",
         username: "",
