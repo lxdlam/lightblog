@@ -1,5 +1,6 @@
 <template>
   <div class="comment-item">
+    <el-divider></el-divider>
     <el-row>
       <el-col :span="1.5">
         <div class="block">
@@ -24,7 +25,7 @@
         <el-row class="com-footer">
           <el-col :span="5">{{ dateStr }}</el-col>
           <el-col :span="2" :offset="17">
-            <div class="el-icon-chat-dot-square" @click="reply">回复</div>
+            <!-- <div class="el-icon-chat-dot-square" @click="reply">回复</div> -->
           </el-col>
         </el-row>
         <el-input
@@ -36,7 +37,7 @@
         ></el-input>
       </el-col>
     </el-row>
-    <label class="gray_line"></label>
+    <!-- <label class="gray_line"></label> -->
   </div>
 </template>
 
@@ -116,7 +117,8 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .comment-item {
-  width: 1000px;
+  width: 100%;
+  /* padding-left: 20px; */
 }
 .el-row {
   margin-bottom: 5px;
@@ -130,6 +132,16 @@ export default {
   border-radius: 50%;
   overflow: hidden;
   margin-right: 12px;
+}
+.block {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: #606266;
+  box-shadow: 3px 3px 5px #606264;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 .gray_line {
   background: #e5e5e5;
@@ -145,7 +157,7 @@ export default {
 }
 .com-content {
   text-align: left;
-  font-size: 16px;
+  font-size: 15px;
   color: #606266;
   margin-bottom: 10px;
 }

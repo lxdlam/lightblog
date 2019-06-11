@@ -39,13 +39,6 @@
 ```
 var ob = {name:'小明',friends:['小明','小白']};
 
-//原型式继承  参数o,引用类型值，实质就是一个内存地址
-function object(o){
-  function F(){}//创建一个构造函数F
-  F.prototype = o;
-  return new F();
-}
-
 var ob1 = object(ob);
 ob1.name = '小小';
 ob1.friends.push('小黑');
@@ -91,11 +84,23 @@ console.log(ob2.friends);//小明，小白，小黑
           </el-button>
         </el-row>
       </div>
-      <el-divider></el-divider>
+
       <CommentItem
-        avatar_sm="https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg"
-        user_nickname="无影の繁华"
+        avatar_sm="http://pic.baike.soso.com/p/20130110/20130110235135-1881501597.jpg"
+        user_nickname="李泽林"
         comment="感谢博主分享"
+        :comment_time="1559738627000"
+      ></CommentItem>
+      <CommentItem
+        avatar_sm="https://cn.bing.com/th?id=OIP.Yppu9B9I6HRz4JmUwNXawgAAAA&pid=Api&rs=1&p=0"
+        user_nickname="臧博浩"
+        comment="博主666"
+        :comment_time="1559738627000"
+      ></CommentItem>
+      <CommentItem
+        avatar_sm="https://img.4hw.com.cn/20190529/87fccee3d753990e592c222fe0c697d9.jpg!logo"
+        user_nickname="李洋"
+        comment="学到了学到了"
         :comment_time="1559738627000"
       ></CommentItem>
     </div>
@@ -200,7 +205,7 @@ export default {
 #read-article {
   max-width: 1280px;
   width: 980px;
-  background-color: #e8f3fb;
+  background-color: #eff8fd;
   box-shadow: 4px 4px 2px #e3e8f3;
 }
 #title h1 {
@@ -308,6 +313,7 @@ export default {
   margin-left: 12px;
 }
 #submit-button {
+  width: 100%;
   float: right;
   margin: 10px 30px auto auto;
 }

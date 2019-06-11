@@ -8,6 +8,7 @@
     ></CommentItem> -->
     <ul>
       <li v-for="comment in comments" v-bind:key="comment">
+        <el-divider></el-divider>
         <CommentItem
           :avatar_sm="comment.avatar_sm"
           :user_nickname="comment.user_nickname"
