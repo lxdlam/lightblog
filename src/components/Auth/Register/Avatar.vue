@@ -92,7 +92,6 @@ export default {
         viewMode: 1,
         preview: ".img-preview"
       });
-      console.log(this.cropper);
     },
     crop() {
       const canvas = this.cropper.getCroppedCanvas();
@@ -100,14 +99,15 @@ export default {
       this.user.img_files = Object.assign(
         {},
         {
-          large: getRoundedCanvas(canvas, 256).toDataURL(),
-          medium: getRoundedCanvas(canvas, 128).toDataURL(),
-          small: getRoundedCanvas(canvas, 64).toDataURL()
+          large: getRoundedCanvas(canvas, 256),
+          medium: getRoundedCanvas(canvas, 128),
+          small: getRoundedCanvas(canvas, 64)
         }
       );
 
       this.$set(this.user.stage, 1, true);
       this.$message({ message: "剪裁成功！", type: "success" });
+
       this.$emit("croppered");
     },
     beforeAvatarUpload(file) {
