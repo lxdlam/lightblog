@@ -1,0 +1,117 @@
+<template>
+  <div id="menu">
+    <div id="tabs">
+      <el-menu
+        :default-active="activeIndex"
+        class="el-menu-demo"
+        mode="horizontal"
+        @select="handleSelect"
+        :style="{ 'align-items': 'justify' }"
+      >
+        <el-menu-item index="1">个人信息</el-menu-item>
+        <el-menu-item index="2">我的关注</el-menu-item>
+        <el-menu-item index="3">我的评论</el-menu-item>
+        <el-menu-item index="4">我的发布</el-menu-item>
+      </el-menu>
+    </div>
+    <div id="container">
+      <template v-if="infoLoad">
+        <PersonalInformation />
+      </template>
+      <template v-else-if="attentionLoad">
+        <PersonalAttention />
+      </template>
+      <template v-else-if="commentLoad">
+        <PersonalComment />
+      </template>
+      <template v-else-if="articleLoad">
+        <PersonalArticle />
+      </template>
+    </div>
+  </div>
+</template>
+
+<script>
+import PersonalInformation from "@/components/Auth/Personal/PersonalInformation";
+import PersonalAttention from "@/components/Auth/Personal/PersonalAttention";
+import PersonalComment from "@/components/Auth/Personal/PersonalComment";
+import PersonalArticle from "@/components/Auth/Personal/PersonalArticle";
+export default {
+  name: "Menu",
+  props: {},
+  data() {
+    return {
+      infoLoad: true,
+      attentionLoad: false,
+      commentLoad: false,
+      articleLoad: false
+    };
+  },
+  components: {
+    // 在这里加载你的组件
+    PersonalInformation,
+    PersonalAttention,
+    PersonalComment,
+    PersonalArticle
+  },
+  methods: {
+    handleSelect(key) {
+      //   console.log(key, keyPath);
+      if (key == 1) {
+        this.infoLoad = true;
+        this.attentionLoad = false;
+        this.commentLoad = false;
+        this.articleLoad = false;
+      } else if (key == 2) {
+        this.infoLoad = false;
+        this.attentionLoad = true;
+        this.commentLoad = false;
+        this.articleLoad = false;
+      } else if (key == 3) {
+        this.infoLoad = false;
+        this.attentionLoad = false;
+        this.commentLoad = true;
+        this.articleLoad = false;
+      } else if (key == 4) {
+        this.infoLoad = false;
+        this.attentionLoad = false;
+        this.commentLoad = true;
+        this.articleLoad = false;
+      }
+    }
+  },
+  mounted: function() {}
+};
+</script>
+
+}
+
+<style scoped>
+#menu {
+  width: 980px;
+  height: 700px;
+  max-width: 1280px;
+  /* background-color: blue; */
+  /* margin-top: -10px; */
+}
+#tabs {
+  width: 100%;
+  /* height: 80px; */
+  display: flex;
+  justify-content: center;
+  /* background-color: aqua; */
+  color: Transparent;
+  /* margin-bottom: 10px; */
+}
+#tabs h3 {
+  color: #303133;
+}
+#container {
+  width: 100%;
+  /* height: 100%; */
+  /* margin-top: 10px; */
+  padding-top: 20px;
+  background-color: #eef3fb;
+  box-shadow: 2px 2px 3px 0px #e0e4e6;
+}
+</style>
