@@ -5,3 +5,7 @@
 table {
   margin: auto;
 }
+
+#markdown-renderer {
+  text-align: start;
+}

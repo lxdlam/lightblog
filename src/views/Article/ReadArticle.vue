@@ -30,10 +30,9 @@
       </div>
     </div>
     <el-divider></el-divider>
-
-    <Renderer
-      class="article"
-      content="
+    <div class="article-container">
+      <Renderer
+        content="
 ### 一、原型链继承
 ```
 var ob = {name:'小明',friends:['小明','小白']};
@@ -57,7 +56,8 @@ console.log(ob2.friends);//小明，小白，小黑
 在创建子类型(例如创建Son的实例)时,不能向超类型(例如Father)的构造函数中传递参数.
 
 "
-    ></Renderer>
+      ></Renderer>
+    </div>
     <div id="thumb-bar">
       <el-button type="primary" plain @click="thumb">喜 欢</el-button>
     </div>
@@ -266,14 +266,7 @@ export default {
   justify-content: center;
   /* padding-left: 20px; */
 }
-#thumb-bar {
-  /* width: 100%;
-  height: 50px;
-  display: flex;
-  flex-direction: row;
-  justify-items: end;
-  background-color: #606266; */
-}
+
 .circle-md {
   width: 128px;
   height: 128px;
@@ -298,8 +291,9 @@ export default {
   color: #606266;
   /* margin: 10px 0 0 20px; */
 }
-.article {
-  margin: 20px 0 20px 20px;
+.article-container {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 #comment-bar {
   width: 100%;

@@ -66,6 +66,14 @@ export default new Router({
       name: "search",
       component: () =>
         import(/* webpackChunkName: "searchView" */ "./views/Meta/Search.vue")
+    },
+    {
+      path: "/article/read",
+      name: "read_article",
+      component: () =>
+        import(
+          /* webpackChunkName: "readArticleView" */ "./views/Article/ReadArticle.vue"
+        )
     }
   ]
 });
