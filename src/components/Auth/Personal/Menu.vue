@@ -108,9 +108,11 @@ export default {
 }
 #container {
   width: 100%;
+  min-height: 620px;
+  border-radius: 10px;
   /* height: 100%; */
   /* margin-top: 10px; */
-  padding-top: 20px;
+  /* padding-top: 20px; */
   background-color: #eef3fb;
   box-shadow: 2px 2px 3px 0px #e0e4e6;
 }

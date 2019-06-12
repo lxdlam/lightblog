@@ -1,5 +1,5 @@
 <template>
-  <div id="author-information">
+  <div id="attention-item">
     <div id="container">
       <el-row
         :gutter="10"
@@ -24,19 +24,6 @@
                     >
                   </div></el-col
                 >
-                <el-col :xs="7" :sm="8" :md="8" :lg="9" :xl="11">
-                  <!-- 关注按钮 -->
-                  <template v-if="focus == true">
-                    <div id="button-bar">
-                      <el-button round>+ 关注</el-button>
-                    </div>
-                  </template>
-                  <template v-else-if="focus == false">
-                    <div id="button-bar">
-                      <el-button type="primary" round>取消关注</el-button>
-                    </div>
-                  </template>
-                </el-col>
               </div>
             </el-row>
             <el-row :gutter="10">
@@ -56,7 +43,7 @@
 
 <script>
 export default {
-  name: "AuthorInformation",
+  name: "AttentionItem",
   props: {
     account: Number
   },
@@ -156,7 +143,7 @@ export default {
 }
 #name-bar h1 {
   font-size: 23px;
-  color: #ffffff;
+  color: #606266;
   text-shadow: 2px 2px 4px #ccced1;
 }
 #sign-bar {
@@ -166,8 +153,8 @@ export default {
   text-align: start;
   padding-left: 3px;
   font-size: 14px;
-  color: #f2f6fc;
-  text-shadow: 2px 2px 4px #ccced1;
+  color: #606266;
+  text-shadow: 2px 2px 8px #d1d3d6;
 }
 #line1-bar {
   width: 350px;
@@ -179,13 +166,16 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
-#author-information {
+#attention-item {
+  width: 95%;
   border-radius: 10px;
   background-repeat: no-repeat;
-  background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560156534576&di=1e660a8f9c608407dd3a20b90c1ac993&imgtype=0&src=http%3A%2F%2Fimglf0.ph.126.net%2F2OxjSW7ICrsfk4K99Cj33w%3D%3D%2F6608488194911282475.jpg);
+  /* background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560156534576&di=1e660a8f9c608407dd3a20b90c1ac993&imgtype=0&src=http%3A%2F%2Fimglf0.ph.126.net%2F2OxjSW7ICrsfk4K99Cj33w%3D%3D%2F6608488194911282475.jpg); */
   /* background-attachment: fixed; */
+  background-color: #d7e0f1;
   box-shadow: 6px 6px 4px #909399;
   overflow: hidden;
+  margin-bottom: 10px;
 }
 
 #container {
@@ -196,6 +186,6 @@ export default {
   display: block;
   display: flex;
   align-items: center;
-  padding-left: 20px;
+  /* padding-left: 20px; */
 }
 </style>

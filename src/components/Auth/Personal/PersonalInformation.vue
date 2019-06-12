@@ -111,6 +111,8 @@ export default {
 
 <style scoped>
 #personal-information {
+  /* margin-top: 20px; */
+  padding-top: 20px;
   width: 100%;
   display: flex;
   justify-content: center;
