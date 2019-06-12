@@ -75,8 +75,8 @@ export default {
       } else if (key == 4) {
         this.infoLoad = false;
         this.attentionLoad = false;
-        this.commentLoad = true;
-        this.articleLoad = false;
+        this.commentLoad = false;
+        this.articleLoad = true;
       }
     }
   },
@@ -105,14 +105,13 @@ export default {
 }
 #tabs h3 {
   color: #303133;
+  /* margin-bottom: 5px; */
 }
 #container {
   width: 100%;
   min-height: 620px;
   border-radius: 10px;
-  /* height: 100%; */
-  /* margin-top: 10px; */
-  /* padding-top: 20px; */
+  padding-left: -20px;
   background-color: #eef3fb;
   box-shadow: 2px 2px 3px 0px #e0e4e6;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="comment-item">
+  <div class="personal-comment-item">
     <el-divider></el-divider>
     <el-row>
       <el-col :span="1.5">
@@ -8,8 +8,11 @@
         </div>
       </el-col>
       <el-col :span="20">
-        <div class="username">
-          <strong>{{ user_nickname }}</strong>
+        <div id="line1">
+          <div class="username">
+            <strong>{{ user_nickname }}</strong>
+          </div>
+          <div id="article-title">{{ article_title }}</div>
         </div>
         <div class="parent-comment" v-show="has_parent">
           <div class="par-username">
@@ -43,7 +46,7 @@
 
 <script>
 export default {
-  name: "CommentItem",
+  name: "PersonalCommentItem",
   props: {
     avatar_sm: {
       type: String,
@@ -62,6 +65,9 @@ export default {
       required: true
     },
     parent_comment_id: {
+      type: Number
+    },
+    article_title: {
       type: Number
     }
   },
@@ -116,7 +122,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.comment-item {
+.personal-comment-item {
   width: 100%;
   border-radius: 10px;
   /* padding-left: 20px; */
@@ -150,6 +156,11 @@ export default {
   height: 2px;
   float: left;
   margin: 0 5px;
+}
+#line1 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 .username {
   text-align: left;

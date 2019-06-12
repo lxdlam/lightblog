@@ -21,7 +21,7 @@
               :xs="14"
               :sm="12"
               :md="12"
-              :lg="7"
+              :lg="10"
               :xl="20"
               word-wrap="break-word"
             >
@@ -40,7 +40,7 @@
             </el-col>
             <el-col :xs="12" :sm="12" :md="11" :lg="8" :xl="8">
               <div class="grid-content bg-purple" id="multibar">
-                <el-col>{{ author }}&nbsp; | &nbsp;{{ dateStr }}</el-col>
+                <el-col>{{ dateStr }}</el-col>
               </div>
             </el-col>
           </el-row>
@@ -79,7 +79,7 @@ export default {
   name: "ArticleListItem",
   props: {
     title: String,
-    author: String,
+
     date: Number,
     digest: {
       type: String,
@@ -124,6 +124,7 @@ export default {
 }
 <style scoped>
 .el-row {
+  /* width: 100%; */
   margin-top: 5px;
   margin-bottom: 5px;
   height: 40px;
@@ -131,20 +132,20 @@ export default {
   border-radius: 15px;
 }
 #container {
-  /* margin-top: 5px; */
-  /* margin-bottom: 1px; */
   height: 100px;
-  /* width: 1200px; */
-  /* background-color: #e5e9f2; */
+  width: 100%;
   display: flex;
   justify-content: space-between;
   /* box-shadow: 3px 3px 4px #909399; */
+}
+#card-bar {
+  width: 910px;
 }
 .el-col {
   border-radius: 4px;
 }
 .grid-content {
-  border-radius: 4px;
+  border-radius: 10px;
   min-height: 36px;
 }
 

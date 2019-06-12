@@ -1,27 +1,27 @@
 <template>
   <div id="test1-view">
-    <InfoArea :author="1" />
+    <!-- <InfoArea :author="1" /> -->
     <!-- <InfoArea :search="1" /> -->
     <!-- <ArticleList :authorid="1" :start="0" :end="2"></ArticleList> -->
-    <!-- <ReadArticle :article_id="1"></ReadArticle> -->
+    <ReadArticle :article_id="1"></ReadArticle>
     <!-- <CommentList></CommentList> -->
     <!-- <Menu></Menu> -->
   </div>
 </template>
 
 <script>
-import InfoArea from "@/components/Article/InfoArea";
+// import InfoArea from "@/components/Article/InfoArea";
 // import ArticleList from "@/components/Article/ArticleList";
 // import CommentList from "@/components/Comment/CommentList";
-// import ReadArticle from "@/views/Article/ReadArticle";
+import ReadArticle from "@/views/Article/ReadArticle";
 // import Menu from "@/components/Auth/Personal/Menu";
 export default {
   name: "Test1View",
   components: {
-    InfoArea
-    // ArticleList,
-    // ReadArticle,
-    // CommentList,
+    // InfoArea
+    // ArticleList
+    ReadArticle
+    // CommentList
     // Menu
   },
   data: function() {
