@@ -34,18 +34,7 @@ export default {
     return {
       count: 10,
       loading: false,
-      arr: [
-        {
-          // loading: false
-          // title: "文章",
-          // author_nickname: "琴乡梦",
-          // date: 1231234,
-          // digest: "摘要",
-          // thumb: 10,
-          // reading: 20,
-          // imgName: "http://img3m6.ddimg.cn/46/1/24144166-1_u_30016.jpg"
-        }
-      ]
+      arr: [{}]
     };
   },
   components: {
@@ -401,12 +390,12 @@ export default {
   /* padding-right: 30px; */
   padding-top: 10px;
   padding-bottom: 10px;
+  display: flex;
+  justify-content: center;
 }
-#item-bar {
-  width: 1200px;
-}
+
 .el-header {
-  background-color: #b3c0d1;
+  /* background-color: #b3c0d1; */
   color: #333;
   line-height: 60px;
 }
@@ -415,8 +404,9 @@ export default {
   color: #333;
 }
 #article-list {
-  max-width: 1280px;
-  width: 1100px;
+  max-width: 960px;
+  width: 100%;
+  /* background-color: blue; */
   /* box-shadow: 3px 3px 4px #909399; */
 }
 </style>

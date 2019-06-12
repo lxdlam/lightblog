@@ -133,13 +133,14 @@ export default {
 }
 #container {
   height: 100px;
-  width: 100%;
+  width: 90%;
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   /* box-shadow: 3px 3px 4px #909399; */
 }
 #card-bar {
-  width: 910px;
+  width: 100%;
+  margin-left: -20px;
 }
 .el-col {
   border-radius: 4px;

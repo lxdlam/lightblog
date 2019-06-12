@@ -88,9 +88,14 @@ export default {
 
 <style scoped>
 #menu {
-  width: 980px;
+  width: 960px;
   height: 700px;
   max-width: 1280px;
+  display: table;
+  margin: 0 auto;
+
+  /* align-items: center; */
+  /* align-self: center; */
   /* background-color: blue; */
   /* margin-top: -10px; */
 }

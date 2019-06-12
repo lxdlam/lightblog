@@ -393,13 +393,14 @@ export default {
   margin-top: 10px;
 }
 #personal-comment {
-  width: 100%;
-  min-height: 600px;
+  width: 95%;
+  /* max-height: 960px; */
   /* background-color: bisque; */
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding-top: 10px;
   padding-bottom: 10px;
+  padding-left: 10px;
 }
 #left {
   width: 200px;
