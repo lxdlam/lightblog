@@ -65,9 +65,6 @@
                   <el-dropdown-item icon="el-icon-document" command="articles">
                     我的文章
                   </el-dropdown-item>
-                  <el-dropdown-item icon="el-icon-star-on" command="favorites">
-                    收藏中心
-                  </el-dropdown-item>
                   <el-dropdown-item
                     divided
                     icon="el-icon-error"
@@ -131,8 +128,6 @@ export default {
         // Go to profile page
       } else if (key === "articles") {
         // Go to article page
-      } else if (key === "favorites") {
-        // Go to favorites page
       } else if (key === "logout") {
         this.$store.commit("user/logout");
       }

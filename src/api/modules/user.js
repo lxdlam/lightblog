@@ -51,7 +51,7 @@ export default class {
 
   updateUserInfo(uid, token, data) {
     return this.proxy.loggedQuery("/user/update", token, uid, {
-      uid: uid,
+      uid: data.uid,
       account: data.account,
       nickname: data.nickname,
       email: data.email,

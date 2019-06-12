@@ -2,6 +2,10 @@ import QueryProxy from "./query";
 import Img from "./modules/img";
 import User from "./modules/user";
 import Article from "./modules/article";
+import Comment from "./modules/comment";
+import Tag from "./modules/tag";
+import Follow from "./modules/follow";
+import Like from "./modules/like";
 
 export default class {
   constructor(options) {
@@ -12,6 +16,10 @@ export default class {
     this._img = new Img(this.proxy);
     this._user = new User(this.proxy);
     this._article = new Article(this.proxy);
+    this._comment = new Comment(this.proxy);
+    this._tag = new Tag(this.proxy);
+    this._follow = new Follow(this.proxy);
+    this._like = new Like(this.proxy);
   }
 
   get img() {
@@ -24,5 +32,21 @@ export default class {
 
   get article() {
     return this._article;
+  }
+
+  get comment() {
+    return this._comment;
+  }
+
+  get tag() {
+    return this._tag;
+  }
+
+  get follow() {
+    return this._follow;
+  }
+
+  get like() {
+    return this._like;
   }
 }

@@ -9,8 +9,9 @@
           uid = null;
         "
         type="warning"
-        >Clear</el-button
       >
+        Clear
+      </el-button>
     </p>
     <p>Token: {{ this.token }}</p>
     <p>UID: {{ this.uid }}</p>
@@ -23,12 +24,14 @@ export default {
   data: function() {
     return {
       token: null,
-      uid: null
+      uid: null,
+      article_id: "8869c389281978a6221a9cd46ac15478"
     };
   },
   methods: {
     login() {
       const vm = this;
+
       this.$api.user
         .login("lxdlam", "e99a18c428cb38d5f260853678922e03")
         .then(ret => {
@@ -38,21 +41,10 @@ export default {
         .catch(err => console.log(err));
     },
     test() {
-      this.$api.user
-        .updateUserInfo(this.uid, this.token, {
-          uid: this.uid,
-          account: "lxdlam",
-          nickname: "Ramen_new",
-          email: null,
-          phone: null,
-          avatar_sm: null,
-          avatar_md: null,
-          avatar_lg: null,
-          singature: null,
-          interest: null
-        })
+      this.$api.article
+        .recommendList()
         .then(ret => console.log(ret))
-        .catch(err => console.log(err));
+        .catch(err => console.log(`Error: [${err.code}] ${err.message}`));
     }
   }
 };

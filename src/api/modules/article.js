@@ -73,4 +73,12 @@ export default class {
     };
     return this.proxy.query("/article/query_by_title", query);
   }
+
+  randomArticle() {
+    return this.proxy.query("/article/query_random");
+  }
+
+  recommendList() {
+    return this.proxy.query("/article/recommend");
+  }
 }
