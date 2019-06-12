@@ -65,28 +65,8 @@ console.log(ob2.friends);//小明，小白，小黑
     <el-divider></el-divider>
     <div id="comment-bar">
       <h1>评论</h1>
-      <div class="submit-comment">
-        <el-row>
-          <el-col :span="1">
-            <i id="icon-bar" class="el-icon-s-custom"></i>
-            <!-- <el-image id="placeholder" icon="el-icon-user"></el-image> -->
-          </el-col>
-          <el-col :span="22">
-            <el-input
-              type="textarea"
-              :rows="Rows"
-              placeholder="输入评论..."
-              v-model="textarea"
-              @focus="increseRows"
-              @blur="decreseRows"
-              class="input-comment"
-            />
-          </el-col>
-          <el-button v-if="isOnFocus" type="primary" id="submit-button">
-            发表评论
-          </el-button>
-        </el-row>
-      </div>
+      <InputBox />
+      <!-- <el-button @click="submitComment">aaa</el-button> -->
       <CommentList></CommentList>
       <CommentItem
         avatar_sm="http://pic.baike.soso.com/p/20130110/20130110235135-1881501597.jpg"
@@ -106,6 +86,7 @@ console.log(ob2.friends);//小明，小白，小黑
         comment="学到了学到了"
         :comment_time="1559738627000"
       ></CommentItem>
+      <h1 style="margin:25px">没有更多内容了</h1>
     </div>
   </div>
 </template>
@@ -114,6 +95,7 @@ console.log(ob2.friends);//小明，小白，小黑
 import Renderer from "@/components/Markdown/Renderer";
 import CommentItem from "@/components/Comment/CommentItem";
 import CommentList from "@/components/Comment/CommentList";
+import InputBox from "@/components/Comment/InputBox";
 export default {
   name: "ReadArticle",
   props: {
@@ -125,16 +107,16 @@ export default {
   components: {
     Renderer,
     CommentItem,
-    CommentList
+    CommentList,
+    InputBox
   },
   data() {
     return {
       dateStr: "",
-      textarea: "",
-      Rows: 1,
-      isOnFocus: false,
+
       user_img: "",
-      arr: {}
+      arr: {},
+      isDecrese: false
     };
   },
   mounted: function() {
@@ -198,10 +180,18 @@ export default {
       this.isOnFocus = true;
     },
     decreseRows() {
-      this.Rows = 1;
-      this.isOnFocus = false;
+      if (this.isDecrese === true) {
+        this.Rows = 1;
+        this.isOnFocus = false;
+      }
+      this.isDecrese === false;
     },
-    thumb() {}
+    thumb() {},
+    submitComment() {
+      //alert("000000");
+      this.isDecrese = false;
+      //document.getElementsById("input-comment").focus();
+    }
   }
 };
 </script>
@@ -318,7 +308,7 @@ export default {
   overflow: hidden;
   /* margin-right: 200px; */
 }
-.input-comment {
+#input-comment {
   margin-left: 12px;
 }
 #submit-button {

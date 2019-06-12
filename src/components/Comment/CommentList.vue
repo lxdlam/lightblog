@@ -37,28 +37,20 @@ export default {
   },
   methods: {
     // 一个使用 axios 进行 http 查询的例子
-    query: function() {
-      this.axios
-        .post("./comment/article_query", {
-          article_id: 0,
-          start: 0,
-          end: this.endNum
+    login() {
+      const vm = this; // 如果你需要在回调函数内调用 this，请做此绑定并在回调函数内部使用 vm
+
+      // 下面给出了一个登录 API 的调用例子。
+      this.$api.comment
+        .fetchCommentByArticle("")
+        .then(ret => {
+          vm.token = ret.data.token;
+          vm.uid = ret.data.uid;
         })
-        .then(resp => {
-          if (resp.code === 0) {
-            this.comments = resp.data.arr;
-            this.commentNum = resp.data.sum;
-          } else {
-            console.log(resp.msg);
-          }
-        })
-        .catch(e => {
-          console.log("Query failed. You may encounter a network broken.");
-          console.log(e);
-        });
+        .catch(err => console.log(err));
     }
   },
-  created: function() {
+  /* created: function() {
     this.query();
   },
   updated: function() {
@@ -66,7 +58,8 @@ export default {
       this.endNum += 10;
       this.query();
     }
-  }
+  } */
+  mounted: function() {}
 };
 </script>
 
