@@ -18,7 +18,7 @@ import ReadArticle from "@/views/Article/ReadArticle";
 export default {
   name: "Test1View",
   components: {
-    // InfoArea
+    // InfoArea,
     // ArticleList
     ReadArticle
     // CommentList

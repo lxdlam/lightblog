@@ -209,9 +209,12 @@ export default {
 <style scoped>
 #read-article {
   max-width: 1280px;
-  width: 980px;
-  background-color: #eff8fd;
+  width: 960px;
+  /* background-color: #eff8fd; */
+  background-color: #ffffff;
   box-shadow: 4px 4px 2px #e3e8f3;
+  display: table;
+  margin: 0 auto;
 }
 #title h1 {
   width: 100%;

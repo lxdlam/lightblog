@@ -407,13 +407,6 @@ export default {
     };
     this.arr = articles.data.arr;
     this.date = articles.response_time;
-    // this.arr.title = articles.data.arr.title;
-    // this.author_nickname = articles.data.arr.author_nickname;
-
-    // this.arr.digest = articles.data.arr.articleAbstract;
-    // this.arr.thumb = articles.data.arr.thumb;
-    // this.arr.reading = articles.data.arr.reading;
-    // this.arr.imgName = articles.data.arr.cover;
   }
 };
 </script>
@@ -432,7 +425,9 @@ export default {
 }
 #article-list {
   max-width: 1280px;
-  width: 1100px;
+  width: 960px;
+  display: table;
+  margin: 0 auto;
   /* box-shadow: 3px 3px 4px #909399; */
 }
 </style>

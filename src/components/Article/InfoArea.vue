@@ -89,7 +89,8 @@ export default {
 </script>
 <style scoped>
 #infoArea {
-  width: 1200px;
+  max-width: 1280px;
+  width: 960px;
   height: 140px;
   margin: 0 auto;
   margin-bottom: 20px;

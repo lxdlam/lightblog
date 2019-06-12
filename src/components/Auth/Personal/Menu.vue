@@ -1,20 +1,20 @@
 <template>
   <div id="menu">
-    <div id="tabs">
-      <el-menu
-        :default-active="activeIndex"
-        class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        :style="{ 'align-items': 'justify' }"
-      >
-        <el-menu-item index="1">个人信息</el-menu-item>
-        <el-menu-item index="2">我的关注</el-menu-item>
-        <el-menu-item index="3">我的评论</el-menu-item>
-        <el-menu-item index="4">我的发布</el-menu-item>
-      </el-menu>
-    </div>
     <div id="container">
+      <div id="tabs">
+        <el-menu
+          :default-active="activeIndex"
+          class="el-menu-demo"
+          mode="horizontal"
+          @select="handleSelect"
+          :style="{ 'align-items': 'justify' }"
+        >
+          <el-menu-item index="1">个人信息</el-menu-item>
+          <el-menu-item index="2">我的关注</el-menu-item>
+          <el-menu-item index="3">我的评论</el-menu-item>
+          <el-menu-item index="4">我的发布</el-menu-item>
+        </el-menu>
+      </div>
       <template v-if="infoLoad">
         <PersonalInformation />
       </template>
@@ -93,11 +93,6 @@ export default {
   max-width: 1280px;
   display: table;
   margin: 0 auto;
-
-  /* align-items: center; */
-  /* align-self: center; */
-  /* background-color: blue; */
-  /* margin-top: -10px; */
 }
 #tabs {
   width: 100%;
@@ -114,10 +109,11 @@ export default {
 }
 #container {
   width: 100%;
-  min-height: 620px;
-  border-radius: 10px;
+  min-height: 680px;
+  border-radius: 5px;
   padding-left: -20px;
-  background-color: #eef3fb;
+  /* background-color: #eef3fb; */
+  background-color: #ffffff;
   box-shadow: 2px 2px 3px 0px #e0e4e6;
 }
 </style>
