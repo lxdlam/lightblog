@@ -14,10 +14,10 @@ export default {
   props: {
     content: String
   },
-  data() {
-    return {
-      compiled_html: ""
-    };
+  computed: {
+    compiled_html: function() {
+      return instance.render(this.content);
+    }
   },
   mounted: function() {
     this.compiled_html = instance.render(this.content);
@@ -27,4 +27,8 @@ export default {
 
 <style scoped>
 @import "./style.css";
+
+.markdown-body {
+  text-align: start;
+}
 </style>
