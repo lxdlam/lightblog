@@ -6,7 +6,11 @@
         spellcheck="false"
         class="article-title-input"
         maxlength="40"
-      /><el-button type="primary" class="article-title-button">发布</el-button>
+        v-model="title"
+      />
+      <el-button @click="publish" type="primary" class="article-title-button"
+        >发布</el-button
+      >
     </div>
     <Editor v-model="value" class="article-editor" />
   </div>
@@ -19,6 +23,7 @@ export default {
   name: "EditArticle",
   data: function() {
     return {
+      title: null,
       value: "# 在这里写文章吧！"
     };
   },
@@ -26,7 +31,31 @@ export default {
     Editor
   },
   methods: {
-    loadArticle(article_id) {}
+    publish() {
+      if (!this.$store.state.user.logged) {
+        this.$message.error("没登录不能发文章哦～");
+        this.$router.replace("/na");
+      }
+      const vm = this;
+      this.$api.article
+        .newArticle(this.$store.state.user.uid, this.$store.state.user.token, {
+          title: vm.title,
+          type: [1],
+          cover: null,
+          content: vm.value,
+          article_abstract: "abc"
+        })
+        .then(() => {
+          vm.$message({
+            type: "success",
+            message: "发布成功！快去看看吧！"
+          });
+        })
+        .catch(err => {
+          vm.$message.error("Oops，出现了一些错误，请联系管理员！");
+          console.log(err);
+        });
+    }
   },
   mounted() {
     if (this.$route.params["id"] === "new") {

@@ -59,13 +59,13 @@ export default {
             {
               name: "heading-smaller",
               action: SimpleMDE.toggleHeadingSmaller,
-              className: "fa fa-lg fa-header",
+              className: "fa fa-header",
               title: "减小标题等级"
             },
             {
               name: "heading-bigger",
               action: SimpleMDE.toggleHeadingBigger,
-              className: "fa fa-header",
+              className: "fa fa-lg fa-header",
               title: "增大标题等级"
             },
             "|",
