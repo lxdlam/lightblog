@@ -13,5 +13,6 @@ export const ERROR_CODE = new Map([
   [5005, "Not followed"],
   [5006, "Target is same as request user"],
   [6002, "Duplicate like request"],
-  [6004, "Not liked"]
+  [6004, "Not liked"],
+  [4004, "Tag not exist"]
 ]);

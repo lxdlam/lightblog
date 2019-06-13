@@ -46,7 +46,7 @@
                 v-if="$store.state.user.avatar"
                 :src="$store.state.user.avatar"
               />
-              <img id="avatar" v-else src="../../assets/default_avatar.jpeg" />
+              <img id="avatar" v-else :src="$store.state.user.avatar_sm" />
             </li>
             <li class="nav-item">
               <el-dropdown
@@ -56,7 +56,8 @@
                 placement="top"
               >
                 <span class="el-dropdown-link">
-                  Ramen<i class="el-icon-arrow-down el-icon--right" />
+                  {{ $store.state.user.username }}
+                  <i class="el-icon-arrow-down el-icon--right" />
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item icon="el-icon-user-solid" command="profile">
@@ -129,7 +130,12 @@ export default {
       } else if (key === "articles") {
         // Go to article page
       } else if (key === "logout") {
+        this.$message({
+          type: "success",
+          message: "退出登录成功！即将返回首页……"
+        });
         this.$store.commit("user/logout");
+        this.$router.push("/");
       }
     },
     do_search() {

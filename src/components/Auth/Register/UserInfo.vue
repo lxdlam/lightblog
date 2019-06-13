@@ -41,6 +41,8 @@
 </template>
 
 <script>
+import md5 from "blueimp-md5";
+
 export default {
   name: "RegisterUserInfo",
   props: {
@@ -129,20 +131,49 @@ export default {
     validate() {
       this.$refs["user-info"].validate(valid => {
         if (valid) {
-          this.user.account = this.form_data.account;
-          this.user.username = this.form_data.username;
-          this.user.password = this.form_data.password;
-          this.user.phone = this.form_data.phone;
-          this.user.email = this.form_data.email;
-          this.$set(this.user.stage, 0, true);
+          const vm = this;
 
-          this.$emit("validated");
-        } else {
-          this.user.account = this.user.username = this.user.password = this.user.phone = this.user.email =
-            "";
-          this.$set(this.user.stage, 0, false);
-        }
+          this.$api.user
+            .testAccount(this.form_data.account)
+            .then(data => {
+              if (data.data.validate_result === 1) {
+                return vm.$api.user.testEmail(vm.form_data.email);
+              } else throw new Error("account");
+            })
+            .then(data => {
+              if (data.data.validate_result === 1) {
+                return vm.$api.user.testPhone(vm.form_data.phone);
+              } else throw new Error("email");
+            })
+            .then(data => {
+              if (data.data.validate_result === 1) {
+                vm.success();
+              } else throw new Error("phone");
+            })
+            .catch(err => {
+              if (err.message === "account") {
+                vm.$message.error("账号不可用！");
+              } else if (err.message === "email") {
+                vm.$message.error("Email 已经注册过啦！");
+              } else if (err.message === "phone") {
+                vm.$message.error("手机号已经注册过啦！");
+              }
+            });
+        } else this.failed();
       });
+    },
+    failed() {
+      this.$set(this.user.stage, 0, false);
+    },
+    success() {
+      this.user.account = this.form_data.account;
+      this.user.username = this.form_data.username;
+      this.user.password = md5(this.form_data.password);
+      this.user.phone = this.form_data.phone;
+      this.user.email = this.form_data.email;
+      this.$set(this.user.stage, 0, true);
+
+      this.$emit("validated");
     }
   }
 };

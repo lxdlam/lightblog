@@ -8,9 +8,6 @@
 import SimpleMDE from "simplemde";
 import instance from "./render";
 
-// TODO: Add a default content
-// const defaultContent;
-
 export default {
   name: "MarkdownEditor",
   props: {
@@ -62,13 +59,13 @@ export default {
             {
               name: "heading-smaller",
               action: SimpleMDE.toggleHeadingSmaller,
-              className: "fa fa-header",
+              className: "fa fa-lg fa-header",
               title: "减小标题等级"
             },
             {
               name: "heading-bigger",
               action: SimpleMDE.toggleHeadingBigger,
-              className: "fa fa-lg fa-header",
+              className: "fa fa-header",
               title: "增大标题等级"
             },
             "|",
@@ -173,4 +170,8 @@ export default {
 <style scoped>
 @import "~simplemde/dist/simplemde.min.css";
 @import "./style.css";
+
+#markdown-editor {
+  text-align: start;
+}
 </style>

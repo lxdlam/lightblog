@@ -33,7 +33,7 @@ export default {
       const vm = this;
 
       this.$api.user
-        .login("lxdlam", "e99a18c428cb38d5f260853678922e03")
+        .login("lxdlam123", "25d55ad283aa400af464c76d713c07ad")
         .then(ret => {
           vm.token = ret.data.token;
           vm.uid = ret.data.uid;

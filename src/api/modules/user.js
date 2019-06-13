@@ -3,8 +3,8 @@ export default class {
     this.proxy = proxy;
   }
 
-  testUsername(username) {
-    return this.proxy.query("/login_validate_account", { account: username });
+  testAccount(account) {
+    return this.proxy.query("/login_validate_account", { account: account });
   }
 
   testEmail(email) {
@@ -62,5 +62,9 @@ export default class {
       singature: data.singature,
       interest: data.interest
     });
+  }
+
+  fetchAvatar(uid) {
+    return this.proxy.query("/user/avatar", { uid });
   }
 }

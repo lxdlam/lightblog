@@ -2,10 +2,20 @@
 @import "~katex/dist/katex.css";
 @import "~highlight.js/styles/foundation.css";
 
-table {
-  margin: auto;
+.CodeMirror-fullscreen,
+.editor-preview-side,
+.editor-toolbar.fullscreen {
+  z-index: 3000;
 }
 
-#markdown-renderer {
-  text-align: start;
+.CodeMirror, .CodeMirror-scroll {
+  min-height: 640px;
+}
+
+.editor-preview {
+  z-index: 3000;
+}
+
+.editor-toolbar {
+  text-align: center;
 }

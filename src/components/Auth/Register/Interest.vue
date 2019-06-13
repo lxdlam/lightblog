@@ -7,11 +7,12 @@
         :data="table_data"
         max-height="600"
         @selection-change="handleChange"
+        v-loading="loading"
         stripe
       >
         <el-table-column type="selection" width="60" fixed />
         <el-table-column prop="name" label="标签" width="180" fixed />
-        <el-table-column prop="desc" label="描述" width="720" />
+        <el-table-column prop="desc" label="描述" width="540" />
       </el-table>
     </div>
   </div>
@@ -28,48 +29,43 @@ export default {
   },
   data: function() {
     return {
-      choiceCount: 0,
-      choices: [],
-      table_data: [
-        { id: "a", name: "a", desc: "aaa" },
-        { id: "b", name: "b", desc: "bbb" },
-        { id: "c", name: "c", desc: "ccc" },
-        { id: "d", name: "d", desc: "ddd" },
-        { id: "e", name: "e", desc: "eee" },
-        { id: "f", name: "f", desc: "fff" },
-        { id: "g", name: "g", desc: "ggg" },
-        { id: "h", name: "h", desc: "hhh" },
-        { id: "i", name: "i", desc: "iii" },
-        { id: "j", name: "j", desc: "jjj" },
-        { id: "k", name: "k", desc: "kkk" },
-        { id: "l", name: "l", desc: "lll" },
-        { id: "m", name: "m", desc: "mmm" },
-        { id: "n", name: "n", desc: "nnn" },
-        { id: "o", name: "o", desc: "ooo" },
-        { id: "p", name: "p", desc: "ppp" },
-        { id: "q", name: "q", desc: "qqq" },
-        { id: "r", name: "r", desc: "rrr" },
-        { id: "s", name: "s", desc: "sss" },
-        { id: "t", name: "t", desc: "ttt" },
-        { id: "u", name: "u", desc: "uuu" },
-        { id: "v", name: "v", desc: "vvv" },
-        { id: "w", name: "w", desc: "www" },
-        { id: "x", name: "x", desc: "xxx" },
-        { id: "y", name: "y", desc: "yyy" },
-        { id: "z", name: "z", desc: "zzz" }
-      ]
+      table_data: [],
+      loading: false
     };
   },
   methods: {
     handleChange(val) {
       const vm = this;
 
-      console.log(this.user.interest);
       vm.user.interest = [];
       val.forEach(row => vm.user.interest.push(row.id));
 
       vm.$emit("selected");
+    },
+    loadTags() {
+      const vm = this;
+      this.loading = true;
+
+      this.$api.tag
+        .list(0, 1000)
+        .then(data => {
+          data.data.arr.forEach(row => {
+            vm.table_data.push({
+              id: row.labelId,
+              name: row.labelName,
+              desc: row.description
+            });
+          });
+          vm.loading = false;
+        })
+        .catch(err => {
+          vm.$message.error("出现错误！请联系管理员！");
+          console.log(err);
+        });
     }
+  },
+  mounted() {
+    this.loadTags();
   }
 };
 </script>
@@ -81,7 +77,7 @@ export default {
 }
 
 .interest-table {
-  max-width: 960px;
+  max-width: 920px;
   text-align: center;
 }
 </style>

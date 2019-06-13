@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import md5 from "blueimp-md5";
+
 export default {
   name: "Login",
   data: function() {
@@ -51,25 +53,35 @@ export default {
     };
   },
   methods: {
-    // TODO: No login action performed
     login() {
       const vm = this;
       this.$refs["login-form"].validate(valid => {
         if (valid) {
-          this.$message({
-            // FIXME: Change this one into nickname
-            message: `登陆成功！欢迎回来 ${vm.form_data.user}！`,
-            type: "success"
-          });
-          this.$emit("success");
-          this.$store.commit("user/login", {});
+          vm.$api.user
+            .login(vm.form_data.user, md5(vm.form_data.passwd))
+            .then(data => {
+              this.$store.commit("user/login", data.data);
+              this.$message({
+                message: `登陆成功！欢迎回来 ${vm.$store.state.user.username}！`,
+                type: "success"
+              });
 
-          // this.$message({
-          //   message: "登录失败，请检查用户信息和密码的组合！",
-          //   type: "error"
-          // });
+              this.$emit("success");
+            })
+            .catch(err => {
+              if (err.code === 1001 || err.code === 1003) {
+                this.$message({
+                  message: "登录失败，请检查用户信息和密码的组合！",
+                  type: "error"
+                });
+              } else {
+                this.$message.error("Oops，登录出现问题，请联系管理员！");
+              }
 
-          // this.$emit("error");
+              console.log(err);
+
+              this.$emit("error");
+            });
         } else {
           this.$message({
             message: "请填写用户信息和密码",
