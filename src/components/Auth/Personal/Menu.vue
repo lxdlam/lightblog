@@ -56,7 +56,6 @@ export default {
   },
   methods: {
     handleSelect(key) {
-      //   console.log(key, keyPath);
       if (key == 1) {
         this.infoLoad = true;
         this.attentionLoad = false;
@@ -96,16 +95,13 @@ export default {
 }
 #tabs {
   width: 100%;
-  /* height: 80px; */
   display: flex;
   justify-content: center;
   /* background-color: aqua; */
   color: Transparent;
-  /* margin-bottom: 10px; */
 }
 #tabs h3 {
   color: #303133;
-  /* margin-bottom: 5px; */
 }
 #container {
   width: 100%;

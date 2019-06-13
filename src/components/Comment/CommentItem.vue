@@ -24,9 +24,7 @@
         </div>
         <el-row class="com-footer">
           <el-col :span="5">{{ dateStr }}</el-col>
-          <el-col :span="2" :offset="17">
-            <!-- <div class="el-icon-chat-dot-square" @click="reply">回复</div> -->
-          </el-col>
+          <el-col :span="2" :offset="17"> </el-col>
         </el-row>
         <el-input
           type="textarea"
@@ -37,7 +35,6 @@
         ></el-input>
       </el-col>
     </el-row>
-    <!-- <label class="gray_line"></label> -->
   </div>
 </template>
 
@@ -83,7 +80,6 @@ export default {
       this.axios
         .post("./comment/parent_query", { parent_comment_id })
         .then(resp => {
-          //console.log(resp);
           if (resp.code === 0) {
             this.parent_comment = resp.data.arr;
           }
@@ -114,12 +110,10 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .comment-item {
   width: 100%;
   border-radius: 10px;
-  /* padding-left: 20px; */
 }
 .el-row {
   margin-bottom: 5px;

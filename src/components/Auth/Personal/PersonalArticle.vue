@@ -7,7 +7,6 @@
         infinite-scroll-disabled="disabled"
         infinite-scroll-distance="30px"
       >
-        <!-- <li v-for="i in count" class="list-item">{{ i }}</li> -->
         <ArticleListItem
           v-for="(item, index) in this.arr"
           :key="index"
@@ -387,7 +386,6 @@ export default {
 #personal-article {
   width: 100%;
   /* background-color: aquamarine; */
-  /* padding-right: 30px; */
   padding-top: 10px;
   padding-bottom: 10px;
   display: flex;
@@ -407,6 +405,5 @@ export default {
   max-width: 960px;
   width: 100%;
   /* background-color: blue; */
-  /* box-shadow: 3px 3px 4px #909399; */
 }
 </style>

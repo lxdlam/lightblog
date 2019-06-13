@@ -6,7 +6,6 @@
       infinite-scroll-disabled="disabled"
       infinite-scroll-distance="30px"
     >
-      <!-- <li v-for="i in count" class="list-item">{{ i }}</li> -->
       <ArticleListItem
         v-for="(item, index) in this.arr"
         :key="index"
@@ -44,18 +43,7 @@ export default {
       // date: 0,
       count: 10,
       loading: false,
-      arr: [
-        {
-          // loading: false
-          // title: "文章",
-          // author_nickname: "琴乡梦",
-          // date: 1231234,
-          // digest: "摘要",
-          // thumb: 10,
-          // reading: 20,
-          // imgName: "http://img3m6.ddimg.cn/46/1/24144166-1_u_30016.jpg"
-        }
-      ]
+      arr: [{}]
     };
   },
   components: {
@@ -428,6 +416,5 @@ export default {
   width: 960px;
   display: table;
   margin: 0 auto;
-  /* box-shadow: 3px 3px 4px #909399; */
 }
 </style>

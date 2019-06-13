@@ -9,7 +9,7 @@
               <!-- 标签名称 -->
               <div id="name-bar">
                 <strong
-                  ><h1>{{ labelname }}</h1></strong
+                  ><h1>{{ this.arr.label_name }}</h1></strong
                 >
               </div></el-col
             >
@@ -32,7 +32,7 @@
           <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11">
             <!-- 标签描述 -->
             <div id="sign-bar">
-              <p>{{ description }}</p>
+              <p>{{ this.arr.description }}</p>
             </div></el-col
           >
         </el-row>
@@ -48,16 +48,27 @@ export default {
   data() {
     return {
       focus: true,
-      labelname: "科技",
-      description:
-        "这里有各类电子产品、技术发明相关的内容。这里有各类电子产品、技术发明相关的内容。这里有各类电子产品、技术发明相关的内容。这里有各类电子产品、技术发明相关的内容。"
+      arr: {}
     };
   },
   components: {
     // 在这里加载你的组件
   },
   methods: {},
-  mounted: function() {}
+  mounted: function() {
+    let labelInfo = {
+      response_time: 1560310151961,
+      code: 0,
+      msg: "success",
+      data: {
+        label_id: 1,
+        label_name: "科技",
+        description:
+          "这里有各类电子产品、技术发明相关的内容。这里有各类电子产品、技术发明相关的内容。这里有各类电子产品、技术发明相关的内容。这里有各类电子产品、技术发明相关的内容。"
+      }
+    };
+    this.arr = labelInfo.data;
+  }
 };
 </script>
 

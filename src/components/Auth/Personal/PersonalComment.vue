@@ -1,6 +1,5 @@
 <template>
   <div id="personal-comment">
-    <!-- <div id="left"> -->
     <el-menu
       default-active="1-4-1"
       class="el-menu-vertical-demo"
@@ -20,7 +19,6 @@
         <span slot="title"><strong>我发送的评论</strong></span>
       </el-menu-item>
     </el-menu>
-    <!-- </div> -->
     <div id="right">
       <div id="receive" v-if="receiveLoad">
         <p id="title-bar">我收到的评论</p>
@@ -30,7 +28,6 @@
           infinite-scroll-disabled="disabled"
           infinite-scroll-distance="30px"
         >
-          <!-- <li v-for="i in count" class="list-item">{{ i }}</li> -->
           <PersonalCommentItem
             v-for="(item, index) in this.receiveArr"
             :key="index"
@@ -46,14 +43,12 @@
       </div>
       <div id="send" v-else-if="sendLoad">
         <p id="title-bar">我发送的评论</p>
-        <!-- <CommentList></CommentList> -->
         <ul
           class="article-line"
           v-infinite-scroll="load"
           infinite-scroll-disabled="disabled"
           infinite-scroll-distance="30px"
         >
-          <!-- <li v-for="i in count" class="list-item">{{ i }}</li> -->
           <PersonalCommentItem
             v-for="(item, index) in this.sendArr"
             :key="index"
@@ -73,7 +68,6 @@
 
 <script>
 import PersonalCommentItem from "@/components/Auth/Personal/PersonalCommentItem";
-// import CommentList from "@/components/Comment/CommentList";
 export default {
   name: "PersonalComment",
   props: {},
@@ -404,7 +398,6 @@ export default {
 }
 #left {
   width: 200px;
-  /* height: 100%; */
   /* background-color: coral; */
 }
 #right {

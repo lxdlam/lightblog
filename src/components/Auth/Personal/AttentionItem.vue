@@ -94,7 +94,6 @@ export default {
     this.arr = userInfo.data;
     this.img = this.arr.avatar_md;
     this.nickname = this.arr.nickname;
-
     this.signature = this.arr.signature;
   }
 };
@@ -125,7 +124,6 @@ export default {
 #personal-info {
   width: 1000px;
   height: 60px;
-
   /* background-color: aqua; */
   display: flex;
   flex-direction: column;
@@ -144,7 +142,6 @@ export default {
 #name-bar h1 {
   font-size: 23px;
   color: #606266;
-  /* text-shadow: 2px 2px 4px #ccced1; */
 }
 #sign-bar {
   width: 500px;
@@ -154,7 +151,6 @@ export default {
   padding-left: 3px;
   font-size: 14px;
   color: #606266;
-  /* text-shadow: 2px 2px 8px #d1d3d6; */
 }
 #line1-bar {
   width: 350px;
@@ -171,8 +167,6 @@ export default {
   max-width: 960px;
   border-radius: 10px;
   background-repeat: no-repeat;
-  /* background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1560156534576&di=1e660a8f9c608407dd3a20b90c1ac993&imgtype=0&src=http%3A%2F%2Fimglf0.ph.126.net%2F2OxjSW7ICrsfk4K99Cj33w%3D%3D%2F6608488194911282475.jpg); */
-  /* background-attachment: fixed; */
   background-color: #eeeff6;
   box-shadow: 2px 2px 4px #9c9ea1;
   overflow: hidden;
@@ -187,6 +181,5 @@ export default {
   display: block;
   display: flex;
   align-items: center;
-  /* padding-left: 20px; */
 }
 </style>

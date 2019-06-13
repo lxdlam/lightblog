@@ -107,7 +107,6 @@ export default {
     this.arr = userInfo.data;
     this.img = this.arr.avatar_md;
     this.nickname = this.arr.nickname;
-
     this.signature = this.arr.signature;
   }
 };
@@ -138,7 +137,6 @@ export default {
 #personal-info {
   width: 1000px;
   height: 60px;
-
   /* background-color: aqua; */
   display: flex;
   flex-direction: column;
@@ -157,7 +155,6 @@ export default {
 #name-bar h1 {
   font-size: 23px;
   color: #ffffff;
-  /* text-shadow: 2px 2px 4px #ccced1; */
 }
 #sign-bar {
   width: 500px;
@@ -167,7 +164,6 @@ export default {
   padding-left: 3px;
   font-size: 14px;
   color: #f2f6fc;
-  /* text-shadow: 2px 2px 4px #ccced1; */
 }
 #line1-bar {
   width: 350px;
@@ -191,7 +187,6 @@ export default {
 #container {
   width: 1200px;
   height: 140px;
-
   position: relative;
   display: block;
   display: flex;

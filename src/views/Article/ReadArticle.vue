@@ -59,14 +59,30 @@ console.log(ob2.friends);//小明，小白，小黑
       ></Renderer>
     </div>
     <div id="thumb-bar">
-      <el-button type="primary" plain @click="thumb">喜 欢</el-button>
+      <el-button
+        v-if="!likeOrNot"
+        v-model="likeOrNot"
+        type="danger"
+        icon="el-icon-star-off"
+        plain
+        @click="thumb"
+        >喜 欢</el-button
+      >
+      <el-button
+        v-else-if="likeOrNot"
+        v-model="likeOrNot"
+        type="danger"
+        icon="el-icon-star-off"
+        @click="thumb"
+        >喜 欢</el-button
+      >
     </div>
 
     <el-divider></el-divider>
     <div id="comment-bar">
       <h1>评论</h1>
       <InputBox />
-      <!-- <el-button @click="submitComment">aaa</el-button> -->
+
       <CommentList></CommentList>
       <CommentItem
         avatar_sm="http://pic.baike.soso.com/p/20130110/20130110235135-1881501597.jpg"
@@ -113,10 +129,10 @@ export default {
   data() {
     return {
       dateStr: "",
-
       user_img: "",
       arr: {},
-      isDecrese: false
+      isDecrese: false,
+      likeOrNot: false
     };
   },
   mounted: function() {
@@ -186,12 +202,10 @@ export default {
       }
       this.isDecrese === false;
     },
-    thumb() {},
-    submitComment() {
-      //alert("000000");
-      this.isDecrese = false;
-      //document.getElementsById("input-comment").focus();
-    }
+    thumb() {
+      this.likeOrNot = !this.likeOrNot;
+    },
+    submitComment() {}
   }
 };
 </script>
@@ -217,7 +231,6 @@ export default {
   text-align: start;
   padding-left: 40px;
   padding-top: 20px;
-  /* padding-bottom: 5px; */
 }
 #info-bar {
   width: 100%;
@@ -225,7 +238,6 @@ export default {
   /* background-color: cadetblue; */
   display: flex;
   justify-content: space-between;
-  /* padding-top: 20px; */
 }
 #left-bar {
   height: 100%;
@@ -250,13 +262,20 @@ export default {
   height: 100%;
   width: 160px;
   /* background-color: blueviolet; */
-  /* border: 1px; */
+
   display: flex;
   align-items: center;
   justify-content: center;
-  /* padding-left: 20px; */
 }
-
+#thumb-bar {
+  padding-top: 50px;
+  width: 100%;
+  height: 65px;
+  /* background-color: aqua; */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
 .circle-md {
   width: 128px;
   height: 128px;
@@ -269,7 +288,7 @@ export default {
   /* background-color: brown; */
   font-size: 16px;
   text-align: start;
-  /* margin: 15px 0 20px 20px; */
+
   color: #606266;
 }
 .article-info {
@@ -279,7 +298,6 @@ export default {
   font-size: 14px;
   text-align: start;
   color: #606266;
-  /* margin: 10px 0 0 20px; */
 }
 .article-container {
   padding-left: 20px;
@@ -293,7 +311,6 @@ export default {
 #comment-bar h1 {
   text-align: center;
   font-size: 15px;
-  /* margin-top: 50px; */
 }
 .submit-comment {
   width: 95%;
@@ -306,7 +323,6 @@ export default {
   height: 50px;
   border-radius: 50%;
   overflow: hidden;
-  /* margin-right: 200px; */
 }
 #input-comment {
   margin-left: 12px;

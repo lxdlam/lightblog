@@ -1,7 +1,5 @@
 <template>
   <div id="articleListItem">
-    <!-- 把你的组件放在这来测试！ -->
-    <!-- 下面的按钮都是可以删除的，只是占位使用 -->
     <el-card shadow="hover" id="card-bar">
       <el-row id="container" type="flex" justify="space-between" align="middle">
         <img :v-if="loadOrNot" id="img-bar" v-bind:src="imgName" alt="" />
@@ -70,7 +68,6 @@
         </el-col>
       </el-row></el-card
     >
-    <!-- <el-divider></el-divider> -->
   </div>
 </template>
 
@@ -124,7 +121,6 @@ export default {
 }
 <style scoped>
 .el-row {
-  /* width: 100%; */
   margin-top: 5px;
   margin-bottom: 5px;
   height: 40px;
@@ -135,8 +131,6 @@ export default {
   height: 100px;
   width: 90%;
   display: flex;
-  /* justify-content: space-between; */
-  /* box-shadow: 3px 3px 4px #909399; */
 }
 #card-bar {
   width: 100%;
@@ -158,7 +152,7 @@ export default {
 }
 #title-bar {
   text-size-adjust: 20px;
-  /* width: 450px; */
+
   text-align: left;
   padding-left: 20px;
   color: #303133;
@@ -167,20 +161,17 @@ export default {
   font-size: 20px;
 }
 #title-bar h3:hover {
-  /* font-size: 21px; */
   color: #000000;
-  /* text-shadow: 3px 3px 4px #909399; */
 }
 #digestbar {
   font-size: 15px;
-  /* width: 800px; */
+
   text-align: left;
   padding-left: 20px;
   word-wrap: break-word;
   color: #606266;
 }
 #multibar {
-  /* width: 300px; */
   font-size: 14px;
   display: flex;
   color: #606266;
@@ -188,12 +179,9 @@ export default {
   /* background-color: antiquewhite; */
 }
 #multibar:hover {
-  /* text-shadow: 3px 3px 4px #909399; */
-  /* font-size: 15px; */
   color: #424447;
 }
 #func-bar {
-  /* width: 160px; */
   color: #606266;
   display: flex;
   justify-content: space-around;

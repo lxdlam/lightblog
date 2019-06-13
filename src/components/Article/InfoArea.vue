@@ -44,25 +44,18 @@ export default {
       labelLoad: false,
       searchLoad: false,
       account: "123"
-      // random: this.$router.params['random'] !== undefined && this.$router.params['random'] !== null;
     };
   },
   components: {
-    // 在这里加载你的组件
     RandomInformation,
     AuthorInformation,
     LabelInformation,
     SearchInformation
   },
   methods: {
-    fetchInfo() {
-      // this.axios.get("").then(response => {
-      //   // 信息显示到页面上
-      // });
-    }
+    fetchInfo() {}
   },
   mounted: function() {
-    // console.log(this.random);
     if (this.random != undefined) {
       this.randomLoad = true;
     } else {
@@ -83,7 +76,6 @@ export default {
     } else {
       this.searchLoad = false;
     }
-    // this.fetchInfo();
   }
 };
 </script>
@@ -94,7 +86,6 @@ export default {
   height: 140px;
   margin: 0 auto;
   margin-bottom: 20px;
-  /* border-radius: 50%; */
   /* background-color: #f2f6fc; */
 }
 </style>

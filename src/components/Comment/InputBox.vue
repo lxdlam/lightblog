@@ -63,6 +63,7 @@ export default {
   background: #eaf0f8;
   margin: auto auto 20px 10px;
   padding: 10px 0 12px 20px;
+  border-radius: 7px;
 }
 #input-comment {
   margin-left: 12px;

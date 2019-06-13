@@ -7,7 +7,6 @@
             <div id="img-border">
               <img id="img-bar" v-bind:src="form.img" alt="" />
               <el-button type="primary" @click="changeImg">更换</el-button>
-              <!-- <el-input v-model="form.img"></el-input> -->
             </div>
           </el-form-item>
         </div>
@@ -111,7 +110,6 @@ export default {
 
 <style scoped>
 #personal-information {
-  /* margin-top: 20px; */
   padding-top: 20px;
   width: 100%;
   display: flex;
@@ -120,9 +118,6 @@ export default {
 #form {
   width: 450px;
   /* background-color: aquamarine; */
-  /* align-self: center; */
-  /* align-items: center; */
-  /* align-content: center; */
   padding-right: 20px;
   padding-top: 20px;
 }
@@ -131,9 +126,7 @@ export default {
   height: 80px;
   border-radius: 50%;
   overflow: hidden;
-  /* box-shadow: #606266; */
   box-shadow: 3px 3px 5px #e0e4e6;
-  /* margin-right: 30px; */
 }
 #img-border {
   width: 100%;
@@ -143,20 +136,14 @@ export default {
   align-items: center;
 }
 #img-line {
-  /* width: 100%; */
   height: 100px;
   /* background-color: brown; */
   text-align: center;
-  /* display: flex; */
-  /* flex-direction: row; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
 }
 #btn-bar {
   width: 100%;
   display: flex;
   justify-content: center;
-  /* padding-right: 20px; */
   /* background-color: burlywood; */
 }
 </style>

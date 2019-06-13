@@ -1,6 +1,6 @@
 <template>
   <div id="test1-view">
-    <!-- <InfoArea :author="1" /> -->
+    <!-- <InfoArea :label="1" /> -->
     <!-- <InfoArea :search="1" /> -->
     <!-- <ArticleList :authorid="1" :start="0" :end="2"></ArticleList> -->
     <ReadArticle :article_id="1"></ReadArticle>
