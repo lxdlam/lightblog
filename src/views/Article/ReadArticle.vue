@@ -59,20 +59,26 @@
       <InputBox />
 
       <CommentList :article_id="article_id"></CommentList>
+      <!-- <CommentItem
+        avatar_sm="https://vblogstore-1257377207.cos.ap-chengdu.myqcloud.com/image/d2d7c57d727f14148d8bf047ccdbedc1.png"
+        user_nickname="雨女无瓜"
+        comment="评论1"
+        :comment_time="time"
+      ></CommentItem> -->
     </div>
   </div>
 </template>
 
 <script>
 import Renderer from "@/components/Markdown/Renderer";
-// import CommentItem from "@/components/Comment/CommentItem";
+//import CommentItem from "@/components/Comment/CommentItem";
 import CommentList from "@/components/Comment/CommentList";
 import InputBox from "@/components/Comment/InputBox";
 export default {
   name: "ReadArticle",
   components: {
     Renderer,
-    // CommentItem,
+    //CommentItem,
     CommentList,
     InputBox
   },
@@ -86,6 +92,7 @@ export default {
       isDecrese: false,
       likeOrNot: false,
       article_id: 0
+      //time: 1559560386501
     };
   },
   methods: {

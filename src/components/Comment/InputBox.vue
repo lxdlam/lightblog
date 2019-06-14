@@ -76,8 +76,8 @@ export default {
       }
       this.data.uid = this.$store.state.user.id;
       this.data.comment = this.textarea;
-      this.article_id = this.$route.params["id"];
-      alert(this.$store.state.user.id);
+      this.data.article_id = this.$route.params["id"];
+      //alert(this.$store.state.user.id);
       //const vm = this;
       this.$api.comment
         .newComment(
