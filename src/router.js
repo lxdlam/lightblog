@@ -90,6 +90,12 @@ export default new Router({
         import(
           /* webpackChunkName: "personalView" */ "./views/Auth/Personal.vue"
         )
+    },
+    {
+      path: "/random",
+      name: "random",
+      component: () =>
+        import(/* webpackChunkName: "randomView" */ "./views/Meta/Random.vue")
     }
   ]
 });

@@ -17,15 +17,17 @@
         </div>
       </div>
       <div id="right-bar">
-        <template v-if="isOnFocus == false">
-          <div id="button-bar">
-            <el-button plain>+ 关注</el-button>
-          </div>
-        </template>
-        <template v-else-if="isOnFocus == true">
-          <div id="button-bar">
-            <el-button plain>取消关注</el-button>
-          </div>
+        <template v-if="!same_user">
+          <template v-if="followed === false">
+            <div id="button-bar">
+              <el-button @click="focus" plain>+ 关注</el-button>
+            </div>
+          </template>
+          <template v-else-if="followed === true">
+            <div id="button-bar">
+              <el-button @click="focus" plain>取消关注</el-button>
+            </div>
+          </template>
         </template>
       </div>
     </div>
@@ -35,8 +37,7 @@
     </div>
     <div id="thumb-bar">
       <el-button
-        v-if="!likeOrNot"
-        v-model="likeOrNot"
+        v-if="!liked"
         type="danger"
         icon="el-icon-star-off"
         plain
@@ -44,10 +45,9 @@
         >喜 欢</el-button
       >
       <el-button
-        v-else-if="likeOrNot"
-        v-model="likeOrNot"
+        v-else-if="liked"
         type="danger"
-        icon="el-icon-star-off"
+        icon="el-icon-star-on"
         @click="thumb"
         >喜 欢</el-button
       >
@@ -59,12 +59,6 @@
       <InputBox :article_id="article_id" />
 
       <CommentList :article_id="article_id"></CommentList>
-      <!-- <CommentItem
-        avatar_sm="https://vblogstore-1257377207.cos.ap-chengdu.myqcloud.com/image/d2d7c57d727f14148d8bf047ccdbedc1.png"
-        user_nickname="雨女无瓜"
-        comment="评论1"
-        :comment_time="time"
-      ></CommentItem> -->
     </div>
   </div>
 </template>
@@ -90,28 +84,96 @@ export default {
         content: ""
       },
       isDecrese: false,
-      likeOrNot: false,
+      liked: false,
       article_id: 0,
-      author_id: 0
+      author_id: 0,
+      followed: false,
+      same_user: false
     };
   },
   methods: {
-    /* increseRows() {
-      //alert("点击了");
-      this.Rows = 5;
-      this.isOnFocus = true;
-    },
-    decreseRows() {
-      if (this.isDecrese === true) {
-        this.Rows = 1;
-        this.isOnFocus = false;
+    focus() {
+      if (!this.$store.state.user.logged) {
+        return;
       }
-      this.isDecrese === false;
-    }, */
-    thumb() {
-      this.likeOrNot = !this.likeOrNot;
+
+      const vm = this;
+
+      if (!this.followed) {
+        this.$api.follow
+          .makeFollow(
+            this.$store.state.user.uid,
+            this.$store.state.user.token,
+            this.author_id
+          )
+          .then(() => {
+            vm.$message({
+              type: "success",
+              message: "关注成功！"
+            });
+            vm.followed = true;
+          })
+          .catch(err => {
+            vm.$message.error("Oops，关注失败！");
+            console.log(err);
+          });
+      } else {
+        this.$api.follow
+          .cancelFollow(
+            this.$store.state.user.uid,
+            this.$store.state.user.token,
+            this.author_id
+          )
+          .then(() => {
+            vm.$message({
+              type: "success",
+              message: "取消关注成功！"
+            });
+            vm.followed = false;
+          })
+          .catch(err => {
+            vm.$message.error("Oops，取消关注失败！");
+            console.log(err);
+          });
+      }
     },
-    submitComment() {},
+    thumb() {
+      if (!this.$store.state.user.logged) {
+        return;
+      }
+
+      const vm = this;
+
+      if (!this.liked) {
+        this.$api.like
+          .makeLike(
+            this.$store.state.user.uid,
+            this.$store.state.user.token,
+            this.article_id
+          )
+          .then(() => {
+            vm.liked = true;
+          })
+          .catch(err => {
+            vm.$message.error("Oops，点赞失败！");
+            console.log(err);
+          });
+      } else {
+        this.$api.like
+          .cancelLike(
+            this.$store.state.user.uid,
+            this.$store.state.user.token,
+            this.article_id
+          )
+          .then(() => {
+            vm.liked = false;
+          })
+          .catch(err => {
+            vm.$message.error("Oops，取消点赞失败！");
+            console.log(err);
+          });
+      }
+    },
     loadArticle(article_id) {
       const vm = this;
       this.article_id = article_id;
@@ -136,20 +198,36 @@ export default {
           return vm.$api.user.fetchAvatar(vm.arr.author_id);
         })
         .then(avatar => {
-          console.log(123);
-          // console.log(vm.arr.author_id);
           vm.user_img = avatar.data.avatar_md;
-          console.log(avatar.data.avatar_md);
+          if (vm.$store.state.user.logged) {
+            return vm.$api.like.testLike(
+              vm.$store.state.user.uid,
+              vm.$store.state.user.token,
+              vm.article_id
+            );
+          } else return { data: { validate_result: false } };
         })
-        // eslint-disable-next-line no-unused-vars
+        .then(ret => {
+          vm.liked = ret.data.validate_result;
+          if (vm.author_id === vm.$store.state.user.uid) {
+            vm.same_user = true;
+            return { data: { validate_result: false } };
+          } else if (vm.$store.state.user.logged) {
+            return vm.$api.follow.testFollow(
+              vm.$store.state.user.uid,
+              vm.$store.state.user.token,
+              vm.author_id
+            );
+          } else return { data: { validate_result: false } };
+        })
+        .then(ret => (vm.followed = ret.data.validate_result))
         .catch(err => {
-          vm.$message.error("Oops，确认一下文章 ID 吧！");
-          // vm.$router.push("/"); // redirect to the index
+          if (err.message !== "Skip") {
+            vm.$message.error("Oops，确认一下文章 ID 吧！");
+            console.log(err);
+          }
         });
     }
-    // loadAvatar(uid) {
-    //   const vm = this;
-    // }
   },
   mounted: function() {
     this.loadArticle(this.$route.params["id"]);

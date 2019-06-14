@@ -15,7 +15,9 @@
             >
           </li>
           <li class="nav-item">
-            <el-link :underline="false">I'm feeling lucky</el-link>
+            <el-link :underline="false" @click="$router.push('/random')"
+              >I'm feeling lucky</el-link
+            >
           </li>
           <li class="nav-item nav-search">
             <el-input
@@ -126,10 +128,8 @@ export default {
     },
     dispatch(key) {
       if (key === "profile") {
-        // Go to profile page
         this.$router.push("/personal");
       } else if (key === "articles") {
-        // Go to article page
         this.$router.push({ name: "personal", params: { key: 4 } });
       } else if (key === "logout") {
         this.$message({
