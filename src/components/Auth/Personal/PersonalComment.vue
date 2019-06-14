@@ -75,8 +75,14 @@ export default {
     return {
       receiveLoad: true,
       sendLoad: false,
+
+      sendSum: 0,
+      receiveSum: 0,
+      endNum1: 10,
+      endNum2: 10,
       sendArr: {},
       receiveArr: {}
+      //status: 0
     };
   },
   components: {
@@ -100,24 +106,55 @@ export default {
         this.sendLoad = true;
       }
     },
+    loadCommentSend(uid, start, end) {
+      const vm = this; // 如果你需要在回调函数内调用 this，请做此绑定并在回调函数内部使用 vm
+      this.$api.comment
+        .fetchCommentByUser(uid, start, end)
+        .then(res => {
+          vm.sendArr = res.data.arr;
+          console.log(vm.sendArr);
+        })
+        .catch(err => {
+          console.log(err.code);
+          console.log(err.msg);
+        });
+    },
+    loadCommentReceive(uid, key) {
+      const vm = this; // 如果你需要在回调函数内调用 this，请做此绑定并在回调函数内部使用 vm
+      this.$api.comment
+        .fetchCommentForUser(uid, key)
+        .then(res => {
+          vm.receiveArr = res.data.arr;
+          console.log(vm.receiveArr);
+        })
+        .catch(err => {
+          console.log(err.code);
+          console.log(err.msg);
+        });
+    },
     load() {
       this.loading = true;
-      setTimeout(() => {
-        this.count += 2;
-        this.loading = false;
-      }, 1000);
+
+      this.count += 10;
+      this.loading = false;
     }
   },
   computed: {
     noMore() {
-      return this.count >= 3;
+      if (this.key === 1) {
+        return this.count >= this.sendSum;
+      } else if (this.key === 2) {
+        return this.count >= this.receiveSum;
+      } else {
+        return true;
+      }
     },
     disabled() {
       return this.loading || this.noMore;
     }
   },
   mounted: function() {
-    let receiveList = {
+    /* let receiveList = {
       response_time: 1560322641434,
       code: 0,
       msg: "success",
@@ -363,10 +400,31 @@ export default {
               "https://vblogstore-1257377207.cos.ap-chengdu.myqcloud.com/image/d5f3357ae0ef7d8fc5787cb3c45dcbe8.png"
           }
         ]
-      }
-    };
-    this.sendArr = sendList.data.arr;
-    this.receiveArr = receiveList.data;
+      } 
+    };*/
+    if (this.key === 1) {
+      this.loadCommentSend(this.$store.state.user.id, 0, this.endNum1);
+    } else if (this.key === 2) {
+      this.loadCommentReceive(
+        this.$store.state.user.id,
+        this.$store.state.user.key
+      );
+    }
+
+    /* this.sendArr = sendList.data.arr;
+    this.receiveArr = receiveList.data; */
+  },
+  beforeRouteUpdate(to, from, next) {
+    if (this.key === 1) {
+      this.loadCommentSend(this.$store.state.user.id, 0, this.endNum1);
+    } else if (this.key === 2) {
+      this.loadCommentReceive(
+        this.$store.state.user.id,
+        this.$store.state.user.key
+      );
+    }
+
+    next();
   }
 };
 </script>

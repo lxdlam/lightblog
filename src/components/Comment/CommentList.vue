@@ -38,7 +38,7 @@ export default {
   },
   data() {
     return {
-      endNum: 10,
+      endNum: 20,
       comments: [],
       commentNum: 0,
       loading: false

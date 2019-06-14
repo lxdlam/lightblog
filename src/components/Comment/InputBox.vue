@@ -35,6 +35,7 @@ export default {
       textarea: "",
       Rows: 1,
       isOnFocus: false,
+      endNum: 20,
       data: {
         uid: 0,
         comment: "",
@@ -44,11 +45,22 @@ export default {
     };
   },
   props: {
-    article_id: String
+    article_id: {
+      type: String,
+      required: true
+    }
   },
   methods: {
     increseRows() {
       //alert("点击了");
+      if (
+        typeof this.$store.state.user.uid === "undefined" ||
+        this.$store.state.user.uid === null ||
+        this.$store.state.user.uid === ""
+      ) {
+        this.$message.error("请先登录");
+        return;
+      }
       this.Rows = 5;
       this.isOnFocus = true;
     },
@@ -57,6 +69,20 @@ export default {
       this.isOnFocus = false;
     },
     thumb() {},
+    loadComment(article_id, start, end) {
+      const vm = this; // 如果你需要在回调函数内调用 this，请做此绑定并在回调函数内部使用 vm
+      this.$api.comment
+        .fetchCommentByArticle(article_id, start, end)
+        .then(res => {
+          vm.comments = res.data.arr;
+          vm.commentNum = res.data.sum;
+          console.log(vm.comments);
+        })
+        .catch(err => {
+          console.log(err.code);
+          console.log(err.msg);
+        });
+    },
     submitComment() {
       //alert("000000");
       if (
@@ -64,14 +90,14 @@ export default {
         this.textarea === null ||
         this.textarea === ""
       ) {
-        alert("评论内容不能为空！");
+        this.$message.error("评论内容不能为空！");
         return;
       }
       this.data.uid = this.$store.state.user.uid;
       this.data.comment = this.textarea;
       this.data.article_id = this.article_id;
       //alert(this.$store.state.user.id);
-      //const vm = this;
+      const vm = this;
       this.$api.comment
         .newComment(
           this.$store.state.user.uid,
@@ -79,19 +105,28 @@ export default {
           this.data
         )
         .then(res => {
+          vm.$message("发表评论成功");
+          vm.textarea = "";
+          vm.decreseRows();
+          //vm.loadComment(vm.article_id, 0, vm.endNum);
+          // window.scrollTo({ top: document.body.scrollHeight });
+          window.location.reload();
+          setTimeout(function() {
+            window.scrollTo({ top: document.body.scrollHeight });
+          }, 3000);
           console.log(res);
         })
         .catch(error => {
           console.log(error);
         });
-    }
-    /* mounted: function() {
-      this.submitComment(this.$route.params["id"], 0, this.textarea);
+    },
+    mounted: function() {
+      this.loadComment(this.article_id, 0, this.endNum);
     },
     beforeRouteUpdate(to, from, next) {
-      this.submitComment(this.$route.params["id"], 0, this.textarea);
+      this.loadComment(this.article_id, 0, this.endNum);
       next();
-    } */
+    }
   }
 };
 </script>
