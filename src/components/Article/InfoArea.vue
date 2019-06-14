@@ -1,16 +1,16 @@
 <template>
   <div id="infoArea">
-    <template v-if="randomLoad">
+    <template v-if="random">
       <RandomInformation />
     </template>
-    <template v-else-if="authorLoad">
+    <template v-else-if="author">
       <AuthorInformation :account="account" />
     </template>
-    <template v-else-if="labelLoad">
+    <template v-else-if="label">
       <LabelInformation :label="label.id" />
     </template>
-    <template v-else-if="searchLoad">
-      <SearchInformation />
+    <template v-else-if="search">
+      <SearchInformation :keyword="keyword" />
     </template>
   </div>
 </template>
@@ -35,14 +35,14 @@ export default {
     },
     search: {
       type: Boolean
+    },
+    keyword: {
+      type: String,
+      default: ""
     }
   },
   data() {
     return {
-      randomLoad: false,
-      authorLoad: false,
-      labelLoad: false,
-      searchLoad: false,
       account: "123"
     };
   },

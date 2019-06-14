@@ -1,7 +1,7 @@
 <template>
   <div id="search-information">
     <div id="title">
-      <h1>搜索到以下几篇文章：</h1>
+      <h1>搜索关键词 {{ keyword }} 的结果：</h1>
     </div>
   </div>
 </template>
@@ -9,7 +9,12 @@
 <script>
 export default {
   name: "SearchInformation",
-  props: {},
+  props: {
+    keyword: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {};
   },

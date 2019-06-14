@@ -1,35 +1,44 @@
 <template>
   <div id="explore-view">
-    <!-- <p>{{ keyword }}</p> -->
     <InfoArea :random="true" />
-    <!-- <ListBySearch :keyword="'google'"></ListBySearch> -->
+    <ArticleList :arr="arr" />
   </div>
 </template>
 
 <script>
 import InfoArea from "@/components/Article/InfoArea";
-// import ListBySearch from "@/views/Article/ArticleList/ListBySearch";
+import ArticleList from "@/components/Article/ArticleList";
+
 export default {
   name: "ExploreView",
   components: {
-    InfoArea
-    // ListBySearch
+    InfoArea,
+    ArticleList
   },
   data: function() {
     return {
       keyword: null,
       startNum: 0,
-      endNum: 10
+      endNum: 10,
+      arr: null
     };
   },
-  beforeRouteUpdate(to, from, next) {
-    this.keyword = to.params["keyword"];
-    next();
+  methods: {
+    loadArticles() {
+      const vm = this;
+      this.$api.article
+        .recommendList()
+        .then(ret => {
+          vm.arr = ret.data.list;
+        })
+        .then(err => {
+          vm.$message.error("获取探索列表出现问题");
+          console.log(err);
+        });
+    }
   },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      vm.keyword = to.params["keyword"];
-    });
+  mounted() {
+    this.loadArticles();
   }
 };
 </script>
