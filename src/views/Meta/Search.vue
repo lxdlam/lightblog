@@ -1,6 +1,6 @@
 <template>
   <div id="search_container">
-    <!-- <p>{{ keyword }}</p> -->
+    <p>{{ keyword }}</p>
     <InfoArea :search="true" />
     <ArticleList :arr="arr"></ArticleList>
   </div>
@@ -26,13 +26,11 @@ export default {
   methods: {
     loadArticleList(title) {
       const vm = this;
-      console.log("In loadArticleList " + title);
       this.$api.article
         .searchTitle(title, this.startNum, this.endNum)
         .then(data => {
           vm.arr = data.data.arr;
           vm.date = data.response_time;
-          console.log(vm.arr);
         })
         // eslint-disable-next-line no-unused-vars
         .catch(err => {
@@ -40,10 +38,8 @@ export default {
         });
     }
   },
-
   beforeRouteUpdate(to, from, next) {
     this.keyword = to.params["keyword"];
-    console.log(to.params["keyword"]);
     this.loadArticleList(this.keyword);
     next();
   },

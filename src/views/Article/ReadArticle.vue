@@ -91,13 +91,8 @@ export default {
       },
       isDecrese: false,
       likeOrNot: false,
-<<<<<<< HEAD
       article_id: 0,
       author_id: 0
-=======
-      article_id: 0
-      //time: 1559560386501
->>>>>>> ff3dee6c7f7d08c0f80b489dc81a9012d95073c4
     };
   },
   methods: {
