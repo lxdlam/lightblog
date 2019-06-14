@@ -72,9 +72,25 @@ export default {
           console.log(error);
         });
     },
-    changeImg() {}
+    loadInfo(uid, token) {
+      const vm = this;
+      this.$api.user
+        .fetchDetail(uid, token)
+        .then(data => {
+          // console.log(123);
+          vm.arr = data.data;
+          // vm.date = data.response_time;
+          console.log(vm.arr);
+        })
+        // eslint-disable-next-line no-unused-vars
+        .catch(err => {
+          vm.$message.error("出错啦");
+          // vm.$router.push("/"); // redirect to the index
+        });
+    }
   },
   mounted: function() {
+    this.loadInfo(this.$store.state.user.uid, this.$store.state.user.token);
     let userInfo = {
       response_time: 1560310151961,
       code: 0,
