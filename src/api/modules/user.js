@@ -67,4 +67,8 @@ export default class {
   fetchAvatar(uid) {
     return this.proxy.query("/user/avatar", { uid });
   }
+
+  fetchDetail(uid, token) {
+    return this.proxy.loggedQuery("/user/query_by_id", token, uid, { uid });
+  }
 }
