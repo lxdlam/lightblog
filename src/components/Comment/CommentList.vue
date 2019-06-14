@@ -6,15 +6,15 @@
         v-infinite-scroll="load"
         infinite-scroll-disabled="disabled"
       >
-        <li v-for="comment in comments" v-bind:key="comment">
-          <el-divider></el-divider>
-          <CommentItem
-            :avatar_sm="comment.avatar_sm"
-            :user_nickname="comment.user_nickname"
-            :comment="comment.comment"
-            :comment_time="comment.comment_time"
-          ></CommentItem>
-        </li>
+        <CommentItem
+          v-for="comment in comments"
+          v-bind:key="comment"
+          :avatar_sm="comment.avatar_sm"
+          :user_nickname="comment.user_nickname"
+          :comment="comment.comment"
+          :comment_time="comment.comment_time"
+        ></CommentItem>
+        <el-divider></el-divider>
       </ul>
       <p v-if="loading">加载中...</p>
       <p v-if="noMore">没有更多了</p>
@@ -29,6 +29,12 @@ export default {
   name: "CommentList",
   components: {
     CommentItem
+  },
+  props: {
+    article_id: {
+      type: String,
+      required: true
+    }
   },
   data() {
     return {
@@ -46,6 +52,7 @@ export default {
         .then(res => {
           vm.comments = res.data.arr;
           vm.commentNum = res.data.sum;
+          console.log(vm.comments);
         })
         .catch(err => {
           console.log(err.code);
@@ -55,7 +62,7 @@ export default {
     load() {
       this.loading = true;
 
-      this.loadComment(this.$route.params["id"], 0, this.endNum);
+      //this.loadComment(this.$route.params["id"], 0, this.endNum);
       this.endNum += 10;
       this.loading = false;
     }

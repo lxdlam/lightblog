@@ -16,7 +16,7 @@
         />
       </el-col>
       <el-button
-        @click="submitComment($event)"
+        @click="submitComment()"
         v-show="isOnFocus"
         type="primary"
         id="submit-button"
@@ -34,8 +34,24 @@ export default {
     return {
       textarea: "",
       Rows: 1,
-      isOnFocus: false
+      isOnFocus: false,
+      data: {
+        uid: 0,
+        comment: "",
+        article_id: "",
+        parent_comment_id: ""
+      }
     };
+  },
+  props: {
+    uid: {
+      type: Number,
+      required: true
+    },
+    token: {
+      type: String,
+      required: true
+    }
   },
   methods: {
     increseRows() {
@@ -48,11 +64,41 @@ export default {
       this.isOnFocus = false;
     },
     thumb() {},
-    submitComment(e) {
+    submitComment() {
       //alert("000000");
-
-      e.prventDefault();
+      if (
+        typeof this.textarea === "undefined" ||
+        this.textarea === null ||
+        this.textarea === ""
+      ) {
+        alert("评论内容不能为空！");
+        return;
+      }
+      this.data.uid = this.$store.state.user.id;
+      this.data.comment = this.textarea;
+      this.data.article_id = this.$route.params["id"];
+      //alert(this.$store.state.user.id);
+      //const vm = this;
+      this.$api.comment
+        .newComment(
+          this.$store.state.user.id,
+          this.$store.state.user.token,
+          this.data
+        )
+        .then(res => {
+          console.log(res);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
+    /* mounted: function() {
+      this.submitComment(this.$route.params["id"], 0, this.textarea);
+    },
+    beforeRouteUpdate(to, from, next) {
+      this.submitComment(this.$route.params["id"], 0, this.textarea);
+      next();
+    } */
   }
 };
 </script>

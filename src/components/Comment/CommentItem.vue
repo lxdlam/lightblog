@@ -92,6 +92,7 @@ export default {
   },
   mounted: function() {
     const date = new Date(this.comment_time);
+    //alert(date);
     let month1 = date.getMonth() + 1;
     if (month1 < 10) {
       month1 = "0" + month1;

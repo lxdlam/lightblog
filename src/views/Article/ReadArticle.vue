@@ -59,20 +59,26 @@
       <InputBox />
 
       <CommentList :article_id="article_id"></CommentList>
+      <!-- <CommentItem
+        avatar_sm="https://vblogstore-1257377207.cos.ap-chengdu.myqcloud.com/image/d2d7c57d727f14148d8bf047ccdbedc1.png"
+        user_nickname="雨女无瓜"
+        comment="评论1"
+        :comment_time="time"
+      ></CommentItem> -->
     </div>
   </div>
 </template>
 
 <script>
 import Renderer from "@/components/Markdown/Renderer";
-// import CommentItem from "@/components/Comment/CommentItem";
+//import CommentItem from "@/components/Comment/CommentItem";
 import CommentList from "@/components/Comment/CommentList";
 import InputBox from "@/components/Comment/InputBox";
 export default {
   name: "ReadArticle",
   components: {
     Renderer,
-    // CommentItem,
+    //CommentItem,
     CommentList,
     InputBox
   },
@@ -85,12 +91,17 @@ export default {
       },
       isDecrese: false,
       likeOrNot: false,
+<<<<<<< HEAD
       article_id: 0,
       author_id: 0
+=======
+      article_id: 0
+      //time: 1559560386501
+>>>>>>> ff3dee6c7f7d08c0f80b489dc81a9012d95073c4
     };
   },
   methods: {
-    increseRows() {
+    /* increseRows() {
       //alert("点击了");
       this.Rows = 5;
       this.isOnFocus = true;
@@ -101,7 +112,7 @@ export default {
         this.isOnFocus = false;
       }
       this.isDecrese === false;
-    },
+    }, */
     thumb() {
       this.likeOrNot = !this.likeOrNot;
     },
