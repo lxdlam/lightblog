@@ -10,6 +10,7 @@
         v-for="(item, index) in this.arr"
         :key="index"
         :title="item.title"
+        :article_id="item.virtual_id"
         :author="item.author_nickname"
         :date="item.release_time"
         :digest="item.articleAbstract"
@@ -48,14 +49,6 @@ export default {
     ArticleListItem
   },
   methods: {
-    fetchData() {
-      // const acquire_one_article = (id, callback) => {
-      //   this.axios.get().then(callback);
-      // };
-      // for (let item in retArray) {
-      //   this.arti_object.push(item);
-      // }
-    },
     load() {
       this.loading = true;
       setTimeout(() => {

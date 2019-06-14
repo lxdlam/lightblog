@@ -127,8 +127,10 @@ export default {
     dispatch(key) {
       if (key === "profile") {
         // Go to profile page
+        this.$router.push("/personal");
       } else if (key === "articles") {
         // Go to article page
+        this.$router.push({ name: "personal", params: { key: 4 } });
       } else if (key === "logout") {
         this.$message({
           type: "success",

@@ -56,7 +56,7 @@
     <el-divider></el-divider>
     <div id="comment-bar">
       <h1>评论</h1>
-      <InputBox />
+      <InputBox :article_id="article_id" />
 
       <CommentList :article_id="article_id"></CommentList>
       <!-- <CommentItem

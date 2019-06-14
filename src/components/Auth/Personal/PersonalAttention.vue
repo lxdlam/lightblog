@@ -24,64 +24,54 @@ export default {
   props: {},
   data() {
     return {
-      arr: {}
+      arr: [{}],
+      loading: false,
+      startNum: 0,
+      endNum: 10
     };
   },
   components: {
     // 在这里加载你的组件
     AttentionItem
   },
-  methods: {},
+  methods: {
+    load() {
+      this.loading = true;
+      setTimeout(() => {
+        this.count += 2;
+        this.loading = false;
+      }, 1000);
+    },
+    loadAttention(uid, token, start, end) {
+      const vm = this;
+      this.$api.article
+        .fetchFollowedList(uid, token, start, end)
+        .then(data => {
+          vm.arr = data.data.arr;
+          console.log(vm.arr);
+        })
+        // eslint-disable-next-line no-unused-vars
+        .catch(err => {
+          vm.$message.error("出错啦");
+          // vm.$router.push("/"); // redirect to the index
+        });
+    }
+  },
+  computed: {
+    // noMore() {
+    //   return this.count >= 15;
+    // },
+    // disabled() {
+    //   return this.loading || this.noMore;
+    // }
+  },
   mounted: function() {
-    let attentionList = {
-      response_time: 1560315024475,
-      code: 0,
-      msg: "success",
-      data: {
-        start: 0,
-        end: 1,
-        sum: 2,
-        arr: [
-          {
-            user_id: 1,
-            user_nickname: "yuasdyuas"
-          },
-          {
-            user_id: 3,
-            user_nickname: "liyang"
-          },
-          {
-            user_id: 3,
-            user_nickname: "liyang"
-          },
-          {
-            user_id: 3,
-            user_nickname: "liyang"
-          },
-          {
-            user_id: 3,
-            user_nickname: "liyang"
-          },
-          {
-            user_id: 3,
-            user_nickname: "liyang"
-          },
-          {
-            user_id: 3,
-            user_nickname: "liyang"
-          },
-          {
-            user_id: 3,
-            user_nickname: "liyang"
-          },
-          {
-            user_id: 3,
-            user_nickname: "liyang"
-          }
-        ]
-      }
-    };
-    this.arr = attentionList.data.arr;
+    this.loadAttention(
+      this.$store.state.user.uid,
+      this.$store.state.user.token,
+      this.startNum,
+      this.endNum
+    );
   }
 };
 </script>

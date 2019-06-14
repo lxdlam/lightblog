@@ -5,25 +5,25 @@
         <div id="img-line">
           <el-form-item label="头像">
             <div id="img-border">
-              <img id="img-bar" v-bind:src="form.img" alt="" />
+              <img id="img-bar" v-bind:src="arr.avatar_md" alt="" />
               <el-button type="primary" @click="changeImg">更换</el-button>
             </div>
           </el-form-item>
         </div>
         <el-form-item label="昵称">
-          <el-input v-model="form.nickname"></el-input>
+          <el-input v-model="arr.nickname"></el-input>
         </el-form-item>
         <el-form-item label="邮箱">
-          <el-input v-model="form.email"></el-input>
+          <el-input v-model="arr.email"></el-input>
         </el-form-item>
         <el-form-item label="手机号">
-          <el-input v-model="form.phone"></el-input>
+          <el-input v-model="arr.phone"></el-input>
         </el-form-item>
         <el-form-item label="关注标签">
           <el-input v-model="form.label"></el-input>
         </el-form-item>
         <el-form-item label="个性标签">
-          <el-input type="textarea" v-model="form.desc"></el-input>
+          <el-input type="textarea" v-model="arr.signature"></el-input>
         </el-form-item>
         <el-form-item>
           <div id="btn-bar">
@@ -58,6 +58,19 @@ export default {
   methods: {
     onSubmit() {
       console.log("submit!");
+
+      this.$api.article
+        .updateUserInfo(
+          this.$store.state.user.uid,
+          this.$store.state.user.token,
+          this.form
+        )
+        .then(res => {
+          console.log(res);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     changeImg() {}
   },
@@ -69,7 +82,7 @@ export default {
       data: {
         user_id: 1,
         account: "liysuzy",
-        nickname: "yuasdyuas",
+        nickname: "yaoyu",
         email: "1121899707@qq.com",
         phone: "17863110500",
         avatar_lg:

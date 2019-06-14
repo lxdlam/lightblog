@@ -44,14 +44,7 @@ export default {
     };
   },
   props: {
-    uid: {
-      type: Number,
-      required: true
-    },
-    token: {
-      type: String,
-      required: true
-    }
+    article_id: String
   },
   methods: {
     increseRows() {
@@ -74,14 +67,14 @@ export default {
         alert("评论内容不能为空！");
         return;
       }
-      this.data.uid = this.$store.state.user.id;
+      this.data.uid = this.$store.state.user.uid;
       this.data.comment = this.textarea;
-      this.data.article_id = this.$route.params["id"];
+      this.data.article_id = this.article_id;
       //alert(this.$store.state.user.id);
       //const vm = this;
       this.$api.comment
         .newComment(
-          this.$store.state.user.id,
+          this.$store.state.user.uid,
           this.$store.state.user.token,
           this.data
         )

@@ -80,7 +80,14 @@ export default {
       }
     }
   },
-  mounted: function() {}
+  mounted: function() {
+    if (this.$route.params.key == 4) {
+      this.infoLoad = false;
+      this.attentionLoad = false;
+      this.commentLoad = false;
+      this.articleLoad = true;
+    }
+  }
 };
 </script>
 

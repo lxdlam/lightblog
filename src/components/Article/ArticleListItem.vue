@@ -32,7 +32,9 @@
                 word-wrap="break-word"
               >
                 <strong>
-                  <h3>{{ title }}</h3></strong
+                  <router-link :to="`/article/read/${article_id}`"
+                    ><h3>{{ title }}</h3></router-link
+                  ></strong
                 >
               </el-col>
             </el-col>
@@ -76,7 +78,7 @@ export default {
   name: "ArticleListItem",
   props: {
     title: String,
-
+    article_id: String,
     date: Number,
     digest: {
       type: String,

@@ -1,6 +1,5 @@
 <template>
   <div id="search_container">
-    <p>{{ keyword }}</p>
     <InfoArea :search="true" />
     <ArticleList :arr="arr"></ArticleList>
   </div>
