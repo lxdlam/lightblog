@@ -1,5 +1,5 @@
 <template>
-  <div id="menu">
+  <div id="personal">
     <div id="container">
       <div id="tabs">
         <el-menu
@@ -38,7 +38,7 @@ import PersonalComment from "@/components/Auth/Personal/PersonalComment";
 // import PersonalArticle from "@/components/Auth/Personal/PersonalArticle";
 import ListBySelf from "@/views/Article/ArticleList/ListBySelf";
 export default {
-  name: "Menu",
+  name: "Personal",
   props: {},
   data() {
     return {

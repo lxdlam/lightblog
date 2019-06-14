@@ -85,7 +85,8 @@ export default {
       },
       isDecrese: false,
       likeOrNot: false,
-      article_id: 0
+      article_id: 0,
+      author_id: 0
     };
   },
   methods: {
@@ -114,6 +115,7 @@ export default {
           Object.assign(vm.arr, data.data);
           // vm.arr = data.data;
           console.log(vm.arr);
+          vm.author_id = data.data.author_id;
           //////////////////////获取时间
           const date = new Date(data.data.release_time);
           let month1 = date.getMonth() + 1;
@@ -125,17 +127,28 @@ export default {
             day1 = "0" + day1;
           }
           vm.dateStr = `${date.getFullYear()}年${month1}月${day1}日 ${date.getHours()}:${date.getMinutes()}`;
+          return vm.$api.user.fetchAvatar(vm.arr.author_id);
+        })
+        .then(avatar => {
+          console.log(123);
+          // console.log(vm.arr.author_id);
+          vm.user_img = avatar.data.avatar_md;
+          console.log(avatar.data.avatar_md);
         })
         // eslint-disable-next-line no-unused-vars
         .catch(err => {
           vm.$message.error("Oops，确认一下文章 ID 吧！");
-          vm.$router.push("/"); // redirect to the index
+          // vm.$router.push("/"); // redirect to the index
         });
     }
+    // loadAvatar(uid) {
+    //   const vm = this;
+    // }
   },
   mounted: function() {
     this.loadArticle(this.$route.params["id"]);
-
+    // this.loadAvatar(this.arr.author_id);
+    // this.loadAvatar(2);
     if (this.$route.params["id"] === "new") {
       this.msg = "new";
     } else {

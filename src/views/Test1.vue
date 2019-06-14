@@ -7,8 +7,8 @@
     <!-- <CommentList></CommentList> -->
     <!-- <Menu></Menu> -->
     <!-- <ListByUser></ListByUser> -->
-    <!-- <ListBySearch></ListBySearch> -->
-    <ListBySelf></ListBySelf>
+    <!-- <ListBySearch :keyword="google"></ListBySearch> -->
+    <!-- <ListBySelf :keywords="'vue'"></ListBySelf> -->
   </div>
 </template>
 
@@ -20,7 +20,7 @@
 // import Menu from "@/components/Auth/Personal/Menu";
 // import ListByUser from "@/views/Article/ArticleList/ListByUser";
 // import ListBySearch from "@/views/Article/ArticleList/ListBySearch";
-import ListBySelf from "@/views/Article/ArticleList/ListBySelf";
+// import ListBySelf from "@/views/Article/ArticleList/ListBySelf";
 export default {
   name: "Test1View",
   components: {
@@ -31,7 +31,7 @@ export default {
     // Menu
     // ListByUser
     // ListBySearch
-    ListBySelf
+    // ListBySelf
   },
 
   data: function() {

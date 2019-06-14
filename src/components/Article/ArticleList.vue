@@ -28,15 +28,6 @@ import ArticleListItem from "@/components/Article/ArticleListItem";
 export default {
   name: "ArticleList",
   props: {
-    authorid: {
-      type: Number
-    },
-    start: {
-      type: Number
-    },
-    end: {
-      type: Number
-    },
     arr: {
       type: Array,
       required: true
@@ -108,7 +99,7 @@ export default {
   mounted: function() {
     // this.fetchData();
     // this.loadArticleList(this.$route.params["id"]);
-    this.loadArticleList(2);
+    // this.loadArticleList(2);
     if (this.$route.params["id"] === "new") {
       this.msg = "new";
     } else {

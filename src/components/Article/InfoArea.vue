@@ -25,16 +25,16 @@ export default {
   name: "InfoArea",
   props: {
     random: {
-      type: String
+      type: Boolean
     },
     author: {
-      type: String
+      type: Boolean
     },
     label: {
-      type: String
+      type: Boolean
     },
     search: {
-      type: String
+      type: Boolean
     }
   },
   data() {

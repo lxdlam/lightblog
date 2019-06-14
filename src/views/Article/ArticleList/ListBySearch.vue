@@ -9,14 +9,9 @@ import ArticleList from "@/components/Article/ArticleList";
 export default {
   name: "ListBySearch",
   props: {
-    authorid: {
-      type: Number
-    },
-    start: {
-      type: Number
-    },
-    end: {
-      type: Number
+    keyword: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -33,16 +28,18 @@ export default {
   methods: {
     loadArticleList(title) {
       const vm = this;
+      console.log("In loadArticleList " + title);
       this.$api.article
         .searchTitle(title, this.startNum, this.endNum)
         .then(data => {
           vm.arr = data.data.arr;
           vm.date = data.response_time;
+          console.log(vm.arr);
         })
         // eslint-disable-next-line no-unused-vars
         .catch(err => {
           vm.$message.error("Oops，确认一下文章 ID 吧！");
-          vm.$router.push("/"); // redirect to the index
+          // vm.$router.push("/"); // redirect to the index
         });
     }
   },
@@ -56,16 +53,13 @@ export default {
   },
   mounted: function() {
     // this.fetchData();
-    // this.loadArticleList(this.$route.params["id"]);
-    this.loadArticleList(this.$route.params["id"]);
-    if (this.$route.params["id"] === "new") {
-      this.msg = "new";
-    } else {
-      this.msg = "id: " + this.$route.params["id"];
-    }
+    console.log("here");
+    console.log(this.keyword);
+    this.loadArticleList(this.keyword);
+    // this.loadArticleList(this.$route.params["keyword"]);
   },
   beforeRouteUpdate(to, from, next) {
-    this.loadArticleList(this.$route.params["id"]);
+    this.loadArticleList(this.keyword);
     next();
   }
 };

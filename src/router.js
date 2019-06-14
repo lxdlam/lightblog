@@ -74,6 +74,22 @@ export default new Router({
         import(
           /* webpackChunkName: "readArticleView" */ "./views/Article/ReadArticle.vue"
         )
+    },
+    {
+      path: "/explore",
+      name: "explore_article",
+      component: () =>
+        import(
+          /* webpackChunkName: "exploreArticleView" */ "./views/Meta/Explore.vue"
+        )
+    },
+    {
+      path: "/personal",
+      name: "personal",
+      component: () =>
+        import(
+          /* webpackChunkName: "personalView" */ "./views/Auth/Personal.vue"
+        )
     }
   ]
 });
