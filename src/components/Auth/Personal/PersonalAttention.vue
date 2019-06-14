@@ -9,7 +9,7 @@
       <AttentionItem
         v-for="(item, index) in this.arr"
         :key="index"
-        :account="item.user_id"
+        :arr="item"
       ></AttentionItem>
     </ul>
     <p v-if="loading">加载中...</p>
@@ -44,28 +44,30 @@ export default {
     },
     loadAttention(uid, token, start, end) {
       const vm = this;
-      this.$api.article
+
+      this.$api.follow
         .fetchFollowedList(uid, token, start, end)
         .then(data => {
           vm.arr = data.data.arr;
-          console.log(vm.arr);
+          // console.log(vm.arr);
         })
         // eslint-disable-next-line no-unused-vars
         .catch(err => {
           vm.$message.error("出错啦");
-          // vm.$router.push("/"); // redirect to the index
+          // console.log(err);
         });
     }
   },
-  computed: {
-    // noMore() {
-    //   return this.count >= 15;
-    // },
-    // disabled() {
-    //   return this.loading || this.noMore;
-    // }
-  },
+  // computed: {
+  // noMore() {
+  //   return this.count >= 15;
+  // },
+  // disabled() {
+  //   return this.loading || this.noMore;
+  // }
+  // },
   mounted: function() {
+    // console.log(this.startNum);
     this.loadAttention(
       this.$store.state.user.uid,
       this.$store.state.user.token,
