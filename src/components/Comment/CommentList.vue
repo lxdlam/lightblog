@@ -30,6 +30,12 @@ export default {
   components: {
     CommentItem
   },
+  props: {
+    article_id: {
+      type: String,
+      required: true
+    }
+  },
   data() {
     return {
       endNum: 10,

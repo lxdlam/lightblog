@@ -89,7 +89,7 @@ export default {
     };
   },
   methods: {
-    increseRows() {
+    /* increseRows() {
       //alert("点击了");
       this.Rows = 5;
       this.isOnFocus = true;
@@ -100,7 +100,7 @@ export default {
         this.isOnFocus = false;
       }
       this.isDecrese === false;
-    },
+    }, */
     thumb() {
       this.likeOrNot = !this.likeOrNot;
     },
