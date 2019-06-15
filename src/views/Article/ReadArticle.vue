@@ -8,9 +8,21 @@
       <div id="left-bar">
         <img id="img-bar" :src="this.user_img" alt="" />
         <div id="word-bar">
-          <div class="username">
-            <strong>{{ arr.author_nickname }}</strong>
-          </div>
+          <router-link
+            :to="{
+              path: '/article/list/${author_id}',
+              query: {
+                author_id: this.arr.author_id,
+                author_nickname: this.arr.author_nickname,
+                author_avatar: this.user_img,
+                author_signature: this.arr.signature
+              }
+            }"
+          >
+            <div class="username">
+              <strong>{{ arr.author_nickname }}</strong>
+            </div>
+          </router-link>
           <div class="article-info">
             {{ dateStr }} &emsp; 浏览 {{ arr.reading }}
           </div>
@@ -182,8 +194,9 @@ export default {
         .then(data => {
           Object.assign(vm.arr, data.data);
           // vm.arr = data.data;
-          console.log(vm.arr);
+          // console.log(vm.arr);
           vm.author_id = data.data.author_id;
+          // console.log("id----" + this.arr.author_id);
           //////////////////////获取时间
           const date = new Date(data.data.release_time);
           let month1 = date.getMonth() + 1;
@@ -244,6 +257,7 @@ export default {
   },
   mounted: function() {
     this.loadArticle(this.$route.params["id"]);
+
     // this.loadAvatar(this.arr.author_id);
     // this.loadAvatar(2);
     if (this.$route.params["id"] === "new") {

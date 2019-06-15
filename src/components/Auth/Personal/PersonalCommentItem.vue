@@ -12,7 +12,9 @@
           <div class="username">
             <strong>{{ user_nickname }}</strong>
           </div>
-          <div id="article-title">{{ article_title }}</div>
+          <router-link :to="`/article/read/${article_id}`">
+            <div id="article-title">{{ article_title }}</div></router-link
+          >
         </div>
         <div class="parent-comment" v-show="has_parent">
           <div class="par-username">
@@ -65,6 +67,9 @@ export default {
       type: Number
     },
     article_title: {
+      type: String
+    },
+    article_id: {
       type: Number
     }
   },

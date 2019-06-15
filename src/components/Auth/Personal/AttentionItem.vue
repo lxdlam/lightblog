@@ -18,11 +18,23 @@
               <div id="line1-bar">
                 <el-col :xs="8" :sm="6" :md="4" :lg="3" :xl="1">
                   <!-- 昵称 -->
-                  <div id="name-bar">
-                    <strong
-                      ><h1>{{ arr.user_nickname }}</h1></strong
-                    >
-                  </div></el-col
+                  <router-link
+                    :to="{
+                      path: '/article/list/${author_id}',
+                      query: {
+                        author_id: this.arr.user_id,
+                        author_nickname: this.arr.user_nickname,
+                        author_avatar: this.arr.avatar_md,
+                        author_signature: this.arr.signature
+                      }
+                    }"
+                  >
+                    <div id="name-bar">
+                      <strong
+                        ><h1>{{ arr.user_nickname }}</h1></strong
+                      >
+                    </div></router-link
+                  ></el-col
                 >
               </div>
             </el-row>
@@ -51,7 +63,7 @@ export default {
     return {
       focus: true,
       nickname: "蔡徐坤",
-      signature: "我喜欢唱、跳、rap还有篮球",
+      signature: "",
       img:
         "http://pic.rmb.bdstatic.com/463add22b252e2f7f0862fd3d2ea77b58239.gif"
     };

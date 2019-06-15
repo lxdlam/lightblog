@@ -4,10 +4,10 @@
       <RandomInformation />
     </template>
     <template v-else-if="author">
-      <AuthorInformation :account="account" />
+      <AuthorInformation :author_id="this.author_id" />
     </template>
     <template v-else-if="label">
-      <LabelInformation :label="label.id" />
+      <LabelInformation :keyword="keyword" />
     </template>
     <template v-else-if="search">
       <SearchInformation :keyword="keyword" />
@@ -39,6 +39,9 @@ export default {
     keyword: {
       type: String,
       default: ""
+    },
+    author_id: {
+      type: Number
     }
   },
   data() {
@@ -56,6 +59,8 @@ export default {
     fetchInfo() {}
   },
   mounted: function() {
+    console.log("step2---" + this.author_id);
+    this.author_id = this.$route.query.author_id;
     if (this.random != undefined) {
       this.randomLoad = true;
     } else {
@@ -76,6 +81,19 @@ export default {
     } else {
       this.searchLoad = false;
     }
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.author_id = this.$route.query.author_id;
+    console.log("step2-------" + this.author_id);
+    // console.log("userid" + this.author_id);
+    this.loadArticleList(this.author_id);
+    next();
+  },
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      vm.author_id = this.$route.query.author_id;
+      vm.loadArticleList(vm.author_id);
+    });
   }
 };
 </script>

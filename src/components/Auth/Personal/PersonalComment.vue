@@ -57,6 +57,7 @@
             :comment="item.comment"
             :comment_time="item.comment_time"
             :article_title="item.title"
+            :article_id="item.article_id"
           ></PersonalCommentItem>
         </ul>
         <p v-if="loading">加载中...</p>

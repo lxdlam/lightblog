@@ -9,7 +9,7 @@
       >
         <el-col :xs="3" :sm="3" :md="3" :lg="3" :xl="1">
           <!-- 头像 -->
-          <img id="img-bar" v-bind:src="img" alt="" />
+          <img id="img-bar" v-bind:src="author_avatar" alt="" />
         </el-col>
         <el-col :xs="3" :sm="6" :md="8" :lg="9" :xl="11">
           <!-- 个人信息 -->
@@ -20,21 +20,23 @@
                   <!-- 昵称 -->
                   <div id="name-bar">
                     <strong
-                      ><h1>{{ nickname }}</h1></strong
+                      ><h1>{{ author_nickname }}</h1></strong
                     >
                   </div></el-col
                 >
                 <el-col :xs="7" :sm="8" :md="8" :lg="9" :xl="11">
                   <!-- 关注按钮 -->
-                  <template v-if="focus == true">
-                    <div id="button-bar">
-                      <el-button round>+ 关注</el-button>
-                    </div>
-                  </template>
-                  <template v-else-if="focus == false">
-                    <div id="button-bar">
-                      <el-button type="primary" round>取消关注</el-button>
-                    </div>
+                  <template v-if="!same_user">
+                    <template v-if="followed === false">
+                      <div id="button-bar">
+                        <el-button @click="focus" plain>+ 关注</el-button>
+                      </div>
+                    </template>
+                    <template v-else-if="followed === true">
+                      <div id="button-bar">
+                        <el-button @click="focus" plain>取消关注</el-button>
+                      </div>
+                    </template>
                   </template>
                 </el-col>
               </div>
@@ -43,7 +45,7 @@
               <el-col :xs="4" :sm="6" :md="8" :lg="9" :xl="11">
                 <!-- 个人简介 -->
                 <div id="sign-bar">
-                  <p>{{ signature }}</p>
+                  <p>{{ author_signature }}</p>
                 </div></el-col
               >
             </el-row>
@@ -58,56 +60,99 @@
 export default {
   name: "AuthorInformation",
   props: {
-    account: Number
+    author_id: Number,
+    author_nickname: String,
+    author_avatar: String,
+    author_signature: String
   },
   data() {
     return {
       focus: true,
-      nickname: "蔡徐坤",
-      signature: "我喜欢唱、跳、rap还有篮球",
-      img:
-        "http://pic.rmb.bdstatic.com/463add22b252e2f7f0862fd3d2ea77b58239.gif",
+      followed: false,
+      same_user: false,
       arr: {}
     };
   },
   components: {
     // 在这里加载你的组件
   },
-  methods: {},
-  mounted: function() {
-    let userInfo = {
-      response_time: 1560310151961,
-      code: 0,
-      msg: "success",
-      data: {
-        user_id: 1,
-        account: "liysuzy",
-        nickname: "yuasdyuas",
-        email: "1121899707@qq.com",
-        phone: "17863110500",
-        avatar_lg:
-          "http://pic.rmb.bdstatic.com/463add22b252e2f7f0862fd3d2ea77b58239.gif",
-        avatar_md:
-          "http://pic.rmb.bdstatic.com/463add22b252e2f7f0862fd3d2ea77b58239.gif",
-        avatar_sm:
-          "http://pic.rmb.bdstatic.com/463add22b252e2f7f0862fd3d2ea77b58239.gif",
-        signature: "我热爱学习",
-        interest: [
-          {
-            label_id: 1,
-            label_name: "JAVA"
-          },
-          {
-            label_id: 2,
-            label_name: "Python"
-          }
-        ]
+  methods: {
+    // eslint-disable-next-line vue/no-dupe-keys
+    focus() {
+      if (!this.$store.state.user.logged) {
+        return;
       }
-    };
-    this.arr = userInfo.data;
-    this.img = this.arr.avatar_md;
-    this.nickname = this.arr.nickname;
-    this.signature = this.arr.signature;
+
+      const vm = this;
+
+      if (!this.followed) {
+        this.$api.follow
+          .makeFollow(
+            this.$store.state.user.uid,
+            this.$store.state.user.token,
+            this.author_id
+          )
+          .then(() => {
+            vm.$message({
+              type: "success",
+              message: "关注成功！"
+            });
+            vm.followed = true;
+          })
+          .catch(err => {
+            vm.$message.error("Oops，关注失败！");
+            console.log(err);
+          });
+      } else {
+        this.$api.follow
+          .cancelFollow(
+            this.$store.state.user.uid,
+            this.$store.state.user.token,
+            this.author_id
+          )
+          .then(() => {
+            vm.$message({
+              type: "success",
+              message: "取消关注成功！"
+            });
+            vm.followed = false;
+          })
+          .catch(err => {
+            vm.$message.error("Oops，取消关注失败！");
+            console.log(err);
+          });
+      }
+    },
+    loadInfo(uid, token) {
+      const vm = this;
+      this.$api.user
+        .fetchDetail(uid, token)
+        .then(data => {
+          // console.log(123);
+          vm.arr = data.data;
+          vm.dynamicTags = vm.arr.interest;
+          if (vm.author_id === vm.$store.state.user.uid) {
+            vm.same_user = true;
+            return { data: { validate_result: false } };
+          } else if (vm.$store.state.user.logged) {
+            return vm.$api.follow.testFollow(
+              vm.$store.state.user.uid,
+              vm.$store.state.user.token,
+              vm.author_id
+            );
+          } else return { data: { validate_result: false } };
+        })
+        .then(ret => (vm.followed = ret.data.validate_result))
+        // eslint-disable-next-line no-unused-vars
+        .catch(err => {
+          vm.$message.error("读取信息出错啦");
+          // vm.$router.push("/"); // redirect to the index
+        });
+    }
+  },
+  mounted: function() {
+    console.log("step3---" + this.author_id);
+    this.loadInfo(this.author_id, this.$store.state.user.token);
   }
 };
 </script>

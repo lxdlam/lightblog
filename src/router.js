@@ -74,11 +74,14 @@ export default new Router({
           /* webpackChunkName: "readArticleView" */ "./views/Article/ReadArticle.vue"
         )
     },
-    // {
-    //   path:"/article/list/:id",
-    //   name:"user_articles",
-    //   component: () => import(/* webpackChunkName: "userArticleView */ "")
-    // },
+    {
+      path: "/article/list/:id",
+      name: "user_articles",
+      component: () =>
+        import(
+          /* webpackChunkName: "userArticleView" */ "./views/Article/UserArticle.vue"
+        )
+    },
     {
       path: "/explore",
       name: "explore_article",
