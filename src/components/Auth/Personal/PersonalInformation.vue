@@ -102,8 +102,8 @@ export default {
     changeImg() {
       this.loading = true;
       const vm = this;
-      console.log("asasdas----");
-      console.log(this.avatar);
+      // console.log("asasdas----");
+      // console.log(this.avatar);
       let register_query = {
         avatar_lg: null,
         avatar_md: null,
@@ -172,7 +172,6 @@ export default {
       let label_name = this.inputValue;
       if (label_name) {
         this.dynamicTags.push(label_name);
-        console.log(this.dynamicTags);
       }
       this.inputVisible = false;
       this.inputValue = "";
@@ -207,15 +206,13 @@ export default {
         singature: this.arr.singature,
         interest: this.tag
       };
-      console.log(myForm);
       this.$api.user
         .updateUserInfo(
           this.$store.state.user.uid,
           this.$store.state.user.token,
           myForm
         )
-        .then(res => {
-          console.log(res);
+        .then(() => {
           this.$message({
             message: `更改信息成功！`,
             type: "success"
@@ -232,13 +229,9 @@ export default {
         .then(data => {
           // console.log(123);
           vm.arr = data.data;
-          console.log(vm.arr);
           vm.arr.interest.forEach(item => {
             vm.tag.push(item.label_id);
           });
-          // vm.dynamicTags = vm.arr.interest;
-          // vm.date = data.response_time;
-          // console.log(vm.arr);
         })
         // eslint-disable-next-line no-unused-vars
         .catch(err => {
@@ -250,7 +243,6 @@ export default {
   mounted: function() {
     this.loadAllTags();
     this.loadInfo(this.$store.state.user.uid, this.$store.state.user.token);
-    console.log("dialog" + this.reportVisible);
   }
 };
 </script>

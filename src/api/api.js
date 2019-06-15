@@ -7,6 +7,7 @@ import Tag from "./modules/tag";
 import Follow from "./modules/follow";
 import Like from "./modules/like";
 import Report from "./modules/report";
+import Admin from "./modules/admin";
 
 export default class {
   constructor(options) {
@@ -22,6 +23,7 @@ export default class {
     this._follow = new Follow(this.proxy);
     this._like = new Like(this.proxy);
     this._report = new Report(this.proxy);
+    this._admin = new Admin(this.proxy);
   }
 
   get img() {
@@ -54,5 +56,9 @@ export default class {
 
   get report() {
     return this._report;
+  }
+
+  get admin() {
+    return this._admin;
   }
 }

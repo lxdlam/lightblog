@@ -62,7 +62,7 @@ export default {
     fetchInfo() {}
   },
   mounted: function() {
-    console.log("step2---" + this.author_id);
+    // console.log("step2---" + this.author_id);
     this.author_id = this.$route.query.author_id;
     if (this.random != undefined) {
       this.randomLoad = true;
@@ -87,7 +87,7 @@ export default {
   },
   beforeRouteUpdate(to, from, next) {
     this.author_id = this.$route.query.author_id;
-    console.log("step2-------" + this.author_id);
+    // console.log("step2-------" + this.author_id);
     // console.log("userid" + this.author_id);
     this.loadArticleList(this.author_id);
     next();

@@ -176,9 +176,8 @@ export default {
           this.$store.state.user.token,
           query
         )
-        .then(res => {
+        .then(() => {
           vm.$message("删除成功");
-          console.log(res);
         })
         .catch(error => {
           console.log(error);
@@ -278,7 +277,6 @@ export default {
           // console.log(vm.arr);
           vm.author_id = data.data.author_id;
           vm.virtual_id = data.data.virtual_id;
-          console.log("id----" + this.arr.virtual_id);
           //////////////////////获取时间
           const date = new Date(data.data.release_time);
           let month1 = date.getMonth() + 1;
@@ -369,8 +367,6 @@ export default {
     } else {
       this.msg = "id: " + this.$route.params["id"];
     }
-
-    console.log(this.arr);
   },
   beforeRouteUpdate(to, from, next) {
     this.loadArticle(this.$route.params["id"]);

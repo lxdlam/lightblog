@@ -52,7 +52,6 @@ export default {
         .then(res => {
           vm.comments = res.data.arr;
           vm.commentNum = res.data.sum;
-          console.log(vm.comments);
         })
         .catch(err => {
           console.log(err.code);

@@ -1,6 +1,6 @@
 <template>
   <div id="comment-manage">
-    <el-table :data="tableData" stripe height="578">
+    <el-table :data="tableData" stripe height="900">
       <el-table-column
         prop="articleID"
         label="文章ID"
@@ -18,7 +18,7 @@
       <el-table-column
         prop="content"
         label="评论内容"
-        width="150"
+        width="350"
         align="center"
       ></el-table-column>
       <el-table-column label="操作" align="center">
@@ -52,6 +52,5 @@ export default {
   height: 64px;
   border-radius: 50%;
   overflow: hidden;
-  margin-right: 12px;
 }
 </style>

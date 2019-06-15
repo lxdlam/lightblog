@@ -54,28 +54,8 @@ export default {
     this.author_nickname = this.$route.query.author_nickname;
     this.author_avatar = this.$route.query.author_avatar;
     this.author_signature = this.$route.query.author_signature;
-    console.log(
-      "step1---" +
-        this.$route.query.author_id +
-        "------" +
-        this.$route.query.author_avatar +
-        "------" +
-        this.$route.query.author_signature
-    );
     this.loadArticleList(this.$route.query.author_id);
   }
-  //   beforeRouteUpdate(to, from, next) {
-  //     this.author_id = this.$route.query.author_id;
-  //     // console.log("userid" + this.author_id);
-  //     this.loadArticleList(this.author_id);
-  //     next();
-  //   },
-  //   beforeRouteEnter(to, from, next) {
-  //     next(vm => {
-  //       vm.author_id = this.$route.query.author_id;
-  //       vm.loadArticleList(vm.author_id);
-  //     });
-  //   }
 };
 </script>
 

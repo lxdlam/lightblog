@@ -43,7 +43,6 @@ export default {
           );
         })
         .then(data => {
-          console.log(data);
           vm.arr = data.data.arr;
           this.start += this.offset;
         })

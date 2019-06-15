@@ -28,13 +28,11 @@ export default {
   methods: {
     loadArticleList(title) {
       const vm = this;
-      console.log("In loadArticleList " + title);
       this.$api.article
         .searchTitle(title, this.startNum, this.endNum)
         .then(data => {
           vm.arr = data.data.arr;
           vm.date = data.response_time;
-          console.log(vm.arr);
         })
         // eslint-disable-next-line no-unused-vars
         .catch(err => {
@@ -53,7 +51,6 @@ export default {
   },
   mounted: function() {
     // this.fetchData();
-    console.log("here");
     console.log(this.keyword);
     this.loadArticleList(this.keyword);
     // this.loadArticleList(this.$route.params["keyword"]);

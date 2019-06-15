@@ -82,8 +82,6 @@ export default {
     do_register() {
       if (this.user.stage.some(x => !x)) return;
 
-      console.log("Encounter");
-
       this.loading = true;
 
       const vm = this;

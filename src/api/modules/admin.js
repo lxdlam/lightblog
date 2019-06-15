@@ -23,6 +23,7 @@ export default class {
 
   banUser(uid, token, tid) {
     return this.proxy.loggedQuery("/user/admin/ban_user", token, uid, {
+      uid,
       ban_uid: tid
     });
   }

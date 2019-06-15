@@ -103,7 +103,11 @@ export default new Router({
     },
     {
       path: "/admin",
-      name: "admin"
+      name: "admin",
+      component: () =>
+        import(
+          /* webpackChunkName: "adminView" */ "./views/Manager/Manager.vue"
+        )
     }
   ]
 });

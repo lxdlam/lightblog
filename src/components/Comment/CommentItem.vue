@@ -76,19 +76,6 @@ export default {
     reply: function() {
       this.flag = !this.flag;
     }
-    /* query: function(parent_comment_id) {
-      this.axios
-        .post("./comment/parent_query", { parent_comment_id })
-        .then(resp => {
-          if (resp.code === 0) {
-            this.parent_comment = resp.data.arr;
-          }
-        })
-        .catch(e => {
-          console.log("Query failed. You may encounter a network broken.");
-          console.log(e);
-        });
-    } */
   },
   mounted: function() {
     const date = new Date(this.comment_time);

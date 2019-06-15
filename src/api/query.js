@@ -69,7 +69,7 @@ export default class {
         data: { request_time: time, key: genKey(token, uid, time), ...data }
       }
     );
-    console.log(query);
+    // console.log(query);
     return this.instance(query).then(resp => resp.data);
   }
 

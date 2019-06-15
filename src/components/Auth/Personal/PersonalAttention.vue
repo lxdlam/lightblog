@@ -58,14 +58,6 @@ export default {
         });
     }
   },
-  // computed: {
-  // noMore() {
-  //   return this.count >= 15;
-  // },
-  // disabled() {
-  //   return this.loading || this.noMore;
-  // }
-  // },
   mounted: function() {
     // console.log(this.startNum);
     this.loadAttention(
@@ -82,11 +74,14 @@ export default {
 
 <style scoped>
 #personal-attention {
-  width: 100%;
+  width: 960px;
   /* background-color: aqua; */
   padding-top: 10px;
   padding-bottom: 10px;
-  padding-left: -20px;
+  /* padding-left: -20px; */
   padding-right: 30px;
+  margin: 0 auto;
+  display: table;
+  text-align: center;
 }
 </style>

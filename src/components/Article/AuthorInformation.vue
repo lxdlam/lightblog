@@ -151,7 +151,7 @@ export default {
     }
   },
   mounted: function() {
-    console.log("step3---" + this.author_id);
+    // console.log("step3---" + this.author_id);
     this.loadInfo(this.author_id, this.$store.state.user.token);
   }
 };

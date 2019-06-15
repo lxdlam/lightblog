@@ -61,10 +61,10 @@ export default {
       this.$api.article
         .fetchListByAuthor(author_id, this.startNum, this.endNum)
         .then(data => {
-          console.log(123);
+          // console.log(123);
           vm.arr = data.data.arr;
           vm.date = data.response_time;
-          console.log(vm.arr);
+          // console.log(vm.arr);
         })
         // eslint-disable-next-line no-unused-vars
         .catch(err => {
@@ -121,5 +121,7 @@ export default {
 #article-list {
   max-width: 1280px;
   width: 960px;
+  display: table;
+  margin: 0 auto;
 }
 </style>

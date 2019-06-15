@@ -1,6 +1,6 @@
 <template>
   <div id="report-manage">
-    <el-table :data="tableData" stripe height="578">
+    <el-table :data="tableData" stripe height="900">
       <el-table-column
         prop="articleID"
         label="文章ID"
@@ -46,7 +46,29 @@ export default {
       tableData: Array(15).fill(item)
     };
   },
-  methods: {}
+  methods: {
+    fetchList() {
+      const vm = this;
+
+      this.$api.admin
+        .fetchReportList(
+          this.$store.state.user.uid,
+          this.$store.state.user.token,
+          0,
+          1000
+        )
+        .then(data => {
+          console.log(data);
+        })
+        .catch(err => {
+          vm.$message.error("Error occured. Check console for more details.");
+          console.log(err);
+        });
+    }
+  },
+  mounted() {
+    this.fetchList();
+  }
 };
 </script>
 

@@ -1,24 +1,24 @@
 <template>
   <div id="personal-comment">
-    <el-menu
-      default-active="1-4-1"
-      class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose"
-      @select="handleSelect"
-      :collapse="isCollapse"
-    >
-      <el-menu-item index="1">
-        <template slot="title">
+    <div id="left">
+      <el-menu
+        default-active="1"
+        class="el-menu-vertical-demo"
+        @select="handleSelect"
+        :collapse="isCollapse"
+      >
+        <el-menu-item index="1">
+          <template slot="title">
+            <i class="el-icon-menu"></i>
+            <span slot="title"><strong>我发送的评论</strong></span>
+          </template>
+        </el-menu-item>
+        <el-menu-item index="2">
           <i class="el-icon-menu"></i>
-          <span slot="title"><strong>我发送的评论</strong></span>
-        </template>
-      </el-menu-item>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title"><strong>我收到的评论</strong></span>
-      </el-menu-item>
-    </el-menu>
+          <span slot="title"><strong>我收到的评论</strong></span>
+        </el-menu-item>
+      </el-menu>
+    </div>
     <div id="right">
       <div id="receive" v-if="receiveLoad">
         <p id="title-bar">我收到的评论</p>
@@ -93,14 +93,7 @@ export default {
     PersonalCommentItem
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    },
     handleSelect(key) {
-      console.log(key);
       if (key == 2) {
         this.receiveLoad = true;
         this.sendLoad = false;
@@ -120,7 +113,7 @@ export default {
         .fetchCommentByUser(uid, start, end)
         .then(res => {
           vm.sendArr = res.data.arr;
-          console.log(vm.sendArr);
+          // console.log(vm.sendArr);
         })
         .catch(err => {
           console.log(err.code);
@@ -133,7 +126,7 @@ export default {
         .fetchCommentToUser(uid, token)
         .then(res => {
           vm.receiveArr = res.data.arr;
-          console.log(vm.receiveArr);
+          // console.log(vm.receiveArr);
         })
         .catch(err => {
           console.log(err.code);
@@ -205,7 +198,6 @@ export default {
   margin-top: 10px;
 }
 #personal-comment {
-  width: 95%;
   /* max-height: 960px; */
   /* background-color: bisque; */
   display: flex;
@@ -219,7 +211,8 @@ export default {
   /* background-color: coral; */
 }
 #right {
-  width: 800px;
+  width: 100%;
+  max-width: 1040px;
   min-height: 620px;
   /* background-color: darkseagreen; */
 }

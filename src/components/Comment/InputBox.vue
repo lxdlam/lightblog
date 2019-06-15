@@ -76,7 +76,6 @@ export default {
         .then(res => {
           vm.comments = res.data.arr;
           vm.commentNum = res.data.sum;
-          console.log(vm.comments);
         })
         .catch(err => {
           console.log(err.code);
@@ -104,7 +103,7 @@ export default {
           this.$store.state.user.token,
           this.data
         )
-        .then(res => {
+        .then(() => {
           vm.$message("发表评论成功");
           vm.textarea = "";
           vm.decreseRows();
@@ -114,7 +113,6 @@ export default {
           setTimeout(function() {
             window.scrollTo({ top: document.body.scrollHeight });
           }, 1000);
-          console.log(res);
         })
         .catch(error => {
           console.log(error);

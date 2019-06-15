@@ -146,14 +146,12 @@ export default {
       let process = true;
       const parser = new htmlparser.Parser({
         ontext: text => {
-          console.log(text);
           if (process && vm.abstract.length < 150) {
             vm.abstract += text;
             vm.abstract = vm.abstract.slice(0, 150);
           }
         },
         onattribute: (name, value) => {
-          console.log(name, value);
           if (name === "src" && vm.cover === null) {
             vm.cover = value;
           }
