@@ -143,7 +143,7 @@ export default {
       },
       isDecrese: false,
       liked: false,
-      article_id: 0,
+      article_id: "0",
       author_id: 0,
       virtual_id: 0,
       followed: false,
