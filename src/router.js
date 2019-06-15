@@ -25,8 +25,7 @@ export default new Router({
     {
       path: "/",
       name: "index",
-      component: () =>
-        import(/* webpackChunkName: "indexView" */ "./views/Meta/Index.vue")
+      redirect: "/explore"
     },
     {
       path: "/test",

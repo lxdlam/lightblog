@@ -31,7 +31,7 @@ export default {
         .then(ret => {
           vm.arr = ret.data.list;
         })
-        .then(err => {
+        .catch(err => {
           vm.$message.error("获取探索列表出现问题");
           console.log(err);
         });

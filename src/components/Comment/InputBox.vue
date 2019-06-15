@@ -113,7 +113,7 @@ export default {
           window.location.reload();
           setTimeout(function() {
             window.scrollTo({ top: document.body.scrollHeight });
-          }, 3000);
+          }, 1000);
           console.log(res);
         })
         .catch(error => {

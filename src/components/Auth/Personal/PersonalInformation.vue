@@ -19,9 +19,9 @@
         <el-form-item label="手机号">
           <el-input v-model="arr.phone"></el-input>
         </el-form-item>
-        <el-form-item label="关注标签">
+        <!-- <el-form-item label="关注标签">
           <el-input v-model="form.label"></el-input>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item label="个性标签">
           <el-input type="textarea" v-model="arr.signature"></el-input>
         </el-form-item>

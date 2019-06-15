@@ -4,11 +4,11 @@
       <img id="logo" src="../../assets/logo.png" />
       <div class="nav-bar">
         <ul class="nav-list">
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <el-link :underline="false" @click="$router.push('/')">
               首页
             </el-link>
-          </li>
+          </li> -->
           <li class="nav-item">
             <el-link :underline="false" @click="$router.push('/explore')"
               >探索</el-link
