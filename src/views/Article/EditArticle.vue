@@ -8,6 +8,22 @@
         maxlength="40"
         v-model="title"
       />
+      <el-select
+        autocomplete="off"
+        v-model="tag"
+        multiple
+        filterable
+        placeholder="文章标签"
+        collapse-tags
+      >
+        <el-option
+          v-for="item in available_tags"
+          :key="item.id"
+          :label="item.name"
+          :value="item.id"
+        >
+        </el-option>
+      </el-select>
       <el-button @click="publish" type="primary" class="article-title-button"
         >发布</el-button
       >
@@ -30,7 +46,8 @@ export default {
       article_id: null,
       tag: [],
       cover: null,
-      abstract: ""
+      abstract: "",
+      available_tags: []
     };
   },
   components: {
@@ -38,6 +55,11 @@ export default {
   },
   methods: {
     publish() {
+      if (this.tag.length < 1) {
+        this.$message.error("请至少选择一个标签再发布哦！");
+        return;
+      }
+
       this.parse();
 
       if (!this.$store.state.user.logged) {
@@ -143,9 +165,27 @@ export default {
 
       parser.write(instance.render(this.value));
       parser.end();
+    },
+    loadAllTags() {
+      const vm = this;
+      this.$api.tag
+        .list(0, 1000)
+        .then(data => {
+          data.data.arr.forEach(row => {
+            vm.available_tags.push({
+              id: row.labelId,
+              name: row.labelName
+            });
+          });
+        })
+        .catch(err => {
+          vm.$message.error("标签获取错误！请联系管理员！");
+          console.log(err);
+        });
     }
   },
   mounted() {
+    this.loadAllTags();
     if (this.$route.params["id"] !== "new") {
       this.article_id = this.$route.params["id"];
       this.loadArticle(this.article_id);
@@ -186,6 +226,6 @@ export default {
   outline: none;
   color: #303133;
   font-size: 2rem;
-  min-width: 730px;
+  min-width: 500px;
 }
 </style>
