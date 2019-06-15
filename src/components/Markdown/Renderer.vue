@@ -18,9 +18,6 @@ export default {
     compiled_html: function() {
       return instance.render(this.content);
     }
-  },
-  mounted: function() {
-    this.compiled_html = instance.render(this.content);
   }
 };
 </script>

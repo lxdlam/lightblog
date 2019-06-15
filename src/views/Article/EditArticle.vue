@@ -18,6 +18,8 @@
 
 <script>
 import Editor from "@/components/Markdown/Editor";
+import htmlparser from "htmlparser2";
+import instance from "@/components/Markdown/render";
 
 export default {
   name: "EditArticle",
@@ -26,7 +28,9 @@ export default {
       title: null,
       value: "# 在这里写文章吧！",
       article_id: null,
-      tag: []
+      tag: [],
+      cover: null,
+      abstract: ""
     };
   },
   components: {
@@ -34,10 +38,13 @@ export default {
   },
   methods: {
     publish() {
+      this.parse();
+
       if (!this.$store.state.user.logged) {
         this.$message.error("没登录不能发文章哦～");
         this.$router.replace("/na");
       }
+
       const vm = this;
       if (this.article_id === null) {
         this.$api.article
@@ -47,9 +54,9 @@ export default {
             {
               title: vm.title,
               type: vm.tag,
-              cover: null,
+              cover: vm.cover,
               content: vm.value,
-              article_abstract: "abc"
+              article_abstract: vm.abstract
             }
           )
           .then(() => {
@@ -71,9 +78,9 @@ export default {
               article_id: vm.article_id,
               title: vm.title,
               type: vm.tag,
-              cover: null,
+              cover: vm.cover,
               content: vm.value,
-              article_abstract: "abc"
+              article_abstract: vm.abstract
             }
           )
           .then(() => {
@@ -111,6 +118,31 @@ export default {
           vm.$message.error("Oops，出现了一些问题，请联系管理员！");
           console.log(err);
         });
+    },
+    parse() {
+      const vm = this;
+      let process = true;
+      const parser = new htmlparser.Parser({
+        ontext: text => {
+          console.log(text);
+          if (process && vm.abstract.length < 150) {
+            vm.abstract += text;
+            vm.abstract = vm.abstract.slice(0, 150);
+          }
+        },
+        onattribute: (name, value) => {
+          console.log(name, value);
+          if (name === "src" && vm.cover === null) {
+            vm.cover = value;
+          }
+        },
+        oncomment: data => {
+          if (data === "more") process = false;
+        }
+      });
+
+      parser.write(instance.render(this.value));
+      parser.end();
     }
   },
   mounted() {
