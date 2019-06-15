@@ -8,6 +8,7 @@ export const ERROR_CODE = new Map([
   [6, "Query item is not exist"],
   [7, "Authority rejected"],
   [2001, "Article does not exist"],
+  [2002, "Article is hidden"],
   [5004, "Target user is not exist"],
   [5002, "Duplicate follow request"],
   [5005, "Not followed"],
