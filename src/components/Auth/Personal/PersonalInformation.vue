@@ -25,33 +25,23 @@
           <el-input v-model="arr.phone"></el-input>
         </el-form-item>
         <el-form-item label="关注标签">
-          <el-tag
-            v-for="(tag, index) in dynamicTags"
-            :key="index"
-            closable
-            :disable-transitions="false"
-            @close="handleClose(tag)"
-          >
-            {{ tag.label_name }}
-          </el-tag>
-
-          <el-input
-            class="input-new-tag"
-            v-if="inputVisible"
-            v-model="inputValue"
-            ref="saveTagInput"
-            size="small"
-            @keyup.enter.native="handleInputConfirm"
-            @blur="handleInputConfirm"
-          >
-          </el-input>
-          <el-button
-            v-else
-            class="button-new-tag"
-            size="small"
-            @click="showInput"
-            >+ New Tag</el-button
-          >
+          <div id="select-bar">
+            <el-select
+              autocomplete="off"
+              v-model="tag"
+              multiple
+              filterable
+              placeholder="文章标签"
+              :style="{ width: '100%' }"
+              ><el-option
+                v-for="item in available_tags"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id"
+              >
+              </el-option>
+            </el-select>
+          </div>
         </el-form-item>
 
         <el-form-item label="个性标签">
@@ -73,7 +63,9 @@
       <Crooper :avatar="avatar"></Crooper>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="changeImg">确 定</el-button>
+        <el-button type="primary" @click="changeImg" :loading="loading"
+          >确 定</el-button
+        >
       </span>
     </el-dialog>
   </div>
@@ -87,13 +79,19 @@ export default {
   props: {},
   data() {
     return {
-      dynamicTags: ["标签一", "标签二", "标签三"],
       inputVisible: false,
       inputValue: "",
       dialogVisible: false,
       arr: {},
       avatar: {},
-      account: ""
+      account: "",
+      avatar_lg: "",
+      avatar_md: "",
+      avatar_sm: "",
+      loading: false,
+      tag: [],
+      available_tags: [],
+      form: {}
     };
   },
   components: {
@@ -102,16 +100,11 @@ export default {
   },
   methods: {
     changeImg() {
+      this.loading = true;
       const vm = this;
       console.log("asasdas----");
       console.log(this.avatar);
       let register_query = {
-        account: vm.user.account,
-        pwd: vm.user.password,
-        username: vm.user.username,
-        email: vm.user.email,
-        phone: vm.user.phone,
-        interest: vm.user.interest,
         avatar_lg: null,
         avatar_md: null,
         avatar_sm: null
@@ -131,11 +124,14 @@ export default {
                       .upload(blob, `${vm.account}_avatar_lg.png`)
                       .then(data => {
                         register_query.avatar_lg = data.data.url;
-                        return vm.$api.user.register(register_query);
-                      })
-                      .then(() => {
+
+                        vm.avatar_lg = register_query.avatar_lg;
+                        vm.avatar_md = register_query.avatar_md;
+                        vm.avatar_sm = register_query.avatar_sm;
+
                         vm.loading = false;
-                        vm.step++;
+                        vm.$message.success("上传成功！");
+                        vm.dialogVisible = false;
                       })
                       .catch(err => {
                         vm.$message.error(
@@ -181,29 +177,42 @@ export default {
       this.inputVisible = false;
       this.inputValue = "";
     },
+    loadAllTags() {
+      const vm = this;
+      this.$api.tag
+        .list(0, 1000)
+        .then(data => {
+          data.data.arr.forEach(row => {
+            vm.available_tags.push({
+              id: row.labelId,
+              name: row.labelName
+            });
+          });
+        })
+        .catch(err => {
+          vm.$message.error("标签获取错误！请联系管理员！");
+          console.log(err);
+        });
+    },
     onSubmit() {
-      let interestNumList = [];
-      for (let i = 0; i < this.dynamicTags.length; i++) {
-        interestNumList.push(this.dynamicTags[i].label_id);
-      }
-      let form = {
+      let myForm = {
         uid: this.arr.user_id,
         account: this.arr.account,
         nickname: this.arr.nickname,
         email: this.arr.email,
         phone: this.arr.phone,
-        avatar_sm: this.arr.avatar_sm,
-        avatar_md: this.arr.avatar_md,
-        avatar_lg: this.arr.avatar_lg,
+        avatar_sm: this.avatar_sm,
+        avatar_md: this.avatar_md,
+        avatar_lg: this.avatar_lg,
         singature: this.arr.singature,
-        interest: [4, 5]
+        interest: this.tag
       };
-      console.log(form);
+      console.log(myForm);
       this.$api.user
         .updateUserInfo(
           this.$store.state.user.uid,
           this.$store.state.user.token,
-          form
+          myForm
         )
         .then(res => {
           console.log(res);
@@ -224,7 +233,10 @@ export default {
           // console.log(123);
           vm.arr = data.data;
           console.log(vm.arr);
-          vm.dynamicTags = vm.arr.interest;
+          vm.arr.interest.forEach(item => {
+            vm.tag.push(item.label_id);
+          });
+          // vm.dynamicTags = vm.arr.interest;
           // vm.date = data.response_time;
           // console.log(vm.arr);
         })
@@ -236,48 +248,9 @@ export default {
     }
   },
   mounted: function() {
+    this.loadAllTags();
     this.loadInfo(this.$store.state.user.uid, this.$store.state.user.token);
     console.log("dialog" + this.reportVisible);
-    //   let userInfo = {
-    //     response_time: 1560310151961,
-    //     code: 0,
-    //     msg: "success",
-    //     data: {
-    //       user_id: 1,
-    //       account: "liysuzy",
-    //       nickname: "yaoyu",
-    //       email: "1121899707@qq.com",
-    //       phone: "17863110500",
-    //       avatar_lg:
-    //         "https://vblogstore-1257377207.cos.ap-chengdu.myqcloud.com/image/d5f3357ae0ef7d8fc5787cb3c45dcbe8.png",
-    //       avatar_md:
-    //         "https://vblogstore-1257377207.cos.ap-chengdu.myqcloud.com/image/d5f3357ae0ef7d8fc5787cb3c45dcbe8.png",
-    //       avatar_sm:
-    //         "https://vblogstore-1257377207.cos.ap-chengdu.myqcloud.com/image/d5f3357ae0ef7d8fc5787cb3c45dcbe8.png",
-    //       signature: "我热爱学习",
-    //       interest: [
-    //         {
-    //           label_id: 1,
-    //           label_name: "JAVA"
-    //         },
-    //         {
-    //           label_id: 2,
-    //           label_name: "Python"
-    //         }
-    //       ]
-    //     }
-    //   };
-    //   this.arr = userInfo.data;
-    //   this.form.img = this.arr.avatar_md;
-    //   this.form.nickname = this.arr.nickname;
-    //   this.form.email = this.arr.email;
-    //   this.form.phone = this.arr.phone;
-    //   this.form.desc = this.arr.signature;
-    //   for (let i = 0; i < this.arr.interest.length; i++) {
-    //     this.form.label =
-    //       this.form.label + "    " + this.arr.interest[i].label_name;
-    //   }
-    //   console.log(this.nickname);
   }
 };
 </script>
@@ -285,6 +258,10 @@ export default {
 }
 
 <style scoped>
+#select-bar {
+  width: 100%;
+  background-color: aqua;
+}
 #register-interest {
   display: table;
   margin: 0 auto;

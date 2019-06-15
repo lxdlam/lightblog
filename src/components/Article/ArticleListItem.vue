@@ -47,7 +47,7 @@
           <el-row type="flex" justify="space-between" align="middle">
             <el-col :xs="16" :sm="16" :md="17" :lg="15" :xl="16">
               <div class="grid-content bg-purple" id="digestbar">
-                {{ digest }}
+                {{ digest.slice(0, 40) }}...
               </div>
             </el-col>
 

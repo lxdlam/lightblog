@@ -21,7 +21,7 @@
     </el-menu>
     <div id="right">
       <div id="receive" v-if="receiveLoad">
-        <p id="title-bar">我发送的评论</p>
+        <p id="title-bar">我收到的评论</p>
         <ul
           class="article-line"
           v-infinite-scroll="load"
@@ -42,7 +42,7 @@
         <p v-if="noMore">没有更多了</p>
       </div>
       <div id="send" v-else-if="sendLoad">
-        <p id="title-bar">我收到的评论</p>
+        <p id="title-bar">我发送的评论</p>
         <ul
           class="article-line"
           v-infinite-scroll="load"
