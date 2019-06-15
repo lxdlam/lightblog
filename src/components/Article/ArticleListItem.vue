@@ -109,7 +109,19 @@ export default {
       if (day1 < 10) {
         day1 = "0" + day1;
       }
-      this.dateStr = `${month1}/${day1} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+      let hours = date.getHours();
+      if (hours < 10) {
+        hours = "0" + hours;
+      }
+      let minutes = date.getMinutes();
+      if (minutes < 10) {
+        minutes = "0" + minutes;
+      }
+      let seconds = date.getSeconds();
+      if (seconds < 10) {
+        seconds = "0" + seconds;
+      }
+      this.dateStr = `${date.getFullYear()}/${month1}/${day1} ${hours}:${minutes}:${seconds}`;
       return this.dateStr;
     },
     getImg() {
