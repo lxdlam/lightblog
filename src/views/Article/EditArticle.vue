@@ -8,6 +8,22 @@
         maxlength="40"
         v-model="title"
       />
+      <el-select
+        autocomplete="off"
+        v-model="tag"
+        multiple
+        filterable
+        placeholder="文章标签"
+        collapse-tags
+      >
+        <el-option
+          v-for="item in available_tags"
+          :key="item.id"
+          :label="item.name"
+          :value="item.id"
+        >
+        </el-option>
+      </el-select>
       <el-button @click="publish" type="primary" class="article-title-button"
         >发布</el-button
       >
@@ -18,6 +34,8 @@
 
 <script>
 import Editor from "@/components/Markdown/Editor";
+import htmlparser from "htmlparser2";
+import instance from "@/components/Markdown/render";
 
 export default {
   name: "EditArticle",
@@ -26,7 +44,10 @@ export default {
       title: null,
       value: "# 在这里写文章吧！",
       article_id: null,
-      tag: []
+      tag: [],
+      cover: null,
+      abstract: "",
+      available_tags: []
     };
   },
   components: {
@@ -34,10 +55,18 @@ export default {
   },
   methods: {
     publish() {
+      if (this.tag.length < 1) {
+        this.$message.error("请至少选择一个标签再发布哦！");
+        return;
+      }
+
+      this.parse();
+
       if (!this.$store.state.user.logged) {
         this.$message.error("没登录不能发文章哦～");
         this.$router.replace("/na");
       }
+
       const vm = this;
       if (this.article_id === null) {
         this.$api.article
@@ -47,9 +76,9 @@ export default {
             {
               title: vm.title,
               type: vm.tag,
-              cover: null,
+              cover: vm.cover,
               content: vm.value,
-              article_abstract: "abc"
+              article_abstract: vm.abstract
             }
           )
           .then(() => {
@@ -71,9 +100,9 @@ export default {
               article_id: vm.article_id,
               title: vm.title,
               type: vm.tag,
-              cover: null,
+              cover: vm.cover,
               content: vm.value,
-              article_abstract: "abc"
+              article_abstract: vm.abstract
             }
           )
           .then(() => {
@@ -111,9 +140,52 @@ export default {
           vm.$message.error("Oops，出现了一些问题，请联系管理员！");
           console.log(err);
         });
+    },
+    parse() {
+      const vm = this;
+      let process = true;
+      const parser = new htmlparser.Parser({
+        ontext: text => {
+          console.log(text);
+          if (process && vm.abstract.length < 150) {
+            vm.abstract += text;
+            vm.abstract = vm.abstract.slice(0, 150);
+          }
+        },
+        onattribute: (name, value) => {
+          console.log(name, value);
+          if (name === "src" && vm.cover === null) {
+            vm.cover = value;
+          }
+        },
+        oncomment: data => {
+          if (data === "more") process = false;
+        }
+      });
+
+      parser.write(instance.render(this.value));
+      parser.end();
+    },
+    loadAllTags() {
+      const vm = this;
+      this.$api.tag
+        .list(0, 1000)
+        .then(data => {
+          data.data.arr.forEach(row => {
+            vm.available_tags.push({
+              id: row.labelId,
+              name: row.labelName
+            });
+          });
+        })
+        .catch(err => {
+          vm.$message.error("标签获取错误！请联系管理员！");
+          console.log(err);
+        });
     }
   },
   mounted() {
+    this.loadAllTags();
     if (this.$route.params["id"] !== "new") {
       this.article_id = this.$route.params["id"];
       this.loadArticle(this.article_id);
@@ -154,6 +226,6 @@ export default {
   outline: none;
   color: #303133;
   font-size: 2rem;
-  min-width: 730px;
+  min-width: 500px;
 }
 </style>

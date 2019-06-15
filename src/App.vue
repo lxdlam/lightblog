@@ -20,9 +20,6 @@ export default {
   name: "App",
   components: {
     Heading
-  },
-  mounted() {
-    console.log(this.$route);
   }
 };
 </script>
