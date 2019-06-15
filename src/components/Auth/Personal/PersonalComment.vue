@@ -75,8 +75,8 @@ export default {
     return {
       receiveLoad: true,
       sendLoad: false,
-      isCollapse:false,
-      loading:false,
+      isCollapse: false,
+      loading: false,
 
       sendSum: 0,
       receiveSum: 0,
@@ -103,7 +103,6 @@ export default {
       if (key == 1) {
         this.receiveLoad = true;
         this.sendLoad = false;
-        
       } else if (key == 2) {
         this.receiveLoad = false;
         this.sendLoad = true;

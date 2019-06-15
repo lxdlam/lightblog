@@ -1,5 +1,5 @@
 <template>
-  <div id="register-avatar">
+  <div id="avatar-cropper">
     <table>
       <tr>
         <td rowspan="3">
@@ -77,9 +77,9 @@ function readBase64(file, callback) {
 }
 
 export default {
-  name: "RegisterAvatar",
+  name: "AvatarCropper",
   props: {
-    user: {
+    avatar: {
       type: Object,
       required: true
     }
@@ -96,19 +96,15 @@ export default {
     crop() {
       const canvas = this.cropper.getCroppedCanvas();
       // substitute, the user may change it later
-      this.user.img_files = Object.assign(
-        {},
-        {
-          large: getRoundedCanvas(canvas, 256),
-          medium: getRoundedCanvas(canvas, 128),
-          small: getRoundedCanvas(canvas, 64)
-        }
-      );
+      Object.assign(this.avatar, {
+        large: getRoundedCanvas(canvas, 256),
+        medium: getRoundedCanvas(canvas, 128),
+        small: getRoundedCanvas(canvas, 64)
+      });
 
-      this.$set(this.user.stage, 1, true);
       this.$message({ message: "剪裁成功！", type: "success" });
 
-      this.$emit("croppered");
+      this.$emit("cropped");
     },
     beforeAvatarUpload(file) {
       const acceptable_files = ["image/jpeg", "image/png", "image/png"];

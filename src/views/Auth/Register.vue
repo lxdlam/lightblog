@@ -7,7 +7,10 @@
           <RegisterUserInfo :user="user" />
         </template>
         <template v-else-if="step === 2">
-          <RegisterAvatar :user="user" />
+          <RegisterAvatar
+            :avatar="user.img_files"
+            @cropped="$set(user.stage, 1, true)"
+          />
         </template>
         <template v-else-if="step === 3">
           <RegisterInterest :user="user" />
@@ -40,7 +43,7 @@
 <script>
 import RegisterStepsBar from "@/components/Auth/Register/StepsBar";
 import RegisterUserInfo from "@/components/Auth/Register/UserInfo";
-import RegisterAvatar from "@/components/Auth/Register/Avatar";
+import RegisterAvatar from "@/components/Meta/Cropper";
 import RegisterInterest from "@/components/Auth/Register/Interest";
 import RegisterFinish from "@/components/Auth/Register/Finish";
 
@@ -139,6 +142,12 @@ export default {
           });
       });
     }
+  },
+  mounted() {
+    const vm = this;
+    this.$on("cropped", () => {
+      vm.$set(vm.user.stage, 1, true);
+    });
   }
 };
 </script>

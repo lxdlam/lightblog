@@ -100,6 +100,10 @@ export default new Router({
       name: "random",
       component: () =>
         import(/* webpackChunkName: "randomView" */ "./views/Meta/Random.vue")
+    },
+    {
+      path: "/admin",
+      name: "admin"
     }
   ]
 });

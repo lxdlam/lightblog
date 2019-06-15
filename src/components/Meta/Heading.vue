@@ -69,6 +69,13 @@
                     我的文章
                   </el-dropdown-item>
                   <el-dropdown-item
+                    v-if="$store.state.user.isAdmin"
+                    icon="el-icon-s-tools"
+                    command="admin"
+                  >
+                    管理中心
+                  </el-dropdown-item>
+                  <el-dropdown-item
                     divided
                     icon="el-icon-error"
                     command="logout"
@@ -131,6 +138,8 @@ export default {
         this.$router.push("/personal");
       } else if (key === "articles") {
         this.$router.push({ name: "personal", params: { key: 4 } });
+      } else if (key === "admin") {
+        this.$router.push("/admin");
       } else if (key === "logout") {
         this.$message({
           type: "success",
