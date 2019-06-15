@@ -75,12 +75,14 @@ export default {
     return {
       receiveLoad: true,
       sendLoad: false,
+      isCollapse:false,
+      loading:false,
 
       sendSum: 0,
       receiveSum: 0,
       endNum1: 10,
       endNum2: 10,
-      sendArr: {},
+      sendArr: [],
       receiveArr: {}
       //status: 0
     };
@@ -101,9 +103,11 @@ export default {
       if (key == 1) {
         this.receiveLoad = true;
         this.sendLoad = false;
+        
       } else if (key == 2) {
         this.receiveLoad = false;
         this.sendLoad = true;
+        this.loadCommentSend(this.$store.state.user.uid, 0, this.endNum1);
       }
     },
     loadCommentSend(uid, start, end) {
@@ -403,10 +407,10 @@ export default {
       } 
     };*/
     if (this.key === 1) {
-      this.loadCommentSend(this.$store.state.user.id, 0, this.endNum1);
+      this.loadCommentSend(this.$store.state.user.uid, 0, this.endNum1);
     } else if (this.key === 2) {
       this.loadCommentReceive(
-        this.$store.state.user.id,
+        this.$store.state.user.uid,
         this.$store.state.user.key
       );
     }
@@ -416,10 +420,10 @@ export default {
   },
   beforeRouteUpdate(to, from, next) {
     if (this.key === 1) {
-      this.loadCommentSend(this.$store.state.user.id, 0, this.endNum1);
+      this.loadCommentSend(this.$store.state.user.uid, 0, this.endNum1);
     } else if (this.key === 2) {
       this.loadCommentReceive(
-        this.$store.state.user.id,
+        this.$store.state.user.uid,
         this.$store.state.user.key
       );
     }

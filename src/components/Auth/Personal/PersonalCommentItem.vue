@@ -26,8 +26,8 @@
           {{ comment }}
         </div>
         <el-row class="com-footer">
-          <el-col :span="5">{{ dateStr }}</el-col>
-          <el-col :span="2" :offset="17"> </el-col>
+          <el-col :span="6">{{ dateStr }}</el-col>
+          <el-col :span="2" :offset="16"> </el-col>
         </el-row>
         <el-input
           type="textarea"
@@ -106,7 +106,19 @@ export default {
     if (day1 < 10) {
       day1 = "0" + day1;
     }
-    this.dateStr = `${date.getFullYear()}/${month1}/${day1} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    let hours = date.getHours();
+    if (hours < 10) {
+      hours = "0" + hours;
+    }
+    let minutes = date.getMinutes();
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+    let seconds = date.getSeconds();
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+    this.dateStr = `${date.getFullYear()}/${month1}/${day1} ${hours}:${minutes}:${seconds}`;
     //显示父评论
     if (this.parent_comment_id !== 0 && this.parent_comment_id !== null) {
       this.has_parent = !this.has_parent;
