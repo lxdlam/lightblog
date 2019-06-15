@@ -27,8 +27,7 @@ export default class {
       type_2: data.type[1] | null,
       cover: data.cover,
       content: data.content,
-      article_abstract: data.article_abstract,
-      hidden: 0
+      article_abstract: data.article_abstract
     };
 
     return this.proxy.loggedQuery("/article/update", token, uid, query);

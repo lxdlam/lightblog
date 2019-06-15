@@ -47,7 +47,7 @@
     <div class="article-container">
       <Renderer :content="arr.content"></Renderer>
     </div>
-    <div id="thumb-bar">
+    <div id="button-bar">
       <el-button
         v-if="!liked"
         type="danger"
@@ -63,6 +63,15 @@
         @click="thumb"
         >喜 欢</el-button
       >
+      <el-button
+        v-if="$store.state.user.logged"
+        type="warning"
+        plain
+        icon="el-icon-warning-outline"
+        @click="reportVisible = true"
+      >
+        举 报
+      </el-button>
     </div>
 
     <el-divider></el-divider>
@@ -72,6 +81,27 @@
 
       <CommentList :article_id="article_id"></CommentList>
     </div>
+    <el-dialog title="举报文章" :visible.sync="reportVisible" width="720px">
+      <el-form :model="formData">
+        <el-form-item label="举报原因" label-width="80px">
+          <el-input
+            type="textarea"
+            placeholder="请输入举报原因……"
+            v-model="formData.reason"
+            autocomplete="off"
+            :autosize="{ minRows: 6, maxRows: 10 }"
+          /> </el-form-item
+      ></el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="reportVisible = false">取 消</el-button>
+        <el-button
+          :disabled="formData.reason === ''"
+          type="warning"
+          @click="report"
+          >确 定</el-button
+        >
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -100,7 +130,11 @@ export default {
       article_id: 0,
       author_id: 0,
       followed: false,
-      same_user: false
+      same_user: false,
+      reportVisible: false,
+      formData: {
+        reason: ""
+      }
     };
   },
   methods: {
@@ -253,6 +287,30 @@ export default {
             console.log(err);
           }
         });
+    },
+    report() {
+      if (!this.$store.state.user.logged || this.formData.reason === "") {
+        this.reportVisible = false;
+      } else {
+        const vm = this;
+        this.$api.report
+          .makeReport(
+            this.$store.state.user.uid,
+            this.$store.state.user.token,
+            this.article_id,
+            this.formData.reason
+          )
+          .then(() => {
+            vm.reportVisible = false;
+            vm.$message.success("举报成功！社区的维护离不开你的努力！");
+          })
+          .catch(err => {
+            vm.$message.error("举报失败！是不是没有登录呀？");
+            console.log(err.code);
+          });
+      }
+
+      return;
     }
   },
   mounted: function() {

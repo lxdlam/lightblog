@@ -24,7 +24,7 @@ export default {
   },
   model: {
     prop: "value",
-    event: "change"
+    event: "input"
   },
   methods: {
     initialize() {
@@ -147,7 +147,7 @@ export default {
       this.simplemde = new SimpleMDE(config);
 
       this.simplemde.codemirror.on("change", () =>
-        this.$emit("change", this.simplemde.value())
+        this.$emit("input", this.simplemde.value())
       );
 
       const wrapper = this.simplemde.codemirror.getWrapperElement();
@@ -163,6 +163,12 @@ export default {
   destroyed: function() {
     this.simplemde.toTextArea();
     this.simplemde = null;
+  },
+  watch: {
+    value(newVal) {
+      if (newVal === this.simplemde.value()) return;
+      this.simplemde.value(newVal);
+    }
   }
 };
 </script>

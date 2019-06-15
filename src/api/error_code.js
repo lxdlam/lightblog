@@ -6,13 +6,18 @@ export const ERROR_CODE = new Map([
   [5, "Renew failed"],
   [2, "Not Logged or Key Error"],
   [6, "Query item is not exist"],
-  [7, "Not corresponding user"],
+  [7, "Authority rejected"],
   [2001, "Article does not exist"],
+  [2002, "Article is hidden"],
   [5004, "Target user is not exist"],
   [5002, "Duplicate follow request"],
   [5005, "Not followed"],
   [5006, "Target is same as request user"],
   [6002, "Duplicate like request"],
   [6004, "Not liked"],
-  [4004, "Tag not exist"]
+  [4004, "Tag not exist"],
+  [1002, "User is banned"],
+  [1301, "User has been already banned"],
+  [4001, "Duplicate tag entry"],
+  [7001, "Target article is written by user"]
 ]);

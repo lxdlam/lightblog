@@ -33,7 +33,7 @@ export default {
       const vm = this;
 
       this.$api.user
-        .login("lxdlam123", "25d55ad283aa400af464c76d713c07ad")
+        .login("lxdlam", "25d55ad283aa400af464c76d713c07ad")
         .then(ret => {
           vm.token = ret.data.token;
           vm.uid = ret.data.uid;
@@ -41,8 +41,8 @@ export default {
         .catch(err => console.log(err));
     },
     test() {
-      this.$api.article
-        .recommendList()
+      this.$api.comment
+        .fetchCommentToUser(this.uid, this.token)
         .then(ret => console.log(ret))
         .catch(err => console.log(`Error: [${err.code}] ${err.message}`));
     }

@@ -24,7 +24,9 @@ export default {
   data: function() {
     return {
       title: null,
-      value: "# 在这里写文章吧！"
+      value: "# 在这里写文章吧！",
+      article_id: null,
+      tag: []
     };
   },
   components: {
@@ -37,38 +39,90 @@ export default {
         this.$router.replace("/na");
       }
       const vm = this;
-      this.$api.article
-        .newArticle(this.$store.state.user.uid, this.$store.state.user.token, {
-          title: vm.title,
-          type: [1],
-          cover: null,
-          content: vm.value,
-          article_abstract: "abc"
-        })
-        .then(() => {
-          vm.$message({
-            type: "success",
-            message: "发布成功！快去看看吧！"
+      if (this.article_id === null) {
+        this.$api.article
+          .newArticle(
+            this.$store.state.user.uid,
+            this.$store.state.user.token,
+            {
+              title: vm.title,
+              type: vm.tag,
+              cover: null,
+              content: vm.value,
+              article_abstract: "abc"
+            }
+          )
+          .then(() => {
+            vm.$message({
+              type: "success",
+              message: "发布成功！快去看看吧！"
+            });
+          })
+          .catch(err => {
+            vm.$message.error("Oops，出现了一些错误，请联系管理员！");
+            console.log(err);
           });
+      } else {
+        this.$api.article
+          .updateArticle(
+            this.$store.state.user.uid,
+            this.$store.state.user.token,
+            {
+              article_id: vm.article_id,
+              title: vm.title,
+              type: vm.tag,
+              cover: null,
+              content: vm.value,
+              article_abstract: "abc"
+            }
+          )
+          .then(() => {
+            vm.$message({
+              type: "success",
+              message: "更新成功！快去看看吧！"
+            });
+            vm.$router.push(`/article/read/${vm.article_id}`);
+          })
+          .catch(err => {
+            vm.$message.error("Oops，出现了一些错误，请联系管理员！");
+            console.log(err);
+          });
+      }
+    },
+    loadArticle(article_id) {
+      const vm = this;
+
+      this.$api.article
+        .fetchDetail(article_id)
+        .then(data => {
+          const article = data.data;
+          if (article.author_id !== vm.$store.state.user.uid) {
+            vm.$message.error("Oops，你不能改别人的文章哦！");
+          } else {
+            vm.article_id = article.virtual_id;
+            vm.value = article.content;
+            vm.title = article.title;
+            article.labels.forEach(tag => {
+              vm.tag.push(tag.label_id);
+            });
+          }
         })
         .catch(err => {
-          vm.$message.error("Oops，出现了一些错误，请联系管理员！");
+          vm.$message.error("Oops，出现了一些问题，请联系管理员！");
           console.log(err);
         });
     }
   },
   mounted() {
-    if (this.$route.params["id"] === "new") {
-      this.msg = "new";
-    } else {
-      this.msg = "id: " + this.$route.params["id"];
+    if (this.$route.params["id"] !== "new") {
+      this.article_id = this.$route.params["id"];
+      this.loadArticle(this.article_id);
     }
   },
   beforeRouteUpdate(to, from, next) {
-    if (to.params["id"] === "new") {
-      this.msg = "new";
-    } else {
-      this.msg = "id: " + to.params["id"];
+    if (this.$route.params["id"] !== "new") {
+      this.article_id = this.$route.params["id"];
+      this.loadArticle(this.article_id);
     }
 
     next();

@@ -28,6 +28,12 @@ export default class {
     });
   }
 
+  fetchCommentToUser(uid, token) {
+    return this.proxy.loggedQuery("/comment/query_for_user", token, uid, {
+      uid: uid
+    });
+  }
+
   detailComment(id) {
     return this.proxy.query("/comment/query_by_parent", {
       parent_comment_id: id
