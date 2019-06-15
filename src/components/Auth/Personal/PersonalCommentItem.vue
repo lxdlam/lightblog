@@ -68,12 +68,6 @@ export default {
     },
     article_title: {
       type: String
-<<<<<<< HEAD
-    },
-    article_id: {
-      type: Number
-=======
->>>>>>> 741ee4aa840e3a91b812732947cef46e62b6f92d
     }
   },
   data() {
@@ -89,8 +83,8 @@ export default {
   methods: {
     reply: function() {
       this.flag = !this.flag;
-    },
-    query: function(parent_comment_id) {
+    }
+    /* query: function(parent_comment_id) {
       this.axios
         .post("./comment/parent_query", { parent_comment_id })
         .then(resp => {
@@ -102,7 +96,7 @@ export default {
           console.log("Query failed. You may encounter a network broken.");
           console.log(e);
         });
-    }
+    } */
   },
   mounted: function() {
     const date = new Date(this.comment_time);
@@ -128,10 +122,10 @@ export default {
     }
     this.dateStr = `${date.getFullYear()}/${month1}/${day1} ${hours}:${minutes}:${seconds}`;
     //显示父评论
-    if (this.parent_comment_id !== 0 && this.parent_comment_id !== null) {
+    /* if (this.parent_comment_id !== 0 && this.parent_comment_id !== null) {
       this.has_parent = !this.has_parent;
       this.query(this.parent_comment_id);
-    }
+    } */
   }
 };
 </script>
