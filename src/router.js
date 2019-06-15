@@ -105,6 +105,14 @@ export default new Router({
         import(/* webpackChunkName: "randomView" */ "./views/Meta/Random.vue")
     },
     {
+      path: "/article/tag/:id",
+      name: "articleByTag",
+      component: () =>
+        import(
+          /* webpackChunkName: "articleTagView" */ "./views/Article/TagArticle.vue"
+        )
+    },
+    {
       path: "/admin",
       name: "admin"
     }

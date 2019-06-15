@@ -7,7 +7,7 @@
       <AuthorInformation :author_id="this.author_id" />
     </template>
     <template v-else-if="label">
-      <LabelInformation :keyword="keyword" />
+      <LabelInformation :detail="detail" />
     </template>
     <template v-else-if="search">
       <SearchInformation :keyword="keyword" />
@@ -42,6 +42,9 @@ export default {
     },
     author_id: {
       type: Number
+    },
+    detail: {
+      type: Object
     }
   },
   data() {

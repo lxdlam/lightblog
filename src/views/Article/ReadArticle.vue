@@ -44,10 +44,22 @@
       </div>
     </div>
     <el-divider></el-divider>
+    <div class="tag-container">
+      <template v-for="tag in arr.labels">
+        <div :key="tag.label_id" class="tag-item">
+          <el-tag>
+            <router-link :to="`/article/tag/${tag.label_id}`">
+              {{ tag.label_name }}</router-link
+            >
+          </el-tag>
+        </div>
+      </template>
+    </div>
+    <el-divider></el-divider>
     <div class="article-container">
       <Renderer :content="arr.content"></Renderer>
     </div>
-    <div id="button-bar">
+    <div class="lower-button-bar">
       <el-button
         v-if="!liked"
         type="danger"
@@ -316,16 +328,13 @@ export default {
   mounted: function() {
     this.loadArticle(this.$route.params["id"]);
 
-    // this.loadAvatar(this.arr.author_id);
-    // this.loadAvatar(2);
     if (this.$route.params["id"] === "new") {
       this.msg = "new";
     } else {
       this.msg = "id: " + this.$route.params["id"];
     }
 
-    // this.user_img =
-    //   "http://pic.rmb.bdstatic.com/463add22b252e2f7f0862fd3d2ea77b58239.gif";
+    console.log(this.arr);
   },
   beforeRouteUpdate(to, from, next) {
     this.loadArticle(this.$route.params["id"]);
@@ -467,5 +476,12 @@ export default {
 }
 #icon-bar {
   margin-top: 10px;
+}
+.lower-button-bar {
+  padding-top: 10px;
+}
+.tag-item {
+  display: inline;
+  padding-right: 10px;
 }
 </style>
