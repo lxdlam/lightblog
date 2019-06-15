@@ -1,9 +1,11 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header>
-        <Heading />
-      </el-header>
+      <template v-if="!/^\/admin(\/?)/.test($route.fullPath)">
+        <el-header>
+          <Heading />
+        </el-header>
+      </template>
       <el-main>
         <router-view />
       </el-main>
@@ -18,6 +20,9 @@ export default {
   name: "App",
   components: {
     Heading
+  },
+  mounted() {
+    console.log(this.$route);
   }
 };
 </script>

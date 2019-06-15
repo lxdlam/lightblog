@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "404View"
+  name: "NotFoundView"
 };
 </script>
 

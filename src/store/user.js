@@ -8,6 +8,7 @@ export default {
     avatar_md: null,
     avatar_lg: null,
     username: null,
+    isAdmin: false,
     updateTime: null
   },
   mutations: {
@@ -21,11 +22,14 @@ export default {
         state.avatar_lg = payload.avatar_lg;
         state.username = payload.nickname;
         state.updateTime = new Date().getTime();
+        if (payload.allowance !== undefined && payload.allowrance !== null) {
+          state.isAdmin = payload.allowance === 0;
+        }
       }
     },
     logout(state) {
       if (state.logged) {
-        state.logged = false;
+        state.isAdmin = state.logged = false;
         state.uid = state.token = state.avatar = state.nickname = null;
         state.updateTime = new Date().getTime();
       }
