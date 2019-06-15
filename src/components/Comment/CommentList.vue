@@ -7,8 +7,8 @@
         infinite-scroll-disabled="disabled"
       >
         <CommentItem
-          v-for="comment in comments"
-          v-bind:key="comment"
+          v-for="(comment, index) in comments"
+          v-bind:key="index"
           :avatar_sm="comment.avatar_sm"
           :user_nickname="comment.user_nickname"
           :comment="comment.comment"
@@ -65,10 +65,8 @@ export default {
       //this.loadComment(this.$route.params["id"], 0, this.endNum);
       this.endNum += 10;
       this.loading = false;
-    }
+    },
     // 一个使用 axios 进行 http 查询的例子
-  },
-  computed: {
     noMore() {
       return this.count >= this.commentNum;
     },
@@ -76,6 +74,7 @@ export default {
       return this.loading || this.noMore;
     }
   },
+  computed: {},
 
   mounted: function() {
     this.loadComment(this.$route.params["id"], 0, this.endNum);

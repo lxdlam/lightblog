@@ -6,10 +6,15 @@
           <el-form-item label="头像">
             <div id="img-border">
               <img id="img-bar" v-bind:src="arr.avatar_md" alt="" />
-              <el-button type="primary" @click="changeImg">更换</el-button>
+              <el-button type="primary" @click="dialogVisible = true"
+                >更换</el-button
+              >
             </div>
           </el-form-item>
         </div>
+        <!--  -->
+
+        <!--  -->
         <el-form-item label="昵称">
           <el-input v-model="arr.nickname"></el-input>
         </el-form-item>
@@ -21,8 +26,8 @@
         </el-form-item>
         <el-form-item label="关注标签">
           <el-tag
-            :key="tag"
-            v-for="tag in dynamicTags"
+            v-for="(tag, index) in dynamicTags"
+            :key="index"
             closable
             :disable-transitions="false"
             @close="handleClose(tag)"
@@ -59,10 +64,24 @@
         </el-form-item>
       </el-form>
     </div>
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="80%"
+      :before-close="handleClose1"
+    >
+      <Crooper :avatar="avatar"></Crooper>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="changeImg">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
+import Crooper from "@/components/Meta/Cropper";
 export default {
   name: "PersonalInformation",
   props: {},
@@ -71,24 +90,87 @@ export default {
       dynamicTags: ["标签一", "标签二", "标签三"],
       inputVisible: false,
       inputValue: "",
-      arr: {}
+      dialogVisible: false,
+      arr: {},
+      avatar: {},
+      account: ""
     };
   },
   components: {
     // 在这里加载你的组件
+    Crooper
   },
   methods: {
+    changeImg() {
+      const vm = this;
+      console.log("asasdas----");
+      console.log(this.avatar);
+      let register_query = {
+        account: vm.user.account,
+        pwd: vm.user.password,
+        username: vm.user.username,
+        email: vm.user.email,
+        phone: vm.user.phone,
+        interest: vm.user.interest,
+        avatar_lg: null,
+        avatar_md: null,
+        avatar_sm: null
+      };
+      vm.avatar.small.toBlob(blob => {
+        vm.$api.img
+          .upload(blob, `${vm.account}_avatar_sm.png`)
+          .then(data => {
+            register_query.avatar_sm = data.data.url;
+            vm.avatar.medium.toBlob(blob => {
+              vm.$api.img
+                .upload(blob, `${vm.account}_avatar_md.png`)
+                .then(data => {
+                  register_query.avatar_md = data.data.url;
+                  vm.avatar.large.toBlob(blob => {
+                    vm.$api.img
+                      .upload(blob, `${vm.account}_avatar_lg.png`)
+                      .then(data => {
+                        register_query.avatar_lg = data.data.url;
+                        return vm.$api.user.register(register_query);
+                      })
+                      .then(() => {
+                        vm.loading = false;
+                        vm.step++;
+                      })
+                      .catch(err => {
+                        vm.$message.error(
+                          "Oops，遇到了一些问题，请联系管理员！"
+                        );
+                        console.log(err);
+                      });
+                  });
+                })
+                .catch(err => {
+                  vm.$message.error("Oops，遇到了一些问题，请联系管理员！");
+                  console.log(err);
+                });
+            });
+          })
+          .catch(err => {
+            vm.$message.error("Oops，遇到了一些问题，请联系管理员！");
+            console.log(err);
+          });
+      });
+    },
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
 
     showInput() {
       this.inputVisible = true;
-      // this.$nextTick(_ => {
-      //   this.$refs.saveTagInput.$refs.input.focus();
-      // });
+      // eslint-disable-next-line no-unused-vars
+      this.$nextTick(_ => {
+        this.$refs.saveTagInput.$refs.input.focus();
+      });
     },
-
+    handleClose1(done) {
+      done();
+    },
     handleInputConfirm() {
       // let inputValue = this.inputValue;
       let label_name = this.inputValue;
@@ -100,8 +182,6 @@ export default {
       this.inputValue = "";
     },
     onSubmit() {
-      console.log("this.arr.nickname");
-      console.log(this.arr.nickname);
       let interestNumList = [];
       for (let i = 0; i < this.dynamicTags.length; i++) {
         interestNumList.push(this.dynamicTags[i].label_id);
@@ -116,7 +196,7 @@ export default {
         avatar_md: this.arr.avatar_md,
         avatar_lg: this.arr.avatar_lg,
         singature: this.arr.singature,
-        interest: [4]
+        interest: [4, 5]
       };
       console.log(form);
       this.$api.user
@@ -143,9 +223,10 @@ export default {
         .then(data => {
           // console.log(123);
           vm.arr = data.data;
+          console.log(vm.arr);
           vm.dynamicTags = vm.arr.interest;
           // vm.date = data.response_time;
-          console.log(vm.arr);
+          // console.log(vm.arr);
         })
         // eslint-disable-next-line no-unused-vars
         .catch(err => {
@@ -156,6 +237,7 @@ export default {
   },
   mounted: function() {
     this.loadInfo(this.$store.state.user.uid, this.$store.state.user.token);
+    console.log("dialog" + this.reportVisible);
     //   let userInfo = {
     //     response_time: 1560310151961,
     //     code: 0,

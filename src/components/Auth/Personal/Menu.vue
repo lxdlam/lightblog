@@ -45,7 +45,8 @@ export default {
       infoLoad: true,
       attentionLoad: false,
       commentLoad: false,
-      articleLoad: false
+      articleLoad: false,
+      activeIndex: "1"
     };
   },
   components: {

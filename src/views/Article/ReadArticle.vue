@@ -41,6 +41,22 @@
             </div>
           </template>
         </template>
+        <template v-else-if="same_user">
+          <div id="edit-bar">
+            <router-link
+              :to="{
+                path: `/article/edit/${virtual_id}`
+              }"
+            >
+              <div id="button-bar">
+                <el-button @click="edit" plain>编辑</el-button>
+              </div>
+            </router-link>
+            <div id="button-bar">
+              <el-button @click="deleteArticle" plain>删除</el-button>
+            </div>
+          </div>
+        </template>
       </div>
     </div>
     <el-divider></el-divider>
@@ -139,8 +155,9 @@ export default {
       },
       isDecrese: false,
       liked: false,
-      article_id: 0,
+      article_id: "0",
       author_id: 0,
+      virtual_id: 0,
       followed: false,
       same_user: false,
       reportVisible: false,
@@ -150,6 +167,23 @@ export default {
     };
   },
   methods: {
+    deleteArticle() {
+      const vm = this;
+      let query={uid:this.author_id,article_id:this.article_id};
+      this.$api.article
+        .deleteArticle(
+          this.$store.state.user.uid,
+          this.$store.state.user.token,
+          query
+        )
+        .then(res => {
+          vm.$message("删除成功");
+          console.log(res);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     focus() {
       if (!this.$store.state.user.logged) {
         return;
@@ -235,6 +269,7 @@ export default {
     loadArticle(article_id) {
       const vm = this;
       this.article_id = article_id;
+
       this.$api.article
         .fetchDetail(article_id)
         .then(data => {
@@ -242,7 +277,8 @@ export default {
           // vm.arr = data.data;
           // console.log(vm.arr);
           vm.author_id = data.data.author_id;
-          // console.log("id----" + this.arr.author_id);
+          vm.virtual_id = data.data.virtual_id;
+          console.log("id----" + this.arr.virtual_id);
           //////////////////////获取时间
           const date = new Date(data.data.release_time);
           let month1 = date.getMonth() + 1;
@@ -344,6 +380,13 @@ export default {
 </script>
 
 <style scoped>
+#edit-bar {
+  width: 400px;
+  height: 60px;
+  /* background-color: antiquewhite; */
+  display: flex;
+  justify-content: space-between;
+}
 #read-article {
   max-width: 1280px;
   width: 960px;
@@ -393,9 +436,9 @@ export default {
 }
 #right-bar {
   height: 100%;
-  width: 160px;
+  width: 155px;
   /* background-color: blueviolet; */
-
+  padding-right: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
