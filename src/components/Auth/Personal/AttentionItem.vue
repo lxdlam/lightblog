@@ -9,7 +9,7 @@
       >
         <el-col :xs="3" :sm="3" :md="3" :lg="3" :xl="1">
           <!-- 头像 -->
-          <img id="img-bar" v-bind:src="this.img" alt="" />
+          <img id="img-bar" v-bind:src="arr.avatar_md" alt="" />
         </el-col>
         <el-col :xs="3" :sm="6" :md="8" :lg="9" :xl="11">
           <!-- 个人信息 -->
@@ -76,7 +76,7 @@ export default {
     }
   },
   mounted: function() {
-    this.loadImg(this.arr.user_id);
+    // this.loadImg(this.arr.user_id);
   }
 };
 </script>

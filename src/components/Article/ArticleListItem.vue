@@ -2,7 +2,7 @@
   <div id="articleListItem">
     <el-card shadow="hover" id="card-bar">
       <el-row id="container" type="flex" justify="space-between" align="middle">
-        <img :v-if="loadOrNot" id="img-bar" v-bind:src="imgName" alt="" />
+        <img :v-if="loadOrNot" id="img-bar" v-bind:src="getImg()" alt="" />
         <el-col
           id="right-bar"
           :xs="40"
@@ -40,7 +40,7 @@
             </el-col>
             <el-col :xs="12" :sm="12" :md="11" :lg="8" :xl="8">
               <div class="grid-content bg-purple" id="multibar">
-                <el-col>{{ dateStr }}</el-col>
+                <el-col>{{ genDateString() }}</el-col>
               </div>
             </el-col>
           </el-row>
@@ -97,25 +97,33 @@ export default {
   components: {
     // 在这里加载你的组件
   },
-  methods: {},
+  methods: {
+    genDateString() {
+      const date = new Date(this.date);
+      // eslint-disable-next-line no-unused-vars
+      let month1 = date.getMonth() + 1;
+      if (month1 < 10) {
+        month1 = "0" + month1;
+      }
+      let day1 = date.getDate();
+      if (day1 < 10) {
+        day1 = "0" + day1;
+      }
+      this.dateStr = `${month1}/${day1} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+      return this.dateStr;
+    },
+    getImg() {
+      if (this.imgName == null) {
+        this.imgName =
+          "https://vblogstore-1257377207.cos.ap-chengdu.myqcloud.com/image/8335f50df308a0ab7be244e7775a4562.jpg";
+        // this.imgName = "@/assets/article.jpg";
+      }
+      return this.imgName;
+    }
+  },
   mounted: function() {
-    const date = new Date(this.date);
-    // eslint-disable-next-line no-unused-vars
-    let month1 = date.getMonth() + 1;
-    if (month1 < 10) {
-      month1 = "0" + month1;
-    }
-    let day1 = date.getDate();
-    if (day1 < 10) {
-      day1 = "0" + day1;
-    }
-    this.dateStr = `${month1}/${day1} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
     //动态加载封面图
     // eslint-disable-next-line no-undef
-    if (this.imgName == null) {
-      this.imgName = "http://s11.sinaimg.cn/mw690/001Rpv3lty6VIdRKaMyaa&690";
-      // this.imgName = "@/assets/article.jpg";
-    }
   }
 };
 </script>
