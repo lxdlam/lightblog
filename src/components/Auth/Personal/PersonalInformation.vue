@@ -90,15 +90,10 @@ export default {
       dynamicTags: ["标签一", "标签二", "标签三"],
       inputVisible: false,
       inputValue: "",
-<<<<<<< HEAD
       dialogVisible: false,
       arr: {},
       avatar: {},
       account: ""
-=======
-      arr: {},
-      form: {}
->>>>>>> 1bbc580ac4cf26aded5c0b81796ed4b49332e25e
     };
   },
   components: {
@@ -106,7 +101,6 @@ export default {
     Crooper
   },
   methods: {
-<<<<<<< HEAD
     changeImg() {
       const vm = this;
       console.log("asasdas----");
@@ -163,9 +157,6 @@ export default {
           });
       });
     },
-=======
-    changeImg() {},
->>>>>>> 1bbc580ac4cf26aded5c0b81796ed4b49332e25e
     handleClose(tag) {
       this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
     },
