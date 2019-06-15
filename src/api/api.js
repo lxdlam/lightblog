@@ -6,6 +6,7 @@ import Comment from "./modules/comment";
 import Tag from "./modules/tag";
 import Follow from "./modules/follow";
 import Like from "./modules/like";
+import Report from "./modules/report";
 
 export default class {
   constructor(options) {
@@ -20,6 +21,7 @@ export default class {
     this._tag = new Tag(this.proxy);
     this._follow = new Follow(this.proxy);
     this._like = new Like(this.proxy);
+    this._report = new Report(this.proxy);
   }
 
   get img() {
@@ -48,5 +50,9 @@ export default class {
 
   get like() {
     return this._like;
+  }
+
+  get report() {
+    return this._report;
   }
 }

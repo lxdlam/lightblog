@@ -65,7 +65,7 @@ export default {
       type: Number
     },
     article_title: {
-      type: Number
+      type: String
     }
   },
   data() {
