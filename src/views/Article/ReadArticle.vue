@@ -169,7 +169,7 @@ export default {
   methods: {
     deleteArticle() {
       const vm = this;
-      let query={uid:this.author_id,article_id:this.article_id};
+      let query = { uid: this.author_id, article_id: this.article_id };
       this.$api.article
         .deleteArticle(
           this.$store.state.user.uid,

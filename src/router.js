@@ -28,17 +28,6 @@ export default new Router({
       redirect: "/explore"
     },
     {
-      path: "/test",
-      name: "test",
-      component: () => import(/* webpackChunkName: "test" */ "./views/Test.vue")
-    },
-    {
-      path: "/test1",
-      name: "test1",
-      component: () =>
-        import(/* webpackChunkName: "test" */ "./views/Test1.vue")
-    },
-    {
       path: "/register",
       name: "register",
       component: () =>

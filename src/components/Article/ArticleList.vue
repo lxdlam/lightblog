@@ -121,7 +121,5 @@ export default {
 #article-list {
   max-width: 1280px;
   width: 960px;
-  display: table;
-  margin: 0 auto;
 }
 </style>

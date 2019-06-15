@@ -61,7 +61,6 @@ export default class {
       start: start,
       end: end
     };
-    console.log(query);
     return this.proxy.query("/article/query_by_type", query);
   }
 
