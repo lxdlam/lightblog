@@ -68,12 +68,9 @@ export default {
     },
     article_title: {
       type: String
-<<<<<<< HEAD
-=======
     },
     article_id: {
       type: Number
->>>>>>> 602e054ce292aed383203e9a82ef4729c7eec224
     }
   },
   data() {
