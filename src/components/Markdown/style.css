@@ -4,18 +4,24 @@
 
 .CodeMirror-fullscreen,
 .editor-preview-side,
-.editor-toolbar.fullscreen {
-  z-index: 3000;
+.editor-toolbar,
+.fullscreen {
+  z-index: 2000 !important;
 }
 
-.CodeMirror, .CodeMirror-scroll {
+.CodeMirror,
+.CodeMirror-scroll {
   min-height: 640px;
 }
 
 .editor-preview {
-  z-index: 3000;
+  z-index: 2000 !important;
 }
 
 .editor-toolbar {
   text-align: center;
+}
+
+.markdown-body {
+  text-align: start;
 }

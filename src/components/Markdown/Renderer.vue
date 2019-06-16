@@ -24,8 +24,4 @@ export default {
 
 <style scoped>
 @import "./style.css";
-
-.markdown-body {
-  text-align: start;
-}
 </style>

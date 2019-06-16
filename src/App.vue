@@ -49,7 +49,6 @@ export default {
   width: 100%;
   /* min-width: 960px; */
   max-width: 1280px;
-  padding-top: 100px;
   text-align: center;
   /* background-color: white; */
 }

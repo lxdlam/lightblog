@@ -139,7 +139,7 @@ export default {
 <style scoped>
 @import "~cropperjs/dist/cropper.min.css";
 
-#register-avatar {
+#avatar-cropper {
   display: table;
   margin: 0 auto;
 }
